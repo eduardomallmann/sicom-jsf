@@ -4,17 +4,15 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <!-- Define o repositorio de mensagens do sistema. -->
     <application>
-        <message-bundle>
-            org.sigmo.sicom.resources.ApplicationResources
-        </message-bundle>
+        <message-bundle>org.sigmo.sicom.resources.ApplicationResources</message-bundle>
         <resource-bundle>
-            <base-name>
-                org.sigmo.sicom.resources.ApplicationResources
-            </base-name>
+            <base-name>org.sigmo.sicom.resources.ApplicationResources</base-name>
             <var>msgs</var>
         </resource-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+        </locale-config>
     </application>
     
 </faces-config>
