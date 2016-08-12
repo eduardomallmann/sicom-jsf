@@ -1,0 +1,497 @@
+/*
+Copyright (c) 2016 SIGMO. Todos os direitos reservados.
+Este software é confidencial e um produto proprietário do grupo de pesquisa da UFSC - SIGMO.
+Qualquer uso não autorizado, reprodução ou transferência deste software é terminantemente proibida.
+*/
+/* 
+    Created on : Aug 7, 2016, 6:34:39 PM
+    Author     : Eduardo Mallmann <contato@eduardomallmann.com>
+*/
+
+#-------------------------
+#   FONTS & CONFIGURATION
+#-------------------------
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+        url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+        url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-08 { font-size: 8px; }
+.material-icons.md-12 { font-size: 12px; }
+.material-icons.md-14 { font-size: 14px; }
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-28 { font-size: 28px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.md-color { color: #104b62; }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+#-------------------------
+#   HOME PAGE
+#-------------------------
+
+* {
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    border: none;
+}
+
+body {
+    background-color: #FFF;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+.head {
+    position: absolute;
+    top: 30px;
+    height: 155px;
+    width: 100%;
+    background-image: url('../resources/images/home/cabeЗalho inteiro.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.head .brand {
+    position: absolute;
+    left: 436px;
+}
+.head .login {
+    display: block;
+    margin-top: 85px;
+    margin-right: 150px;
+    float: right;
+}
+.button-txt {
+    font-family: roboto;
+    font-size: 14px;
+    color: #FFF;
+    font-weight: 600;
+    text-shadow: 1px 1px #000;
+    letter-spacing: 1.5px !important;
+}
+.login {
+    display: inline;
+    height: 35px;
+    border-left: 1px solid #FFF;
+    vertical-align: middle;
+}
+.login .login-button {
+    margin-left: 5px;
+}
+.login-data {
+    background-color: rgba(16, 75, 98, 0.8);
+    /*background-color: rgba(30, 30, 30, 0.8);*/
+    border-radius: 3px;
+    box-shadow: 0px 0px 30px #000;
+    width: 350px;
+}
+.login-txt {
+    text-align: center;
+    margin-top: 45px;
+    width: 100%;
+    color: white;
+}
+.login-input {
+    text-align: center;
+}
+.login-label {
+    font-family: roboto;
+    font-size: 18px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.mdl-textfield__input.login-label {
+    border-bottom: 1px solid rgba(255,255,255, 0.4) !important;
+}
+
+.login-data .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.login-data .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+    font-family: roboto;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 16px;
+}
+.login-data .mdl-textfield__label:after {
+    background-color: #FFF;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px transparent !important;
+    -webkit-tap-highlight-color: transparent !important; 
+    -webkit-text-fill-color: black !important;
+
+}
+.login-buttons {
+    text-align: center !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.login-buttons .close-btn {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height: 53px;
+    background: transparent;
+}
+.login-buttons .close-btn:hover {
+    background: rgba(158,158,158,.2);
+}
+.btn-txt {
+    background-color: #229997;
+    color: #FFF;
+    box-shadow: 0.5px 0.5px 3px #104b62;
+}
+.btn-txt:hover {
+    background-color: rgba(34, 153, 151, 0.7);
+}
+.forgotten-txt {
+    position: absolute;
+    right: 30px;
+    text-decoration: underline !important;
+    font-family: roboto;
+    font-size: 16px;
+    color: #FFF;
+    font-weight: 300;
+    vertical-align: top;
+    text-shadow: 1px 1px #000;
+    text-transform: none;
+}
+.home.content {
+    position: absolute;
+    top: 181px;
+    width: 100%;
+}
+.home-grid {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    vertical-align: top;
+}
+.home-img {
+    margin: 0 !important;
+    width: calc(25%) !important;
+    height: 250px;
+}
+.bkg-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 101%;
+}
+.bkg-img.image1 {
+    background-image: url('../resources/images/home/006 - Imagem_01.jpg');
+}
+.bkg-img.image1:hover {
+    background-image: url('../resources/images/home/1.jpg');
+}
+.bkg-img.image2 {
+    background-image: url('../resources/images/home/007 - Imagem_02.jpg');
+    opacity: 0.9;
+}
+.bkg-img.image2:hover {
+    background-image: url('../resources/images/home/2.jpg');
+}
+.bkg-img.image3 {
+    background-image: url('../resources/images/home/008 - Imagem_03.jpg');
+}
+.bkg-img.image3:hover {
+    background-image: url('../resources/images/home/3.jpg');
+}
+.bkg-img.image4 {
+    background-image: url('../resources/images/home/009 - Imagem_04.jpg');
+}
+.bkg-img.image4:hover {
+    background-image: url('../resources/images/home/4.jpg');
+}
+.bkg-img.image5 {
+    background-image: url('../resources/images/home/010 - Imagem_05.jpg');
+}
+.bkg-img.image5:hover {
+    background-image: url('../resources/images/home/5.jpg');
+}
+.bkg-img.image6 {
+    background-image: url('../resources/images/home/011 - Imagem_06.jpg');
+}
+.bkg-img.image6:hover {
+    background-image: url('../resources/images/home/6.jpg');
+}
+.bkg-img.image7 {
+    background-image: url('../resources/images/home/012 - Imagem_07.jpg');
+}
+.bkg-img.image7:hover {
+    background-image: url('../resources/images/home/7.jpg');
+}
+.bkg-img.image8 {
+    background-image: url('../resources/images/home/013 - Imagem_08.jpg');
+}
+.bkg-img.image8:hover {
+    background-image: url('../resources/images/home/8.jpg');
+}
+
+.main-txt {
+    font-family: roboto;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+}
+.footer-txt,
+.normal-txt {
+    font-family: roboto;
+    font-size: 14px;
+    text-decoration: none !important;
+    color: #FFF;
+    font-weight: 300;
+    vertical-align: top;
+    text-shadow: 1px 1px #000;
+}
+.low-bold-txt {
+    font-family: roboto;
+    font-size: 12px;
+    color: #FFF;
+    font-weight: 900;
+    text-shadow: 1px 1px #000;
+}
+.footer-txt {
+    font-size: 16px;
+    vertical-align: middle;
+}
+.txt-shadow {
+    text-shadow: 1px 1px #000;
+}
+.first-img-main-txt {
+    margin-left: 85px;
+    margin-top: 48px;
+    width: 150px;
+    margin-bottom: 18px;
+}
+.first-img-link {
+    margin-left: 85px;
+}
+.first-img-link a {
+    text-decoration: none !important;
+}
+.head-txt {
+    display: block;
+    margin-top: 48px;
+    margin-bottom: 18px;
+}
+.head-txt.extended-date {
+    margin-bottom: 0px;
+}
+.head-txt.seminar {
+    margin-bottom: 35px;
+}
+.img-date-txt {
+    display: inline;
+    margin-left: 34px;
+    width: 41px;
+    text-align: center;
+    word-wrap: break-word;
+}
+.img-date-txt.extended-date {
+    display: inline-block;
+}
+.img-main-txt {
+    display: inline-block;
+    margin-left: 16px;
+    width: 200px;
+    word-wrap: break-word;
+    vertical-align: top;
+}
+.img-panelist-txt {
+    margin-left: 91px;
+    margin-bottom: 18px;
+}
+.img-event-txt {
+    margin-left: 91px;
+}
+.img-panel-txt {
+    margin-left: 91px;
+    margin-top: 48px;
+    width: 150px;
+    margin-bottom: 18px;
+}
+.footer-home {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-image: url('../resources/images/home/014 - RodapВ completo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 101%;
+}
+.footer-home .footer-txt-grid {
+    margin-left: 403px;
+    padding-top: 9px;
+}
+.footer-txt-grid .footer-txt {
+    font-size: 16px;
+    vertical-align: middle;
+}
+.footer-txt-grid .footer-txt:last-of-type {
+    margin-left: 5px;
+}
+.dialoag-popup {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 101%;
+    width: 800px;
+    padding: 0;
+}
+.dialoag-popup.birlo-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop renda.jpg');
+}
+.dialoag-popup.corporate-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop doug.jpg');
+}
+.dialoag-popup.photo-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop fotografia_site.jpg');
+}
+.dialoag-popup.project-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop julio.jpg');
+}
+.dialoag-popup.brand-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop felipe.jpg');
+}
+.dialoag-popup.driin-bkg {
+    background-image: url('../resources/images/palestrasPopUps/banner palestra driin.jpg');
+}
+.dialoag-popup.job-bkg {
+    background-image: url('../resources/images/palestrasPopUps/banner palestra marcio e gladyspsd.jpg');
+}
+.pop-content {
+    margin-top: calc(235px + 28px);
+    margin-left: 38px;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-right: 45px;
+}
+.pop-content div {
+    padding: 0;
+}
+.pop-content .panel {
+    width: 350px;
+}
+.pop-content .panelist-photo {
+    width: 68px;
+    height: 68px;
+    margin-right: 12px;
+    display: inline;
+}
+.pop-content .panelist-name {
+    display: inline-block;
+    width: 145px;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+.pop-content .panelist-txt {
+    font-family: roboto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #229997;   
+}
+.pop-content .panelist-name .panelist-txt {
+    font-size: 17px;
+}
+.pop-content .panel-info {
+    display: block;
+    margin-top: 20px;
+}
+.pop-content .panel-info .panelist-txt {
+    display: inline;
+    margin-left: 10px;
+    vertical-align: super;
+}
+.pop-content .panel-info .panelist-txt.txt-brk {
+    margin-left: 40px;
+}
+.pop-content .panel-info .panelist-txt.light {
+    font-weight: 300;
+}
+.pop-content .panel-description {
+    width: 365px;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+}
+.pop-content .panel-description .panel-description-txt {
+    font-family: roboto;
+    font-size: 12px;
+    font-weight: 400;
+    color: #104b62;
+}
+.dialog-buttons .close-btn {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    height: 53px;
+    background: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .close-btn:hover {
+    background: rgba(16, 75, 98, 0.6);
+}   
+.dialog-buttons .mdl-button--fab:focus:not(:active) {
+    box-shadow: none;
+    background-color: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .mdl-button:focus:not(:active) {
+    background-color: rgba(16, 75, 98, 0.7);
+}
+.open-dialog {
+    text-decoration: none;
+}
+.open-dialog .main-txt {
+    cursor: pointer !important;
+}

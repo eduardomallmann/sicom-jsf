@@ -3,17 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://java.sun.com/jsf/core">
     <f:view>
         <ui:insert name="viewParams"/>
         <h:head>
-            <h:outputStylesheet name="font-awesome.min.css" library="css"/>
-            <h:outputStylesheet name="material.css" library="css"/>
-            <h:outputStylesheet name="default.css" library="css"/>
-            <h:outputScript name="material.js" library="js"/>
+
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+            <h:outputStylesheet name="material.min.css" library="css"/>
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
             <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"></link>
+            <h:outputScript name="material.js" library="js"/>
+            <h:outputScript name="dialog-polyfill.js" library="dialog-polyfill"/>
+            <h:outputStylesheet name="dialog-polyfill.css" library="dialog-polyfill"/>
+            <h:outputStylesheet name="home.css" library="css"/>
+
+
             <title>
                 <ui:insert name="title">
                     <h:outputText value="III-SICOM - Seminário de Informação e Comunicação da Marca" />
@@ -21,14 +26,20 @@
             </title>
         </h:head>
         <h:body id="bodyArea">
-            <div id="header-home">
-                <div class="head brand">
+            <div id="header-home" class="head">
+                <div class="brand">
                     <img src="../../resources/images/home/cabeЗalho marca.png" alt=""/>
                 </div>
-                <div class="head img">
-                    <img src="../../resources/images/home/cabeЗalho inteiro.png" width="100%" height="151" alt=""/>
+
+                <div class="login">
+                    <button id="show-login" 
+                            type="button" 
+                            class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect login-button">
+                        <h:outputLabel value="Login" styleClass="button-txt"/>
+                    </button>
                 </div>
             </div>
+
             <div class="home content">
                 <div class="mdl-grid home-grid">
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image1">
@@ -36,102 +47,118 @@
                             <h:outputLabel value="Inscreva-se nas atividades" styleClass="main-txt"/>
                         </div>
                         <div class="first-img-link">
-                            <h:outputLink value="#" title="Cadastre-se aqui">
+                            <h:outputLink value="../cadastro/cadastro.jsf" title="Cadastre-se aqui">
                                 <h:outputText value="Cadastre-se aqui" styleClass="normal-txt"/>
                             </h:outputLink>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col home-img bkg-img image2">
-                        <div class="head-txt">
-                            <div class="img-date-txt">
-                                <h:outputText value="19/08" styleClass="normal-txt"/>
-                            </div>
-                            <div class="img-main-txt">
-                                <h:outputLabel value="A Renda de Birlo no contexto local de moda" styleClass="main-txt"/>
-                            </div>
-                        </div>
-                        <div class="img-panelist-txt">
-                            <h:outputText value="Mary Clasen e Talyta Bastos" styleClass="normal-txt"/>
-                        </div>
-                        <div class="img-event-txt">
-                            <h:outputText value="Oficina" styleClass="low-bold-txt"/>
-                        </div>
-                    </div>
 
+
+                    <div class="mdl-cell mdl-cell--3-col home-img bkg-img image2">
+                        <h:outputLink id="show-birlo" value="#" styleClass="open-dialog">
+                            <div class="head-txt">
+                                <div class="img-date-txt">
+                                    <h:outputText value="19/08" styleClass="normal-txt"/>
+                                </div>
+                                <div class="img-main-txt">
+
+                                    <h:outputLabel value="A Renda de Birlo no contexto local de moda" styleClass="main-txt"/>
+                                </div>
+                            </div>
+                            <div class="img-panelist-txt">
+                                <h:outputText value="Mary Clasen e Talyta Bastos" styleClass="normal-txt"/>
+                            </div>
+                            <div class="img-event-txt">
+                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                            </div>
+                        </h:outputLink>
+                    </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image3">
-                        <div class="head-txt">
-                            <div class="img-date-txt">
-                                <h:outputText value="24/08" styleClass="normal-txt"/>
+                        <h:outputLink id="show-corporateId" value="#" styleClass="open-dialog">
+                            <div class="head-txt">
+                                <div class="img-date-txt">
+                                    <h:outputText value="24/08" styleClass="normal-txt"/>
+                                </div>
+                                <div class="img-main-txt">
+                                    <h:outputLabel value="Ilustração para identidade corporativa" styleClass="main-txt"/>
+                                </div>
                             </div>
-                            <div class="img-main-txt">
-                                <h:outputLabel value="Ilustração para identidade corporativa" styleClass="main-txt"/>
+                            <div class="img-panelist-txt">
+                                <h:outputText value="Doug Menegazzi" styleClass="normal-txt"/>
                             </div>
-                        </div>
-                        <div class="img-panelist-txt">
-                            <h:outputText value="Doug Menegazzi" styleClass="normal-txt"/>
-                        </div>
-                        <div class="img-event-txt">
-                            <h:outputText value="Oficina" styleClass="low-bold-txt"/>
-                        </div>
+                            <div class="img-event-txt">
+                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                            </div>
+                        </h:outputLink>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image4">
-                        <div class="head-txt extended-date">
-                            <div class="img-date-txt extended-date">
-                                <h:outputText value="02/09 e 09/09" styleClass="normal-txt"/>
+                        <h:outputLink id="show-photo" value="#" styleClass="open-dialog">
+                            <div class="head-txt extended-date">
+                                <div class="img-date-txt extended-date">
+                                    <h:outputText value="02/09 e 09/09" styleClass="normal-txt"/>
+                                </div>
+                                <div class="img-main-txt">
+                                    <h:outputLabel value="Composição Fotográfica registro da arte grafite" styleClass="main-txt"/>
+                                </div>
                             </div>
-                            <div class="img-main-txt">
-                                <h:outputLabel value="Composição Fotográfica registro da arte grafite" styleClass="main-txt"/>
+                            <div class="img-panelist-txt">
+                                <h:outputText value="Sharlene Melanie e Richard Perassi" styleClass="normal-txt"/>
                             </div>
-                        </div>
-                        <div class="img-panelist-txt">
-                            <h:outputText value="Sharlene Melanie e Richard Perassi" styleClass="normal-txt"/>
-                        </div>
-                        <div class="img-event-txt">
-                            <h:outputText value="Oficina" styleClass="low-bold-txt"/>
-                        </div>
+                            <div class="img-event-txt">
+                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                            </div>
+                        </h:outputLink>
                     </div>
                 </div>
                 <div class="mdl-grid home-grid">
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image5">
-                        <div class="head-txt">
-                            <div class="img-date-txt">
-                                <h:outputText value="16/09" styleClass="normal-txt"/>
+                        <h:outputLink id="show-project" value="#" styleClass="open-dialog">
+                            <div class="head-txt">
+                                <div class="img-date-txt">
+                                    <h:outputText value="16/09" styleClass="normal-txt"/>
+                                </div>
+                                <div class="img-main-txt">
+                                    <h:outputLabel value="Gestão Visual de projetos" styleClass="main-txt"/>
+                                </div>
                             </div>
-                            <div class="img-main-txt">
-                                <h:outputLabel value="Gestão Visual de projetos" styleClass="main-txt"/>
+                            <div class="img-panelist-txt">
+                                <h:outputText value="Julio Teixeira" styleClass="normal-txt"/>
                             </div>
-                        </div>
-                        <div class="img-panelist-txt">
-                            <h:outputText value="Julio Teixeira" styleClass="normal-txt"/>
-                        </div>
-                        <div class="img-event-txt">
-                            <h:outputText value="Oficina" styleClass="low-bold-txt"/>
-                        </div>
+                            <div class="img-event-txt">
+                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                            </div>
+                        </h:outputLink>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image6">
-                        <div class="head-txt">
-                            <div class="img-date-txt">
-                                <h:outputText value="21/09" styleClass="normal-txt"/>
+                        <h:outputLink id="show-brand" value="#" styleClass="open-dialog">
+                            <div class="head-txt">
+                                <div class="img-date-txt">
+                                    <h:outputText value="21/09" styleClass="normal-txt"/>
+                                </div>
+                                <div class="img-main-txt">
+                                    <h:outputLabel value="Comunicação de marcas a partir de arquétipos" styleClass="main-txt"/>
+                                </div>
                             </div>
-                            <div class="img-main-txt">
-                                <h:outputLabel value="Comunicação de marcas a partir de arquétipos" styleClass="main-txt"/>
+                            <div class="img-panelist-txt">
+                                <h:outputText value="Felipe Machado" styleClass="normal-txt"/>
                             </div>
-                        </div>
-                        <div class="img-panelist-txt">
-                            <h:outputText value="Felipe Machado" styleClass="normal-txt"/>
-                        </div>
-                        <div class="img-event-txt">
-                            <h:outputText value="Oficina" styleClass="low-bold-txt"/>
-                        </div>
+                            <div class="img-event-txt">
+                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                            </div>
+                        </h:outputLink>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image7">
                         <div class="img-panel-txt">
                             <h:outputLabel value="Palestras" styleClass="main-txt"/>
                         </div>
                         <div class="img-panelist-txt">
-                            <h:outputText value="Drin" styleClass="normal-txt"/>
+                            <h:outputLink id="show-driin" value="#" styleClass="open-dialog">
+                                <h:outputText value="Driin" styleClass="normal-txt"/>
+                            </h:outputLink>
                             <br/>
-                            <h:outputText value="Márcio Miranda e Gladys Prado" styleClass="normal-txt"/>
+                            <h:outputLink id="show-job" value="#" styleClass="open-dialog">
+                                <h:outputText value="Márcio Miranda e Gladys Prado" styleClass="normal-txt"/>
+                            </h:outputLink>
                         </div>
                         <div class="img-event-txt">
                             <h:outputText value="Gratuita" styleClass="low-bold-txt"/>
@@ -153,19 +180,423 @@
                 </div>
             </div>
             <div id="footer-home">
-                <div class="footer">
+                <div class="footer-home">
                     <div class="footer-txt-grid">
                         <h:outputText value="Universidade Federal de Santa Catarina - UFSC" styleClass="footer-txt"/>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
+                        <i class="material-icons md-light md-08">brightness_1</i>
                         <h:outputText value="Florianópolis - SC" styleClass="footer-txt"/>
                     </div>
                 </div>
 
             </div>
 
-            <script>
-                document.onreadystatechange = function () {
+            <dialog id="login-dialog" class="mdl-dialog login-data">
 
+                <form id="login-content" 
+                      method="post" 
+                      action="j_security_check">
+
+                    <div class="login-txt">
+                        <h:outputLabel value="Login" styleClass="mdl-dialog__title"/>
+                    </div>
+
+                    <div class="mdl-dialog__content login-input">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="login" 
+                                   type="text" 
+                                   class="mdl-textfield__input login-label"
+                                   name="j_username"></input>
+                            <label class="mdl-textfield__label login-label" 
+                                   for="login">e-mail
+                            </label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="nonFeedback" 
+                                   type="password" 
+                                   class="mdl-textfield__input login-label"
+                                   name="j_password"></input>
+                            <label class="mdl-textfield__label login-label" 
+                                   for="login">senha
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mdl-dialog__actions login-buttons">
+
+                        <input value="Entrar" 
+                               type="submit" 
+                               name="connect"
+                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt"/>
+
+                        <input value="Esqueci a senha" 
+                               type="submit" 
+                               name="connect"
+                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect forgotten-txt"/>
+
+
+                        <button type="button" 
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+
+                </form>
+            </dialog>
+
+            <dialog id="birlo-dialog" class="mdl-dialog dialoag-popup birlo-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/workshopsPopUps/foto worshop1.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Mary Clasen Talyta Bastos" 
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="19/08/2016 - 14h às 18h30"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Sala 125 - CCE - UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="30,00"
+                                              styleClass="panelist-txt"/>
+                                <h:outputText value="(via PagSeguro)"
+                                              styleClass="panelist-txt light"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="Venha conhecer através da prática de renda de bilro um pouco do contexto cultural do litoral catarinense. Este workshop pretende introduzir à prática da renda de bilro, característica da cidade, tendo como valores os conceitos de inovação, sustentabilidade e economia criativa; além da reflexão para conscientização do modo de vida Slow Fashion e transformação do sistema de moda." 
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <br/>
+                            <h:outputText value="Material: tesourinha para bordado ou corta fios e alfinetes." 
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <dialog id="corporateId-dialog" class="mdl-dialog dialoag-popup corporate-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/workshopsPopUps/foto worshop2.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Douglas Menegazzi" 
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="24/08/2016 - 18h às 21h30"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Sala 125 - CCE - UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="25,00"
+                                              styleClass="panelist-txt"/>
+                                <h:outputText value="(via PagSeguro)"
+                                              styleClass="panelist-txt light"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="A oficina irá discutir aspectos da morfologia e da sintaxe visual aplicados à Ilustração, com práticas em design de superfície para projetos de identidade corporativa. Serão explicados conceitos relacionados aos estilos da representação gráfica com exemplos aplicados a marcas. Serão apresentados estudos resultantes das práticas de ensino exercidas pelo proponente como professor nas disciplinas de Ilustração Digital e Projeto Publicitário no curso de Design da UFSC." 
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <br/>
+                            <h:outputText value="Material: incluso." 
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <dialog id="photo-dialog" class="mdl-dialog dialoag-popup photo-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/workshopsPopUps/foto worshop3.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Sharlene Melanie Richard Perassi" 
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="02/09/2016 e 09/09/2016"
+                                              styleClass="panelist-txt"/>
+                                <br/>
+                                <h:outputText value="14h às 17h30"
+                                              styleClass="panelist-txt txt-brk"/>
+
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Sala 125 - CCE - UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="50,00"
+                                              styleClass="panelist-txt"/>
+                                <h:outputText value="(via PagSeguro)"
+                                              styleClass="panelist-txt light"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="O foco da oficina é a composição fotográfica para a representação da relação das pessoas com a arte grafite, principalmente as encontradas em Florianópolis. Será abordado o estudo da sintaxe visual para ditar técnicas, regras e teorias para capturar uma imagem com qualidade profissional. Desenvolveremos as partes técnicas e teóricas necessárias para entender o processo de composição fotográfica e, posteriormente, aplicá-las de modo prático por meio do uso de smartphones." 
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <br/>
+                            <h:outputText value="Material: smartphone. Não é obrigatório câmera profissional." 
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <dialog id="project-dialog" class="mdl-dialog dialoag-popup project-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/workshopsPopUps/foto worshop4.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Julio Teixeira" 
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="16/09/2016 - 14h20 às 19h20"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Sala 125 - CCE - UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="30,00"
+                                              styleClass="panelist-txt"/>
+                                <h:outputText value="(via PagSeguro)"
+                                              styleClass="panelist-txt light"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="O workshop se dividirá em duas partes, sendo:"
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <h:outputText value="Parte 1 (tarde 1h30) - Conteúdo | serão apresentados princípios, modelos e ferramentas de Gestão Visual de Projetos e suas possibilidades de uso."
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <h:outputText value="Parte 2 (tarde - 3h) – Prática | Equipes desenvolverão uma parte do projeto utilizado ferramentas visuais."
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <br/>
+                            <h:outputText value="Material: incluso." 
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <dialog id="brand-dialog" class="mdl-dialog dialoag-popup brand-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/workshopsPopUps/foto worshop5.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Felipe Machado" 
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="21/09/2016 - 18h às 21h30"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Sala 125 - CCE - UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="25,00"
+                                              styleClass="panelist-txt"/>
+                                <h:outputText value="(via PagSeguro)"
+                                              styleClass="panelist-txt light"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="Marcas que têm consciência de seu arquétipo dominante detêm maior capacidade de criar significados que ultrapassem a razão atingindo o inconsciente dos consumidores - além de conquistar o imaginário social. O arquétipo atua como princípio organizador de marcas e produtos, oferecendo inspiração, estrutura, coerência e significado para seus consumidores e clientes, para a cultura e para a sociedade. Com base na Psicologia e na Antropologia do Consumo, o workshop pretende demonstrar exemplos com arquétipos aplicados em comunicações de marcas."
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <br/>
+                            <h:outputText value="Material: incluso." 
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <dialog id="job-dialog" class="mdl-dialog dialoag-popup job-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/palestrasPopUps/foto palestra1.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Márcio Miranda Gladys Prado" 
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="09/08/2016 - 20h"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Auditório Henrique Fontes CCE/UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="Gratuito"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="Toda mudança tem um preço, mas não mudar na Sociedade do Conhecimento tem um preço ainda mais alto. Com o mercado em constante evolução, a mudança atinge todas as profissões e o profissional precisa estar preparado para buscar alavancagem em sua área de atuação. É preciso aprender a comunicar a marca pessoal e considerar a eficiência, a eficácia e a efetividade das ações no desenvolvimento da empregabilidade. A palestra A Empregabilidade, a Marca e Você é uma palestra desenvolvida para o público acadêmico e com direcionamento ao mercado de trabalho, abordando o tema da empregabilidade, a partir dos princípios de coaching e da comunicação da marca."
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <dialog id="driin-dialog" class="mdl-dialog dialoag-popup driin-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                            <div>
+                                <img src="../../resources/images/palestrasPopUps/foto palestra2.png" 
+                                     alt=""
+                                     class="panelist-photo"/>
+
+                                <div class="panelist-name">
+                                    <h:outputText value="Driin"
+                                                  styleClass="panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="04/10/2016 - 19h"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Auditório Henrique Fontes CCE/UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="Gratuito"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="Driin é tatuador e começou os trabalhos de grafitti em 2006. Seu objetivo era algo mais livre, com cores mais fortes e temática de anjos e figuras femininas."
+                                          styleClass="panel-description-txt"/>
+                            <br/>
+                            <h:outputText value="O palestrante abordará sua experiência na cidade de Florianópolis, com exemplos de seus trabalhos e fotografias dos parceiros Marco Cezar e Igor Spaceck."
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
+            <script>
+                // Page Height Size
+                document.onreadystatechange = function () {
                     var body = document.body,
                             html = document.documentElement;
                     var bigHeight = Math.max(body.scrollHeight, body.offsetHeight,
@@ -178,8 +609,111 @@
                     } else {
                         document.getElementById('bodyArea').setAttribute('style', "height: " + minHeigth + "px");
                     }
-
                 };
+
+                // Login Dialog
+                var loginDialog = document.querySelector('#login-dialog');
+                var showLoginDialogButton = document.querySelector('#show-login');
+                if (!loginDialog.showModal) {
+                    dialogPolyfill.registerDialog(loginDialog);
+                }
+                showLoginDialogButton.addEventListener('click', function () {
+                    loginDialog.showModal();
+                });
+                loginDialog.querySelector('.close').addEventListener('click', function () {
+                    loginDialog.close();
+                });
+
+                // Birlo Dialog
+                var birloDialog = document.querySelector('#birlo-dialog');
+                var showBirloDialogButton = document.querySelector('#show-birlo');
+                if (!birloDialog.showModal) {
+                    dialogPolyfill.registerDialog(birloDialog);
+                }
+                showBirloDialogButton.addEventListener('click', function () {
+                    birloDialog.showModal();
+                });
+                birloDialog.querySelector('.close').addEventListener('click', function () {
+                    birloDialog.close();
+                });
+
+                // Identidade Corporativa Dialog
+                var corporateDialog = document.querySelector('#corporateId-dialog');
+                var showCorporateDialogButton = document.querySelector('#show-corporateId');
+                if (!corporateDialog.showModal) {
+                    dialogPolyfill.registerDialog(corporateDialog);
+                }
+                showCorporateDialogButton.addEventListener('click', function () {
+                    corporateDialog.showModal();
+                });
+                corporateDialog.querySelector('.close').addEventListener('click', function () {
+                    corporateDialog.close();
+                });
+
+                // Composição Fotográfica Dialog
+                var photoDialog = document.querySelector('#photo-dialog');
+                var showPhotoDialogButton = document.querySelector('#show-photo');
+                if (!photoDialog.showModal) {
+                    dialogPolyfill.registerDialog(photoDialog);
+                }
+                showPhotoDialogButton.addEventListener('click', function () {
+                    photoDialog.showModal();
+                });
+                photoDialog.querySelector('.close').addEventListener('click', function () {
+                    photoDialog.close();
+                });
+
+                // Gestão de Projeto Dialog
+                var projectDialog = document.querySelector('#project-dialog');
+                var showProjectDialogButton = document.querySelector('#show-project');
+                if (!projectDialog.showModal) {
+                    dialogPolyfill.registerDialog(projectDialog);
+                }
+                showProjectDialogButton.addEventListener('click', function () {
+                    projectDialog.showModal();
+                });
+                projectDialog.querySelector('.close').addEventListener('click', function () {
+                    projectDialog.close();
+                });
+
+                // Comunicação da Marca Dialog
+                var brandDialog = document.querySelector('#brand-dialog');
+                var showBrandDialogButton = document.querySelector('#show-brand');
+                if (!brandDialog.showModal) {
+                    dialogPolyfill.registerDialog(brandDialog);
+                }
+                showBrandDialogButton.addEventListener('click', function () {
+                    brandDialog.showModal();
+                });
+                brandDialog.querySelector('.close').addEventListener('click', function () {
+                    brandDialog.close();
+                });
+
+                // Empregabilidade Dialog
+                var jobDialog = document.querySelector('#job-dialog');
+                var showJobDialogButton = document.querySelector('#show-job');
+                if (!jobDialog.showModal) {
+                    dialogPolyfill.registerDialog(jobDialog);
+                }
+                showJobDialogButton.addEventListener('click', function () {
+                    jobDialog.showModal();
+                });
+                jobDialog.querySelector('.close').addEventListener('click', function () {
+                    jobDialog.close();
+                });
+
+                // Driin Dialog
+                var driinDialog = document.querySelector('#driin-dialog');
+                var showDriinDialogButton = document.querySelector('#show-driin');
+                if (!driinDialog.showModal) {
+                    dialogPolyfill.registerDialog(driinDialog);
+                }
+                showDriinDialogButton.addEventListener('click', function () {
+                    driinDialog.showModal();
+                });
+                driinDialog.querySelector('.close').addEventListener('click', function () {
+                    driinDialog.close();
+                });
             </script>
         </h:body>
     </f:view>

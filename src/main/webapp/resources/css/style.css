@@ -1,0 +1,146 @@
+/*
+Copyright (c) 2009 Virtual Office.
+Todos os direitos reservados.
+Este software é confidencial e um produto proprietário da Virtual Office.
+Qualquer uso não autorizado, reprodução ou transferência deste software é terminantemente proibida.
+*/
+/* 
+    Created on : Aug 11, 2016, 9:22:27 PM
+    Author     : Eduardo Mallmann <eduardo.mallmann@sippulse.com>
+*/
+
+#-------------------------
+#   FONTS & CONFIGURATION
+#-------------------------
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+        url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+        url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-08 { font-size: 8px; }
+.material-icons.md-12 { font-size: 12px; }
+.material-icons.md-14 { font-size: 14px; }
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-28 { font-size: 28px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.md-color { color: #104b62; }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+#-------------------------
+#   GLOBAL CONFIG
+#-------------------------
+
+* {
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    border: none;
+}
+
+body {
+    background-color: #FFF;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+
+#-------------------------
+#   TEMPLATE
+#-------------------------
+
+.header {
+    position: relative;
+    float: top;
+    width: 100%;
+    height: 127px;
+    background-color: #FFF;
+}
+.header-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.header-logo {
+    position: absolute;
+    top: 47px;
+    left: 319px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 130px;
+    background-image: url("../images/template/rodapВ completo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 101%;
+}
+.footer-grid {
+    width: 80%;
+    clear: both;
+    margin: 0 auto;
+    text-align: center;
+}
+.footer-block {
+    display: inline-block;
+    border-right: 1px solid #FFF;
+    width: 200px;
+    height: 80px;
+    margin-top: 25px;
+    vertical-align: middle;
+}
+.footer-block:last-of-type {
+    border-right: none;
+}
+.footer-txt {
+    font-family: roboto;
+    font-size: 16px;
+    color: #FFF;
+}
