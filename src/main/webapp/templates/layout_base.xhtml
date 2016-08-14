@@ -24,7 +24,6 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
             <h:outputScript name="material.js" library="js"/>
             <h:outputScript name="dialog-polyfill.js" library="dialog-polyfill"/>
             <h:outputStylesheet name="dialog-polyfill.css" library="dialog-polyfill"/>
-            <!--<h:outputStylesheet name="style.css" library="css"/>-->
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css"></link>
 
             <title>
@@ -33,9 +32,9 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                 </ui:insert>
             </title>
         </h:head>
-        <h:body>
+        <h:body id="bodyArea">
 
-            <div class="header">
+            <div class="header bkg-white">
                 <div class="sigmo-logo">
                     <img src="../../resources/images/template/cabeЗalho completo.png" 
                          alt=""
@@ -53,27 +52,29 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                          sticky="false"/>
             </div>
 
-            <div id="bodyArea">
+            <div class="contentArea">
                 <ui:insert name="content"/>
             </div>
 
-            <div class="footer">
+            <div class="footer bkg-img full-footer">
                 <div class="footer-grid">
                     <div class="footer-block">
                         <h:outputLabel value="III Seminário de Informação e Comunicação da Marca" 
-                                       styleClass="footer-txt"/>
+                                       styleClass="roboto-medium s18 white"/>
                     </div>
                     <div class="footer-block">
-                        <h:outputLabel value="19 de outubro de 2016 8h às 12 e 14 às 18h" 
-                                       styleClass="footer-txt"/>
+                        <h:outputLabel value="19 de outubro de 2016" 
+                                       styleClass="roboto-medium s16 white"/>
+                        <br/>
+                        <label class="roboto-medium s16 white">8h às 12 e 14 às 18h</label>
                     </div>
                     <div class="footer-block">
                         <h:outputLabel value="Local: Auditório EFI/UFSC Florianópolis-SC" 
-                                       styleClass="footer-txt"/>
+                                       styleClass="roboto-medium s16 white"/>
                     </div>
                     <div class="footer-block">
                         <h:outputLabel value="sigmo.ufsc@gmail.com (48) 3721-6609" 
-                                       styleClass="footer-txt"/>
+                                       styleClass="roboto-medium s16 white"/>
                     </div>
                 </div>
             </div>
@@ -88,7 +89,6 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     var minHeigth = window.innerHeight;
 
                     if (bigHeight > minHeigth) {
-                        bigHeight += 20;
                         document.getElementById('bodyArea').setAttribute('style', "height: " + bigHeight + "px");
                     } else {
                         document.getElementById('bodyArea').setAttribute('style', "height: " + minHeigth + "px");

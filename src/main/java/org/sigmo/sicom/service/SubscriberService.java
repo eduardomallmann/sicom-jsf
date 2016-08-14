@@ -6,8 +6,12 @@
 package org.sigmo.sicom.service;
 
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.sigmo.sicom.entity.Subscriber;
+import org.sigmo.sicom.exception.BusinessException;
+import org.sigmo.sicom.exception.ExceptionMessage;
 
 /**
  * <p>
@@ -21,7 +25,41 @@ import org.sigmo.sicom.entity.Subscriber;
  *
  * @author Eduardo Mallmann <contato@eduardomallmann.com>
  */
+@Stateless
 public class SubscriberService extends BaseService<Subscriber> {
+
+    /**
+     * Retorna o objeto da entidade "Subscriber" autenticado por seu "login" e "password".
+     *
+     * @param email atributo "email" da entidade "Subscriber"
+     * <p>
+     * @return Retorna o objeto atualizado, com o seu identificador atualizado
+     * <p>
+     * @throws BusinessException Caso ocorra alguma exceção
+     * @see Subscriber
+     */
+    public Subscriber login(final String email) throws BusinessException {
+
+        try {
+            //monta a query para autenticação dos usuários
+            Query query = super.getEm().createNamedQuery("Subscriber.login");
+
+            //define os parametros login e password
+            query.setParameter("email", email);
+
+            //executa a consulta
+            return (Subscriber) query.getSingleResult();
+
+        } catch (NoResultException nre) {
+
+            throw new BusinessException(new ExceptionMessage("login.invalid"), "Login ou Senha inexiste.");
+
+        } catch (Exception e) {
+
+            throw new BusinessException(new ExceptionMessage("error.generic.exception"), 
+                    "Problemas no acesso ao sistema.");
+        }
+    }
 
     /**
      * Recupera todos os registros da Entidade salvos no banco de dados.
@@ -64,9 +102,9 @@ public class SubscriberService extends BaseService<Subscriber> {
      * @return objeto atualizado.
      */
     public Subscriber save(final Subscriber subscriber) {
-        
+
         Subscriber subscriberPersisted;
-        
+
         if (subscriber.getId() == null) {
             subscriberPersisted = super.persist(subscriber);
         } else {

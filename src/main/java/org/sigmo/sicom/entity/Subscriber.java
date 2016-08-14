@@ -37,7 +37,11 @@ import javax.persistence.Transient;
             name = "Subscriber.listByRole",
             query = "SELECT s FROM Subscriber s "
                     + " WHERE s.role = :role "
-                    + " ORDER BY s.fullName ASC ")
+                    + " ORDER BY s.fullName ASC "),
+    @NamedQuery(
+            name = "Subscriber.login",
+            query = "SELECT s FROM Subscriber s "
+            + "WHERE s.email = :email ")
 })
 public class Subscriber implements BaseEntity {
 
@@ -65,8 +69,6 @@ public class Subscriber implements BaseEntity {
     private String course;
     @OneToMany(mappedBy = "subscriber")
     private List<SubscriberDetails> subscriberDetailses;
-    @Transient
-    private String confirmPassword;
 
     public Long getId() {
         return id;
@@ -146,14 +148,6 @@ public class Subscriber implements BaseEntity {
 
     public void setPassword(final String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(final String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     @Override

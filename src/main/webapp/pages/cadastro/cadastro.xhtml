@@ -7,10 +7,160 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/templates/layout_base.xhtml">
         <ui:define name="content">
-       
-        
-        
-        
+            <div class="register bkg-gray">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col">
+                        <div class="register-txt-field">
+                            <div class="register-label">
+                                <h:outputLabel value="III SICOM" 
+                                               styleClass="roboto-light s30 dark-blue register-txt-spacer"/>
+                                <p:spacer class="register-txt-spacer"/>
+                                <h:outputLabel value="Inscrição" 
+                                               styleClass="roboto-light s30 dark-blue"/>
+                            </div>
+                            <div class="register-txt col1">
+                                <h:outputText value="A participação no evento é gratuita." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Feito o cadastro, você está automaticamente inscrito no III SICOM." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Para receber o certificado você deve comparecer ao evento." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="A inscrição também pode ser realizada no local e dia do Seminário." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col register-input">
+                        <h:form>
+                            <div class="register-header">
+                                <i class="material-icons md-54 md-color">account_circle</i>
+                                <div class="txt-header">
+                                    <h:outputLabel value="Meu cadastro" 
+                                                   styleClass="roboto-normal s36 dark-blue"/>
+                                </div>
+                            </div>
+                            <div class="register-input">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsName" 
+                                                 value="#{registerController.subscriber.fullName}" 
+                                                 required="true"
+                                                 class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsName" 
+                                                   value="Nome Completo *" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsName" 
+                                                   value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large roboto-medium"/>
+
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsEmail" 
+                                                 value="#{registerController.subscriber.email}" 
+                                                 class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsEmail" 
+                                                   value="E-mail *" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsCPF" 
+                                                 value="#{registerController.subscriber.cpf}" 
+                                                 class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsCPF" 
+                                                   value="CPF *" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsCPF" 
+                                                   value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large roboto-medium"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                                    <p:password id="subsPwd"
+                                                feedback="true"
+                                                value="#{registerController.subscriber.password}" 
+                                                redisplay="true"
+                                                match="subsConfPwd"
+                                                styleClass="mdl-textfield__input roboto-medium s14 dark-blue  input-txt-space">
+                                        <p:ajax event="change"
+                                                update="subsConfPwd"/>
+                                    </p:password>
+                                    <h:outputLabel for="subsPwd" 
+                                                   value="Senha *" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue  input-txt-space"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputSecret id="subsConfPwd" 
+                                                   value="#{registerController.subscriber.password}" 
+                                                   styleClass="mdl-textfield__input roboto-medium s14 dark-blue  input-txt-space"/>
+                                    <h:outputLabel for="subsConfPwd" 
+                                                   value="Confirmar Senha *" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue  input-txt-space"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col">
+                        <div class="register-txt-field">
+                            <div class="register-label">
+                                <h:outputLabel value="Oficinas" 
+                                               styleClass="roboto-light s30 dark-blue register-txt-spacer"/>
+                                <p:spacer class="register-txt-spacer"/>
+                                <h:outputLabel value="Temáticas" 
+                                               styleClass="roboto-light s30 dark-blue"/>
+                            </div>
+                            <div class="register-txt">
+                                <h:outputText value="As inscrições para as oficinas são apenas online." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                                <br/>
+                                <h:outputText value="Todas as oficinas dão direito à certificado." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                            </div>
+                            <div class="inscriptions-link">
+                                <div class="txt-link">
+                                    <h:outputLabel value="Inscrições oficinas" 
+                                                   styleClass="roboto-medium s18 dark-blue vertical-middle"/>
+                                </div>
+                                <img src="../../resources/images/register/icone oficinas.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col">
+                        <div class="register-txt-field">
+                            <div class="register-label">
+                                <h:outputLabel value="Palestras" 
+                                               styleClass="roboto-light s30 dark-blue register-txt-spacer"/>
+                                <p:spacer class="register-txt-spacer"/>
+                                <h:outputLabel value="Gratuitas" 
+                                               styleClass="roboto-light s30 dark-blue"/>
+                            </div>
+                            <div class="register-txt">
+                                <h:outputText value="Para receber o certificado é necessária a inscrição, podendo ser 
+                                              realizada também no local e dia de cada palestra." 
+                                              styleClass="roboto-light s14 light-blue"/>
+                            </div>
+                            <div class="inscriptions-link">
+                                <div class="txt-link">
+                                    <h:outputLabel value="Inscrições palestras" 
+                                                   styleClass="roboto-medium s18 dark-blue"/>
+                                </div>
+                                <img src="../../resources/images/register/icone palestras.png" 
+                                     alt="" 
+                                     class="icon-img"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
         </ui:define>
     </ui:composition>
 </html>

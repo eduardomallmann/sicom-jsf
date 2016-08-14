@@ -9,9 +9,9 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
     Author     : Eduardo Mallmann <eduardo.mallmann@sippulse.com>
 */
 
-#-------------------------
-#   FONTS & CONFIGURATION
-#-------------------------
+/***************************
+    FONTS & CONFIGURATION
+****************************/
 
 @font-face {
     font-family: 'Material Icons';
@@ -60,6 +60,7 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 .material-icons.md-28 { font-size: 28px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+.material-icons.md-54 { font-size: 54px; }
 
 /* Rules for using icons as black on a light background. */
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
@@ -71,9 +72,9 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
-#-------------------------
-#   GLOBAL CONFIG
-#-------------------------
+/**************************
+    GLOBAL CONFIG
+***************************/
 
 * {
     margin: 0;
@@ -89,16 +90,157 @@ body {
     width: 100%;
 }
 
-#-------------------------
-#   TEMPLATE
-#-------------------------
+/**************************
+    FONTS
+***************************/
+
+/*Font Weigth*/
+.roboto-thin {
+    font-family: roboto;
+    font-weight: 100;
+}
+.roboto-thin--italic {
+    font-family: roboto;
+    font-weight: 100;
+    font-style: italic;
+}
+.roboto-light {
+    font-family: roboto;
+    font-weight: 300;
+}
+.roboto-light--italic {
+    font-family: roboto;
+    font-weight: 300;
+    font-style: italic;
+}
+.roboto-normal {
+    font-family: roboto;
+    font-weight: 400;
+}
+.roboto-normal--italic {
+    font-family: roboto;
+    font-weight: 400;
+    font-style: italic;
+}
+.roboto-medium {
+    font-family: roboto;
+    font-weight: 500;
+}
+.roboto-medium--italic {
+    font-family: roboto;
+    font-weight: 500;
+    font-style: italic;
+}
+.roboto-bold {
+    font-family: roboto;
+    font-weight: 700;
+}
+.roboto-bold--italic {
+    font-family: roboto;
+    font-weight: 700;
+    font-style: italic;
+}
+.roboto-ultra-bold {
+    font-family: roboto;
+    font-weight: 900;
+}
+.roboto-ultra-bold--italic {
+    font-family: roboto;
+    font-weight: 900;
+    font-style: italic;
+}
+
+/*Size*/
+.s12 {
+    font-size: 12px;
+}
+.s14 {
+    font-size: 14px;
+}
+.s16 {
+    font-size: 16px;
+}
+.s18 {
+    font-size: 18px;
+}
+.s20 {
+    font-size: 20px;
+}
+.s22 {
+    font-size: 22px;
+}
+.s24 {
+    font-size: 24px;
+}
+.s28 {
+    font-size: 28px;
+}
+.s30 {
+    font-size: 30px;
+}
+.s32 {
+    font-size: 32px;
+}
+.s36 {
+    font-size: 36px;
+}
+.s48 {
+    font-size: 48px;
+}
+.s56 {
+    font-size: 56px;
+}
+
+/*Color*/
+.white {
+    color: #FFF;
+}
+.dark-blue {
+    color: #104b62;
+}
+.light-blue {
+    color: #229997;
+}
+
+/**************************
+    BACKGROUNDS
+***************************/
+
+/*Bkg Colors*/
+.bkg-white {
+    background-color: #FFF;
+}
+.bkg-gray {
+    background-color: #e3e0e2;
+}
+.bkg-dark-blue {
+    background-color: #104b62;
+}
+.bkg-light-blue {
+    background-color: #229997;
+}
+
+/*Bkg Images*/
+.bkg-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 101%;
+}
+.bkg-img.full-footer {
+    background-image: url("../images/template/rodapВ completo.png");
+}
+
+
+
+/**************************
+    TEMPLATE
+***************************/
 
 .header {
     position: relative;
     float: top;
     width: 100%;
     height: 127px;
-    background-color: #FFF;
 }
 .header-banner {
     position: absolute;
@@ -111,16 +253,11 @@ body {
     top: 47px;
     left: 319px;
 }
-
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: 130px;
-    background-image: url("../images/template/rodapВ completo.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 101%;
 }
 .footer-grid {
     width: 80%;
@@ -132,15 +269,102 @@ body {
     display: inline-block;
     border-right: 1px solid #FFF;
     width: 200px;
-    height: 80px;
+    height: 60px;
     margin-top: 25px;
-    vertical-align: middle;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .footer-block:last-of-type {
     border-right: none;
 }
-.footer-txt {
-    font-family: roboto;
-    font-size: 16px;
-    color: #FFF;
+.footer-block:first-of-type {
+    width: 250px;
+}
+
+/**************************
+    REGISTER
+***************************/
+
+.mdl-grid {
+    padding: 0;
+}
+.mdl-cell {
+    margin: 0;
+}
+.register {
+    position: relative; 
+    width: 100%; 
+}
+.register-txt-field {
+    margin-top: 95px;
+    box-sizing: border-box;
+}
+.register-txt-field:first-of-type {
+    margin-left: 55px;
+    width: 220px;
+}
+.register-label {
+    margin-bottom: 30px;
+}
+.register-txt-spacer {
+    display: block;
+    margin-bottom: 5px;
+}
+.register-txt {
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-bottom: 0.1px solid #229997;
+    border-top: 0.1px solid #229997;
+}
+.register-txt.col1 {
+    border-bottom: none;
+}
+.register .icon-img {
+    float: right;
+}
+.register .inscriptions-link {
+    height: 47px;
+}
+.inscriptions-link .txt-link {
+    display: inline-block;
+    margin-top: 13px;
+}
+.register-header {
+    margin-top: 26px;
+    height: 54px;
+}
+.register-header .txt-header {
+    display: inline-block;
+    margin-left: 13px;
+    vertical-align: 10px;
+}
+
+.register-input {
+    margin-top: 10px;
+}
+
+.register-input .input-txt-space {
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+.register-input .mdl-textfield--floating-label.is-dirty .mdl-textfield__label.input-txt-space,
+.register-input .mdl-textfield--floating-label.is-focused .mdl-textfield__label.input-txt-space {
+    padding-left: 0px;
+    color: #104b62;
+}
+.register-input .mdl-textfield--floating-label .mdl-textfield__input,
+.register-input .mdl-textfield--floating-label.is-dirty .mdl-textfield__input,
+.register-input .mdl-textfield--floating-label.is-focused .mdl-textfield__input {
+    background-color: #FFF
+}
+
+.register-input .mdl-textfield__label:after {
+    background-color: #104b62;
+}
+.register-input .ui-inputfield.ui-state-default.ui-corner-all {
+    outline: none; 
+    padding: 4px 0;
+    box-shadow: none;
+    border-radius: 0;
 }

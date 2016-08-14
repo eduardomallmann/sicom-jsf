@@ -6,6 +6,7 @@
 package org.sigmo.sicom.service;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import org.sigmo.sicom.entity.SubscriberDetails;
 
 /**
@@ -20,6 +21,7 @@ import org.sigmo.sicom.entity.SubscriberDetails;
  *
  * @author Eduardo Mallmann <contato@eduardomallmann.com>
  */
+@Stateless
 public class SubscriberDetailsService extends BaseService<SubscriberDetails> {
 
     /**
