@@ -65,7 +65,7 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 /* Rules for using icons as black on a light background. */
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
-
+.material-icons.md-yellow { color: #cddc39; }
 .material-icons.md-color { color: #104b62; }
 
 /* Rules for using icons as white on a dark background. */
@@ -201,6 +201,10 @@ body {
 .light-blue {
     color: #229997;
 }
+.yellow {
+    color: #cddc39;
+}
+
 
 /**************************
     BACKGROUNDS
@@ -367,4 +371,14 @@ body {
     padding: 4px 0;
     box-shadow: none;
     border-radius: 0;
+}
+
+.button-register-grid {
+    margin-bottom: 40px;
+}
+.button-register {
+    background-color: #104b62 !important;
+}
+.button-register:hover {
+    background-color: #229997 !important;
 }

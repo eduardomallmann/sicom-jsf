@@ -56,8 +56,8 @@ public class SubscriberService extends BaseService<Subscriber> {
 
         } catch (Exception e) {
 
-            throw new BusinessException(new ExceptionMessage("error.generic.exception"), 
-                    "Problemas no acesso ao sistema.");
+            throw new BusinessException(new ExceptionMessage("error.generic.exception"),
+                                        "Problemas no acesso ao sistema.");
         }
     }
 
@@ -95,6 +95,46 @@ public class SubscriberService extends BaseService<Subscriber> {
     }
 
     /**
+     * Conta a quantidade de registros com o email informado.
+     * <p>
+     * @param email atributo e-mail da entidade
+     * <p>
+     * @return quantidade de registros com o e-mail informado.
+     */
+    public Long countByEmail(String email) {
+        //cria os comandos SQL
+        StringBuffer strQuery = new StringBuffer();
+        strQuery.append(" SELECT COUNT(*) FROM Subscriber s ");
+        strQuery.append(" WHERE s.email = :email ");
+        //cria a pesquisa
+        Query query = super.getEm().createQuery(strQuery.toString());
+        //insere o parâmetro email
+        query.setParameter("email", email);
+        //retorna a contagem
+        return (Long) query.getSingleResult();
+    }
+    
+    /**
+     * Conta a quantidade de registros com o cpf informado.
+     * <p>
+     * @param cpf atributo cpf da entidade
+     * <p>
+     * @return quantidade de registros com o cpf informado.
+     */
+    public Long countByCPF(final String cpf) {
+        //cria os comandos SQL
+        StringBuffer strQuery = new StringBuffer();
+        strQuery.append(" SELECT COUNT(*) FROM Subscriber s ");
+        strQuery.append(" WHERE s.cpf = :cpf ");
+        //cria a pesquisa
+        Query query = super.getEm().createQuery(strQuery.toString());
+        //insere o parâmetro email
+        query.setParameter("cpf", cpf);
+        //retorna a contagem
+        return (Long) query.getSingleResult();
+    }
+
+    /**
      * Persiste o objeto repassado no banco de dados ou atualiza o mesmo.
      *
      * @param subscriber objeto a ser persistido.
@@ -112,4 +152,5 @@ public class SubscriberService extends BaseService<Subscriber> {
         }
         return subscriberPersisted;
     }
+
 }

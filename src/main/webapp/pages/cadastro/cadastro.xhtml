@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col register-input">
-                        <h:form>
+                        <h:form id="inputRegister">
                             <div class="register-header">
                                 <i class="material-icons md-54 md-color">account_circle</i>
                                 <div class="txt-header">
@@ -47,63 +47,98 @@
                                 </div>
                             </div>
                             <div class="register-input">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <h:inputText id="subsName" 
+                                <div id="fullname" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsName"
                                                  value="#{registerController.subscriber.fullName}" 
                                                  required="true"
+                                                 requiredMessage="O campo 'Nome Completo' é obrigatório"
                                                  class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
                                     <h:outputLabel for="subsName" 
-                                                   value="Nome Completo *" 
+                                                   value="Nome Completo"
                                                    class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
-                                    <h:outputLabel for="subsName" 
-                                                   value="Necessário para geração de certificado, 
-                                                   preencha cuidadosamente." 
-                                                   class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large roboto-medium"/>
-
                                 </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="fullname">
+                                    <h:outputLabel value="Campo Obrigatorio" 
+                                                   class="roboto-medium yellow"/>
+                                    <br/>
+                                    <h:outputLabel value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="roboto-medium"/>
+                                </div>
+                                <div id="email" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <h:inputText id="subsEmail" 
+                                                 required="true"
+                                                 requiredMessage="O campo 'E-mail' é obrigatório"
                                                  value="#{registerController.subscriber.email}" 
                                                  class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
                                     <h:outputLabel for="subsEmail" 
-                                                   value="E-mail *" 
+                                                   value="E-mail" 
                                                    class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
                                 </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <h:inputText id="subsCPF" 
-                                                 value="#{registerController.subscriber.cpf}" 
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="email">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto-medium yellow"/>
+                                </div>
+                                <div id="cpf" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsCPF"
+                                                 value="#{registerController.subscriber.cpf}"
+                                                 required="true"
+                                                 requiredMessage="O campo 'CPF' é obrigatório"
+                                                 valueChangeListener="#{registerController.checkCPF()}"
+                                                 validator="#{cpfValidator}"
                                                  class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
                                     <h:outputLabel for="subsCPF" 
-                                                   value="CPF *" 
+                                                   value="CPF" 
                                                    class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="cpf">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto-medium yellow"/>
+                                    <br/>
                                     <h:outputLabel for="subsCPF" 
                                                    value="Necessário para geração de certificado, 
                                                    preencha cuidadosamente." 
-                                                   class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large roboto-medium"/>
+                                                   class="roboto-medium"/>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsUniv" 
+                                                 value="#{registerController.subscriber.course}" 
+                                                 class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsUniv" 
+                                                   value="Universidade/Instituição" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsJob" 
+                                                 value="#{registerController.subscriber.job}" 
+                                                 class="mdl-textfield__input roboto-medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsJob" 
+                                                   value="Profissão/Atuação" 
+                                                   class="mdl-textfield__label roboto-medium s14 dark-blue input-txt-space"/>
+                                </div>
+                                <div id="pwd" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-                                    <p:password id="subsPwd"
-                                                feedback="true"
-                                                value="#{registerController.subscriber.password}" 
-                                                redisplay="true"
-                                                match="subsConfPwd"
-                                                styleClass="mdl-textfield__input roboto-medium s14 dark-blue  input-txt-space">
-                                        <p:ajax event="change"
-                                                update="subsConfPwd"/>
-                                    </p:password>
-                                    <h:outputLabel for="subsPwd" 
-                                                   value="Senha *" 
-                                                   class="mdl-textfield__label roboto-medium s14 dark-blue  input-txt-space"/>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <h:inputSecret id="subsConfPwd" 
+                                    <h:inputSecret id="subsPwd"
                                                    value="#{registerController.subscriber.password}" 
+                                                   required="true"
+                                                   requiredMessage="O campo 'Senha' é obrigatório"
                                                    styleClass="mdl-textfield__input roboto-medium s14 dark-blue  input-txt-space"/>
-                                    <h:outputLabel for="subsConfPwd" 
-                                                   value="Confirmar Senha *" 
+                                    <h:outputLabel for="subsPwd" 
+                                                   value="Senha" 
                                                    class="mdl-textfield__label roboto-medium s14 dark-blue  input-txt-space"/>
                                 </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="pwd">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto-medium yellow"/>
+                                </div>
+                            </div>
+
+                            <div class="button-register-grid">
+                                <h:commandButton id="registerbutton"
+                                                 value="Cadastrar"
+                                                 disabled="#{registerController.existingCpf or registerController.existingEmail}"
+                                                 action="#{registerController.save()}"
+                                                 styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto-medium s12 button-register"/>
                             </div>
                         </h:form>
                     </div>

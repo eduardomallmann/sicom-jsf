@@ -41,7 +41,7 @@ import javax.persistence.Transient;
     @NamedQuery(
             name = "Subscriber.login",
             query = "SELECT s FROM Subscriber s "
-            + "WHERE s.email = :email ")
+                    + "WHERE s.email = :email ")
 })
 public class Subscriber implements BaseEntity {
 
