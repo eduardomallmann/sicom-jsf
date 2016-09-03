@@ -42,7 +42,7 @@ public class EmailValidator extends BaseValidator implements Validator {
         //Set the email pattern string
         Pattern p = Pattern
                 .compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))"
-                         + "([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
+                         + "([a-zA-Z]{2,4}|[0-9]{1,6})(\\]?)$");
 
         //Match the given string with the pattern
         Matcher m = p.matcher(enteredEmail);
@@ -53,7 +53,8 @@ public class EmailValidator extends BaseValidator implements Validator {
         if (!matchFound) {
 
             throw new ValidatorException(super.createMessage(FacesMessage.SEVERITY_ERROR,
-                                                             "validator.email.invalid"));
+                                                             "Campo E-mail: informação inválida, favor rever",
+                                                             "E-mail inválido."));
         }
     }
 

@@ -7,11 +7,14 @@ package org.sigmo.sicom.service;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.sigmo.sicom.entity.Subscriber;
 import org.sigmo.sicom.exception.BusinessException;
-import org.sigmo.sicom.exception.ExceptionMessage;
 
 /**
  * <p>
@@ -52,12 +55,44 @@ public class SubscriberService extends BaseService<Subscriber> {
 
         } catch (NoResultException nre) {
 
-            throw new BusinessException(new ExceptionMessage("login.invalid"), "Login ou Senha inexiste.");
+            throw new BusinessException("Login ou Senha inexiste.");
 
         } catch (Exception e) {
 
-            throw new BusinessException(new ExceptionMessage("error.generic.exception"),
-                                        "Problemas no acesso ao sistema.");
+            throw new BusinessException("Problemas no acesso ao sistema.");
+        }
+    }
+
+    /**
+     * Método que autentica o "Subscriber".
+     * <p>
+     * @param email    atributo "email" da entidade "Subscriber"
+     * @param password atributo "password" da entidade "Subscriber"
+     * <p>
+     * @return Subscriber autenticado
+     * <p>
+     * @throws BusinessException Caso o Subscriber não tenha sido persistido previamente.
+     */
+    public Subscriber authentication(final String email, final String password) throws BusinessException {
+        try {
+            //busca o contexto do conteiner da aplicação
+            FacesContext context = FacesContext.getCurrentInstance();
+            //define o request
+            HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+            //define a sessão
+            HttpSession session = request.getSession(false);
+            //define o tempo máximo de inatividade desta sessão
+            session.setMaxInactiveInterval(1800);
+            //autentica o Subscriber na sessão
+            request.login(email, password);
+            //busca o Subscriber logado
+            Subscriber subscriber = this.login(email);
+            //define a sessão como autenticada
+            session.setAttribute("authenticated", true);
+            //retorna o Subscriber autenticado
+            return subscriber;
+        } catch (ServletException ex) {
+            throw new BusinessException("Falha na autenticação do usuário.");
         }
     }
 
@@ -104,7 +139,7 @@ public class SubscriberService extends BaseService<Subscriber> {
     public Long countByEmail(String email) {
         //cria os comandos SQL
         StringBuffer strQuery = new StringBuffer();
-        strQuery.append(" SELECT COUNT(*) FROM Subscriber s ");
+        strQuery.append(" SELECT COUNT(s) FROM Subscriber s ");
         strQuery.append(" WHERE s.email = :email ");
         //cria a pesquisa
         Query query = super.getEm().createQuery(strQuery.toString());
@@ -113,7 +148,7 @@ public class SubscriberService extends BaseService<Subscriber> {
         //retorna a contagem
         return (Long) query.getSingleResult();
     }
-    
+
     /**
      * Conta a quantidade de registros com o cpf informado.
      * <p>
@@ -124,7 +159,7 @@ public class SubscriberService extends BaseService<Subscriber> {
     public Long countByCPF(final String cpf) {
         //cria os comandos SQL
         StringBuffer strQuery = new StringBuffer();
-        strQuery.append(" SELECT COUNT(*) FROM Subscriber s ");
+        strQuery.append(" SELECT COUNT(s) FROM Subscriber s ");
         strQuery.append(" WHERE s.cpf = :cpf ");
         //cria a pesquisa
         Query query = super.getEm().createQuery(strQuery.toString());

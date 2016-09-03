@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/layout_base.xhtml">
+        <ui:define name="content">
+            <h:form id="workshops">
+
+                <h:outputLink target="_self"
+                              styleClass="link-inscriptions"
+                              value="../../pages/inscricao/inscricao.jsf">
+                    <div class="register-return">
+                        <div class="txt-header">
+                            <h:outputLabel value="Meu cadastro" 
+                                           style='cursor: pointer'
+                                           styleClass="roboto medium s16 dark-blue"/>
+                        </div>
+                        <i class="material-icons md-48 md-color">account_circle</i>
+                    </div>
+                </h:outputLink>
+
+                <h:outputLink target="_self"
+                              styleClass="link-inscriptions"
+                              value="../../pages/inscricao/oficinas.jsf">
+                    <div class="goto-event">
+                        <div class="txt-link">
+
+                            <h:outputLabel value="Oficinas"
+                                           style='cursor: pointer'
+                                           styleClass="roboto medium s16 dark-blue"/>
+                        </div>
+                        <img src="../../resources/images/register/icone oficinas.png" 
+                             alt=""
+                             class="icon-img"/>
+                    </div>
+                </h:outputLink>
+
+                <div class='palestras bkg-white'>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--4-col first-column">
+                            <div class='txt-palestras'>
+                                <h:outputLabel value='Palestras' class="roboto bold s42 dark-blue"/>
+                                <br/>
+                                <h:outputLabel value='Gratuitas' class="roboto bold s42 dark-blue"/>
+                            </div>
+                            <div class='txt-advertising'>
+                                <h:outputLabel value='Para receber o certificado é' 
+                                               class="roboto bold s22 light-blue"/>
+                                <br/>
+                                <h:outputLabel value='necessária a inscrição.' 
+                                               class="roboto bold s22 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputLabel value='A inscrição'
+                                               class="roboto bold s22 light-blue"/>
+                                <h:outputLabel value=' também ' 
+                                               class="roboto bold s22 dark-blue"/>
+                                <h:outputLabel value='pode ser realizada ' 
+                                               class="roboto bold s22 light-blue"/>
+                                <h:outputLabel value='no local e dia do evento.' 
+                                               class="roboto bold s22 dark-blue"/>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col empregabilidade">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/palestras/1.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Palestra" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <h:outputLabel value="Empregabilidade, marca e você" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Márcio Miranda e Gladys Prado" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Pretende-se estimular os participantes a atuarem de forma 
+                                                      orientada à marca pessoal para a empregabilidade, possibilitando o 
+                                                      alcance do sucesso pessoal e profissional."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="09/08/2016 20h" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="jobDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(6)}" 
+                                                   rendered="#{!subscriberController.empregabilidade}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+
+                                    <h:commandButton onclick="jobDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.empregabilidade}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/palestras/2.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Palestra" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <h:outputLabel value="Painel com o artista Driin" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Pedro Driin" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Driin é artista e tatuador. Em sua palestra ele falará 
+                                                      sobre a experiência de pintar muros em Florianópolis, mostrando 
+                                                      como a arte grafite pode marcar uma cidade."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="04/10/2016 - 19h" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="driinDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(7)}" 
+                                                   rendered="#{!subscriberController.driin}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+                                    <h:commandButton onclick="driinDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.driin}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

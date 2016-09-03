@@ -8,6 +8,10 @@
         <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
         <param-value>true</param-value>
     </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>none</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -25,4 +29,88 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>sicom-realm</realm-name>
+    </login-config>
+    
+    
+    
+<!--    
+    <security-constraint>
+        <display-name>SubscriberConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Subscriber</web-resource-name>
+            <description/>
+            <url-pattern>/pages/inscricao/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>SUBSCRIBER</role-name>
+            <role-name>ADMINISTRATOR</role-name>
+            <role-name>PANELIST</role-name>
+            <role-name>SECRETARY</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>ErroConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Error</web-resource-name>
+            <description/>
+            <url-pattern>/pages/error/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>*</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>SecurityConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Internal</web-resource-name>
+            <description/>
+            <url-pattern>/template/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>INTERNAL_SECURITY</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-role>
+        <description/>
+        <role-name>ADMINISTRATOR</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>PANELIST</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>SECRETARY</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>SUBSCRIBER</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>INTERNAL_SECURITY</role-name>
+    </security-role>
+    -->
+    
 </web-app>

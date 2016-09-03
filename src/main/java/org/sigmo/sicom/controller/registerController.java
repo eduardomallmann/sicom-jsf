@@ -9,12 +9,14 @@ package org.sigmo.sicom.controller;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import org.sigmo.sicom.entity.Subscriber;
+import org.sigmo.sicom.exception.BusinessException;
 import org.sigmo.sicom.service.SubscriberService;
 import org.sigmo.sicom.type.SubscriberType;
+import org.sigmo.sicom.util.MD5Hash;
 
 /**
  * <p>
@@ -28,7 +30,7 @@ import org.sigmo.sicom.type.SubscriberType;
  * @author Eduardo Mallmann <eduardo.mallmann@sippulse.com>
  */
 @Named("registerController")
-@ViewScoped
+@SessionScoped
 public class registerController extends BaseController implements Serializable {
 
     private static final long serialVersionUID = -4770797471613018053L;
@@ -37,16 +39,20 @@ public class registerController extends BaseController implements Serializable {
     private SubscriberService subscriberService;
 
     private Subscriber subscriber;
+    private Subscriber newSubscriber;
     private boolean existingCpf = false;
     private boolean existingEmail = false;
+    private String password;
+    private String emailLogin;
+    private String pwdLogin;
 
     /**
      * Metodo de inicialização do bean.
      */
     @PostConstruct
     public void init() {
-        if (this.subscriber == null) {
-            this.subscriber = new Subscriber();
+        if (this.newSubscriber == null) {
+            this.newSubscriber = new Subscriber();
         }
     }
 
@@ -54,26 +60,66 @@ public class registerController extends BaseController implements Serializable {
      * Salva o objeto.
      */
     public void save() {
+        //guarda password não encriptado para ser utilizado no login
+        password = this.newSubscriber.getPassword();
+        //encripta a senha informada pelo subscriber
+        this.newSubscriber.setPassword(MD5Hash.encripty(this.newSubscriber.getPassword()));
         //seta o papel para o subscriber
-        this.subscriber.setRole(SubscriberType.SUBSCRIBER.toString());
+        this.newSubscriber.setRole(SubscriberType.SUBSCRIBER.toString());
         //salva o subscriber e retorna o objeto com o id
-        this.subscriber = this.subscriberService.save(this.subscriber);
+        this.setSubscriber(this.subscriberService.save(this.newSubscriber));
+    }
+
+    /**
+     * Método que salva e retorna o usuário logado para a página de inscrição.
+     * <p>
+     * @return página de inscrição
+     */
+    public String autoLogin() {
+        this.save();
+        return "inscricao";
+    }
+
+    /**
+     * Método de autenticação via painel de login.
+     * <p>
+     * @return usuário logado
+     */
+    public String login() {
+        try {
+            //verifica se o email e a senha foram preenchidos
+            if (emailLogin != null || pwdLogin != null || !"".equals(emailLogin) || !"".equals(pwdLogin)) {
+                //Autentica o usuário e retorna o objet instanciado
+                this.subscriber = subscriberService.authentication(emailLogin, pwdLogin);
+                //retorna para a página de inscrição
+                return "inscricao";
+            } else {
+                //envia mensagem de erro caso um dos campos não tenha sido preenchido
+                super.addMessage(FacesMessage.SEVERITY_ERROR, "Campos de e-mail ou senha devem ser preenchidos");
+            }
+        } catch (BusinessException ex) {
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getExceptionMessage().toString());
+        }
+        //retorna para a página home, caso login esteja errado.
+        return "home";
     }
 
     /**
      * Verifica se o usuário já existe pelo cpf informado.
      */
     public void checkCPF() {
-
-        long existingCPF = 0;
-
+        //contador
+        long countCPF;
         //verifica se o CPF foi informado
-        if (this.subscriber.getCpf() != null || !"".equals(this.subscriber.getCpf())) {
+        if (this.newSubscriber.getCpf() == null || "".equals(this.newSubscriber.getCpf())) {
+            return;
+        } else {
             //verifica se o cpf informado já existe
-            existingCPF = this.subscriberService.countByCPF(this.subscriber.getCpf());
+            countCPF = this.subscriberService.countByCPF(this.newSubscriber.getCpf());
         }
         //caso exista informa ao usuário e não salva
-        if (existingCPF > 0) {
+        if (countCPF > 0) {
             //altera a condição do booleano
             this.existingCpf = true;
         }
@@ -83,27 +129,40 @@ public class registerController extends BaseController implements Serializable {
      * Verifica se o usuário já existe pelo e-mail informado.
      */
     public void checkEmail() {
-
-        long existingEmail = 0;
-
+        //contador
+        long emailCount;
         //verifica se o email foi informado
-        if (this.subscriber.getEmail() != null || !"".equals(this.subscriber.getEmail())) {
+        if (this.newSubscriber.getEmail() == null || "".equals(this.newSubscriber.getEmail())) {
+            return;
+        } else {
             //verifica se o e-mail informado já existe
-            existingEmail = this.subscriberService.countByEmail(this.subscriber.getEmail());
+            emailCount = this.subscriberService.countByEmail(this.newSubscriber.getEmail());
         }
         //caso exista informa ao usuário e não salva
-        if (existingEmail > 0) {
+        if (emailCount > 0) {
             //altera a condição do booleano
             this.existingEmail = true;
         }
     }
 
-    public Subscriber getSubscriber() {
-        return subscriber;
+    /**
+     * Método padrão alterado.
+     * Autentica o Subscriber ao definir o mesmo.
+     * <p>
+     * @param subscriber objeto Subscriber a ser autenticado
+     */
+    public void setSubscriber(Subscriber subscriber) {
+        try {
+            //cria o usuário principal no conteiner e o define na aplicação
+            this.subscriber = this.subscriberService.authentication(subscriber.getEmail(), this.password);
+        } catch (BusinessException ex) {
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getExceptionMessage().toString());
+        }
     }
 
-    public void setSubscriber(Subscriber subscriber) {
-        this.subscriber = subscriber;
+    public Subscriber getSubscriber() {
+        return subscriber;
     }
 
     public boolean isExistingCpf() {
@@ -120,6 +179,38 @@ public class registerController extends BaseController implements Serializable {
 
     public void setExistingEmail(boolean existingEmail) {
         this.existingEmail = existingEmail;
+    }
+
+    public Subscriber getNewSubscriber() {
+        return newSubscriber;
+    }
+
+    public void setNewSubscriber(Subscriber newSubscriber) {
+        this.newSubscriber = newSubscriber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmailLogin() {
+        return emailLogin;
+    }
+
+    public void setEmailLogin(String emailLogin) {
+        this.emailLogin = emailLogin;
+    }
+
+    public String getPwdLogin() {
+        return pwdLogin;
+    }
+
+    public void setPwdLogin(String pwdLogin) {
+        this.pwdLogin = pwdLogin;
     }
 
 }

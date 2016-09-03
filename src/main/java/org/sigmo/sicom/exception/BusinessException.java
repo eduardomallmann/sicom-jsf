@@ -12,7 +12,7 @@ package org.sigmo.sicom.exception;
  * <p>
  * <b>Forma de Uso:</b>
  * <br>
- * Esta classe é responsavel por capturar as exceçoes do sistema.
+ * Esta classe é responsavel por capturar as exceções do sistema.
  * <br>
  *
  * @author Eduardo Mallmann <contato@eduardomallmann.com>
@@ -24,14 +24,12 @@ public class BusinessException extends Exception {
     private ExceptionMessage exceptionMessage;
 
     /**
-     * Metodo construtor padrao.
+     * Metodo construtor padrão.
      *
-     * @param exceptionMessage mensagem de erro do sistema
-     * @param message          informaçao do erro
+     * @param message informação do erro
      */
-    public BusinessException(final ExceptionMessage exceptionMessage, final String message) {
+    public BusinessException(final String message) {
         super(message);
-        this.exceptionMessage = exceptionMessage;
     }
 
     public ExceptionMessage getExceptionMessage() {

@@ -7,6 +7,8 @@ package org.sigmo.sicom.service;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
+import org.sigmo.sicom.entity.Subscriber;
 import org.sigmo.sicom.entity.SubscriberDetails;
 
 /**
@@ -63,5 +65,42 @@ public class SubscriberDetailsService extends BaseService<SubscriberDetails> {
         return subscriberDetailsPersisted;
     }
 
-    
+    /**
+     * Recupera lista com "SubscriberDetails" por seu objeto "Subscriber".
+     * <p>
+     * @param id atributo "id" do objeto de "Subscriber".
+     * <p>
+     * @return lista com os objetos encontrados.
+     */
+    public List<SubscriberDetails> listBySubscriber(final Long id) {
+
+        StringBuffer str = new StringBuffer();
+        str.append("SELECT s FROM SubscriberDetails s ");
+        str.append("WHERE s.subscriber.id = :id");
+
+        Query query = super.getEm().createQuery(str.toString());
+        query.setParameter("id", id);
+
+        return (List<SubscriberDetails>) query.getResultList();
+    }
+
+    /**
+     * Conta a quantidade de objetos existentes conforme seu objeto "Subscriber".
+     * <p>
+     * @param id id atributo "id" do objeto de "Subscriber".
+     * <p>
+     * @return quantidade de objetos encontrados.
+     */
+    public Long countBySubscriber(final Long id) {
+
+        StringBuffer str = new StringBuffer();
+        str.append("SELECT COUNT(s) FROM SubscriberDetails s ");
+        str.append("WHERE s.subscriber.id = :id");
+
+        Query query = super.getEm().createQuery(str.toString());
+        query.setParameter("id", id);
+
+        return (Long) query.getSingleResult();
+    }
+
 }

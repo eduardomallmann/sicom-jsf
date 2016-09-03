@@ -51,7 +51,7 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 }
 
 /* Rules for sizing the icon. */
-.material-icons.md-08 { font-size: 8px; }
+.material-icons.md-08 { font-size: 08px; }
 .material-icons.md-12 { font-size: 12px; }
 .material-icons.md-14 { font-size: 14px; }
 .material-icons.md-16 { font-size: 16px; }
@@ -63,10 +63,13 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 .material-icons.md-54 { font-size: 54px; }
 
 /* Rules for using icons as black on a light background. */
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark             { color: rgba(0, 0, 0, 0.54); }
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
-.material-icons.md-yellow { color: #cddc39; }
-.material-icons.md-color { color: #104b62; }
+.material-icons.md-yellow           { color: #cddc39; }
+.material-icons.md-gray             { color: #666666; }
+.material-icons.md-white            { color: #FFFFFF; }
+.material-icons.md-red              { color: #E53935; }
+.material-icons.md-color            { color: #104b62; }
 
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
@@ -93,117 +96,49 @@ body {
 /**************************
     FONTS
 ***************************/
+/*Font*/
+.roboto { font-family: roboto; }
+
+/*Font Style*/
+.italic { font-style: italic; }
 
 /*Font Weigth*/
-.roboto-thin {
-    font-family: roboto;
-    font-weight: 100;
-}
-.roboto-thin--italic {
-    font-family: roboto;
-    font-weight: 100;
-    font-style: italic;
-}
-.roboto-light {
-    font-family: roboto;
-    font-weight: 300;
-}
-.roboto-light--italic {
-    font-family: roboto;
-    font-weight: 300;
-    font-style: italic;
-}
-.roboto-normal {
-    font-family: roboto;
-    font-weight: 400;
-}
-.roboto-normal--italic {
-    font-family: roboto;
-    font-weight: 400;
-    font-style: italic;
-}
-.roboto-medium {
-    font-family: roboto;
-    font-weight: 500;
-}
-.roboto-medium--italic {
-    font-family: roboto;
-    font-weight: 500;
-    font-style: italic;
-}
-.roboto-bold {
-    font-family: roboto;
-    font-weight: 700;
-}
-.roboto-bold--italic {
-    font-family: roboto;
-    font-weight: 700;
-    font-style: italic;
-}
-.roboto-ultra-bold {
-    font-family: roboto;
-    font-weight: 900;
-}
-.roboto-ultra-bold--italic {
-    font-family: roboto;
-    font-weight: 900;
-    font-style: italic;
-}
+.thin       { font-weight: 100; }
+.light      { font-weight: 300; }
+.normal     { font-weight: 400; }
+.medium     { font-weight: 500; }
+.bold       { font-weight: 700; }
+.ultra-bold { font-weight: 900; }
 
 /*Size*/
-.s12 {
-    font-size: 12px;
-}
-.s14 {
-    font-size: 14px;
-}
-.s16 {
-    font-size: 16px;
-}
-.s18 {
-    font-size: 18px;
-}
-.s20 {
-    font-size: 20px;
-}
-.s22 {
-    font-size: 22px;
-}
-.s24 {
-    font-size: 24px;
-}
-.s28 {
-    font-size: 28px;
-}
-.s30 {
-    font-size: 30px;
-}
-.s32 {
-    font-size: 32px;
-}
-.s36 {
-    font-size: 36px;
-}
-.s48 {
-    font-size: 48px;
-}
-.s56 {
-    font-size: 56px;
-}
+.s12 { font-size: 12px; }
+.s13 { font-size: 13px; }
+.s14 { font-size: 14px; }
+.s16 { font-size: 16px; }
+.s17 { font-size: 17px; }
+.s18 { font-size: 18px; }
+.s20 { font-size: 20px; }
+.s22 { font-size: 22px; }
+.s24 { font-size: 24px; }
+.s25 { font-size: 25px; }
+.s28 { font-size: 28px; }
+.s30 { font-size: 30px; }
+.s32 { font-size: 32px; }
+.s36 { font-size: 36px; }
+.s42 { font-size: 42px; }
+.s45 { font-size: 45px; }
+.s48 { font-size: 48px; }
+.s56 { font-size: 56px; }
 
 /*Color*/
-.white {
-    color: #FFF;
-}
-.dark-blue {
-    color: #104b62;
-}
-.light-blue {
-    color: #229997;
-}
-.yellow {
-    color: #cddc39;
-}
+.white      { color: #FFFFFF; }
+.dark-blue  { color: #104b62; }
+.light-blue { color: #229997; }
+.yellow     { color: #cddc39; }
+.gray       { color: #666666; }
+
+/* Shadow */
+.shadow { text-shadow: 1px 1px #000; }
 
 
 /**************************
@@ -211,18 +146,10 @@ body {
 ***************************/
 
 /*Bkg Colors*/
-.bkg-white {
-    background-color: #FFF;
-}
-.bkg-gray {
-    background-color: #e3e0e2;
-}
-.bkg-dark-blue {
-    background-color: #104b62;
-}
-.bkg-light-blue {
-    background-color: #229997;
-}
+.bkg-white      { background-color: #FFFFFF; }
+.bkg-gray       { background-color: #e3e0e2; }
+.bkg-dark-blue  { background-color: #104b62; }
+.bkg-light-blue { background-color: #229997; }
 
 /*Bkg Images*/
 .bkg-img {
@@ -230,9 +157,7 @@ body {
     background-repeat: no-repeat;
     background-size: 101%;
 }
-.bkg-img.full-footer {
-    background-image: url("../images/template/rodapВ completo.png");
-}
+.bkg-img.full-footer { background-image: url("../images/template/rodapВ completo.png"); }
 
 
 
@@ -286,6 +211,157 @@ body {
     width: 250px;
 }
 
+/* SHOPPING CART */
+
+.shopping-cart {
+    position: absolute;
+    top: 55px; 
+    right: 120px; 
+    float: right;
+}
+
+.shopcart-label {
+    width: 100%; 
+    text-align: center; 
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+.shopping-cart .cart-label {
+    cursor: pointer; 
+    vertical-align: bottom; 
+    margin-right: 5px;
+}
+.shopping-cart .img-cart {
+    width: 41px; 
+    height: 41px;
+}
+.ui-overlaypanel {
+    top: 105px !important;
+}
+.ui-overlaypanel-content {
+    width: 250px;
+    background-color: white;
+}
+
+.cart-btn {
+    margin-bottom: 15px;
+    margin-top: 25px;
+    width: 100%;
+    letter-spacing: 1px;
+    background-color: #104b62 !important;
+}
+
+.cart-table thead th {
+    border-bottom: 1px solid gray;
+    text-align: left;
+}
+.cart-table thead th:nth-of-type(2) {
+    text-align: center;
+}
+
+.cart-table tfoot td {
+    text-align: center;
+}
+.cart-table tfoot td:nth-of-type(2) {
+    border-top: 1px solid gray;
+}
+.cart-table tbody td:nth-of-type(2) {
+    text-align: center;
+}
+.cart-table thead th,
+.cart-table tfoot td,
+.cart-table tbody td {
+    padding: 5px;
+}
+.cart-table td:first-of-type {
+    width: 130px;
+}
+.cart-table td:nth-of-type(2) {
+    width: 72px;
+    vertical-align: middle;
+}
+.cart-table td:last-of-type {
+    padding-left: 0;
+    text-align: left;
+}
+
+.cart-table .odd {
+    background-color: #E8EAF6;
+}
+.cart-table .even {
+    background-color: white;    
+}
+
+/**************************
+    LOGIN DIALOG
+**************************/
+
+.login-data {
+    background-color: rgba(16, 75, 98, 0.8);
+    border-radius: 3px;
+    box-shadow: 0px 0px 30px #000;
+    width: 350px;
+}
+.login-data .mdl-textfield__label:after {
+    background-color: #FFF;
+}
+.login-data .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.login-data .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+    font-family: roboto;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.login-txt {
+    text-align: center;
+    margin-top: 45px;
+    width: 100%;
+    color: white;
+}
+
+.login-input {
+    text-align: center;
+}
+
+.mdl-textfield__input.bkg-input-login {
+    border-bottom: 1px solid rgba(255,255,255, 0.4) !important;
+}
+
+.login-buttons {
+    text-align: center !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.login-buttons .close-btn {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height: 53px;
+    background: transparent;
+}
+.login-buttons .close-btn:hover {
+    background: rgba(158,158,158,.2);
+}
+.btn-txt {
+    box-shadow: 0.5px 0.5px 3px #104b62;
+}
+.btn-txt:hover {
+    background-color: rgba(34, 153, 151, 0.7);
+}
+.forgotten-txt {
+    position: absolute;
+    right: 30px;
+    text-decoration: underline !important;
+    vertical-align: top;
+    text-shadow: 1px 1px #000;
+    text-transform: none;
+}
+
+
 /**************************
     REGISTER
 ***************************/
@@ -296,7 +372,9 @@ body {
 .mdl-cell {
     margin: 0;
 }
-.register {
+
+.register,
+.inscription {
     position: relative; 
     width: 100%; 
 }
@@ -374,11 +452,346 @@ body {
 }
 
 .button-register-grid {
+    margin-top: 10px;
     margin-bottom: 40px;
 }
+.change-pwd,
 .button-register {
     background-color: #104b62 !important;
 }
+.change-pwd:hover,
 .button-register:hover {
     background-color: #229997 !important;
+}
+.login {
+    display: inline;
+    height: 35px;
+    border-left: 1px solid #FFF;
+    vertical-align: middle;
+}
+.login .login-button {
+    margin-left: 5px;
+}
+
+/**************************
+    INSCRIÇÃO
+***************************/
+
+.change-pwd {
+    float: right;
+    margin-right: 23px;
+}
+
+.inscription .icon-img {
+    float: right;
+    margin-right: 40px;
+}
+.inscription .inscriptions-link {
+    margin-left: 55px;
+}
+.inscription .inscriptions-link.workshops {
+    margin-top: 110px;
+}
+.inscription .inscriptions-link.panels {
+    margin-top: 75px;
+}
+.link-inscriptions {
+    text-decoration: none; 
+    cursor: pointer;
+}
+
+.inscriptions-submited {
+    margin-top: 125px;
+    margin-left: 50px;
+}
+
+.order-list {
+    margin-top: 13px;
+    height: 32px;
+}
+
+.event-ordered {
+    margin-left: 5px;
+    vertical-align: super;
+}
+
+
+
+/**************************
+    OFICINAS E PALESTRAS
+***************************/
+/* Botão de retorno */
+.register-return {
+    position: absolute;
+    top: 52px;
+    left: 700px;
+}
+.register-return .txt-header {
+    display: inline-block;
+    margin-left: 13px;
+    vertical-align: 10px;
+}
+
+.goto-event {
+    position: absolute;
+    top: 52px;
+    left: 880px;
+}
+.goto-event .txt-link {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: -13.5px;
+}
+.goto-event .icon-img {
+    margin-top: 3px;
+    width: 41px; 
+    height: 41px;
+}
+
+
+/* Chamada */
+.palestras .first-column,
+.workshops .first-column {
+    padding-left: 127px;
+}
+.palestras .txt-palestras,
+.workshops .txt-workshops {
+    margin-top: 134px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #229997; 
+    width: 212px;
+}
+.palestras .txt-palestras {
+    width: 250px;
+}
+.txt-palestras label:first-of-type,
+.txt-workshops label:first-of-type {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.txt-palestras label:first-of-type {
+    text-align: left;
+}
+.palestras .txt-advertising,
+.workshops .txt-advertising {
+    margin-top: 41px;
+    width: 212px;
+}
+.palestras .txt-advertising {
+    width: 250px;
+}
+.workshops .txt-advice {
+    margin-top: 36px;
+    border-top: 1px solid #229997; 
+    padding-top: 11px;
+    width: 212px;
+}
+
+/* Configuração Cards Oficinas */
+.demo-card-square.mdl-card {
+    width: 260px;
+    height: 460px;
+    margin-top: 25px;
+    margin-left: 100px;
+    margin-bottom: 45px;
+}
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    flex-grow: .77;
+    align-items: flex-end;
+    -webkit-flex-grow: .77;
+    -webkit-align-items: flex-end;
+    background-color: #000;
+    background-clip: content-box;
+    padding: 2px;
+}
+.demo-card-square > .mdl-card__supporting-text {
+    height: 135px;
+    box-sizing: border-box;
+    width: 100%;
+}
+.demo-card-square > .mdl-card__actions {
+    height: 85px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Cards Template*/
+.palestras .card-header,
+.workshops .card-header {
+    margin-top: 45px;
+    z-index: 1;
+    margin-bottom: 10px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+.palestras .card-bkg-img,
+.workshops .card-bkg-img {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    opacity: 0.55;
+}
+.palestras .card-date,
+.workshops .card-date {
+    margin-left: 7px;
+    margin-bottom: 32px;
+}
+.palestras .card-date i,
+.workshops .card-date i {
+    margin-right: 10px;
+}
+.palestras .card-link span,
+.palestras .card-date span,
+.workshops .card-link span,
+.workshops .card-date span {
+    vertical-align: super;
+}
+.palestras .card-link,
+.workshops .card-link {
+    text-decoration: none;
+    margin-left: 7px;
+    background: none;
+    cursor: pointer;
+    vertical-align: top;
+    padding-top: 6px;
+}
+
+.palestras .card-link.check-register,
+.workshops .card-link.check-register {
+    margin-left: 60px;
+}
+.palestras .card-link.checked-register,
+.workshops .card-link.checked-register {
+    margin-left: 70px;
+    padding-top: 3px;
+}
+
+
+.workshops .fotografia .card-date {
+    margin-bottom: 10px;
+}
+
+.workshops .projetos .demo-card-square > .mdl-card__title {
+    flex-grow: .81;
+    -webkit-flex-grow: .81;
+}
+
+.palestras .empregabilidade .demo-card-square > .mdl-card__title {
+    flex-grow: .71;
+    -webkit-flex-grow: .71;
+}
+
+/**************************
+    DIALOGS
+***************************/
+.dialoag-popup {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 101%;
+    width: 800px;
+    padding: 0;
+}
+.dialoag-popup.birlo-bkg {
+    background-image: url('../images/workshopsPopUps/banner workshop renda.jpg');
+}
+.dialoag-popup.corporate-bkg {
+    background-image: url('../images/workshopsPopUps/banner workshop doug.jpg');
+}
+.dialoag-popup.photo-bkg {
+    background-image: url('../images/workshopsPopUps/banner workshop fotografia_site.jpg');
+}
+.dialoag-popup.project-bkg {
+    background-image: url('../images/workshopsPopUps/banner workshop julio.jpg');
+}
+.dialoag-popup.brand-bkg {
+    background-image: url('../images/workshopsPopUps/banner workshop felipe.jpg');
+}
+.dialoag-popup.driin-bkg {
+    background-image: url('../images/palestrasPopUps/banner palestra driin.jpg');
+}
+.dialoag-popup.job-bkg {
+    background-image: url('../images/palestrasPopUps/banner palestra marcio e gladyspsd.jpg');
+}
+.pop-content {
+    margin-top: calc(235px + 28px);
+    margin-left: 38px;
+    padding: 0;
+    margin-right: 45px;
+}
+.pop-content div {
+    padding: 0;
+}
+.pop-content .panel {
+    width: 350px;
+}
+.pop-content .panelist-photo {
+    width: 68px;
+    height: 68px;
+    margin-right: 12px;
+    display: inline;
+}
+.pop-content .panelist-name {
+    display: inline-block;
+    width: 145px;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+
+.pop-content .panelist-name .panelist-txt {
+    font-size: 17px;
+}
+.pop-content .panel-info {
+    display: block;
+    margin-top: 20px;
+}
+.pop-content .panel-info .panelist-txt {
+    display: inline;
+    margin-left: 10px;
+    vertical-align: super;
+}
+.pop-content .panel-info .panelist-txt.txt-brk {
+    margin-left: 40px;
+}
+
+.pop-content .panel-description {
+    width: 365px;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+}
+.mdl-dialog__actions.dialog-buttons {
+    margin-bottom: 20px;
+}
+
+.dialog-buttons .close-btn {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    height: 53px;
+    background: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .close-btn:hover {
+    background: rgba(16, 75, 98, 0.6);
+}   
+.dialog-buttons .mdl-button--fab:focus:not(:active) {
+    box-shadow: none;
+    background-color: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .mdl-button:focus:not(:active) {
+    background-color: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .button-txt {
+    width: 130px;
+    height: 26px;
+    margin-right: 45px;
+}
+.dialog-buttons label.button-txt {
+    padding-left: 10px;
+    padding-bottom: 15px;
+    vertical-align: top;
+}
+.dialog-buttons label i {
+    padding-top: 10px;
 }

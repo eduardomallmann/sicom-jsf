@@ -7,6 +7,7 @@ package org.sigmo.sicom.service;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import org.sigmo.sicom.entity.Workshop;
 
 /**
@@ -61,6 +62,26 @@ public class WorkshopService extends BaseService<Workshop> {
             workshopPersisted = super.merge(workshop);
         }
         return workshopPersisted;
+    }
+
+    /**
+     * Recupera o registro conforme seu atributo "description".
+     * <p>
+     * @param description atributo da entidade.
+     * <p>
+     * @return instância do registro recuperado.
+     */
+    public Workshop findByDescription(final String description) {
+
+        StringBuffer str = new StringBuffer();
+        str.append("SELECT w FROM Workshop w ");
+        str.append("WHERE w.description = :description ");
+
+        Query query = super.getEm().createQuery(str.toString());
+        query.setParameter("description", description);
+
+        return (Workshop) query.getSingleResult();
+
     }
 
 }

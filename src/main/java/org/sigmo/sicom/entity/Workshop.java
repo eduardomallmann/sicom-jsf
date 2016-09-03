@@ -40,7 +40,7 @@ public class Workshop implements BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", unique= true, nullable = false)
     private String description;
     @Column(name = "price")
     private Double price;

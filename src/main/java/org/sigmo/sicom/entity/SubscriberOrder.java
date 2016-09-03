@@ -6,8 +6,10 @@
 package org.sigmo.sicom.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,13 +45,21 @@ public class SubscriberOrder implements BaseEntity {
     @ManyToOne
     @JoinColumn(name = "subscriber_id")
     private Subscriber subscriber;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<SubscriberDetails> subscriberDetailses;
     @Column(name = "amount")
     private BigDecimal amount;
     @Column(name = "transaction_id")
     private String transactionCode;
 
+    /**
+     * Método construtor padrão.
+     */
+    public SubscriberOrder() {
+        super();
+        this.subscriberDetailses = new ArrayList<>();
+    }
+    
     public Long getId() {
         return id;
     }

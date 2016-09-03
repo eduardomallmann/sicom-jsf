@@ -17,38 +17,27 @@ import javax.faces.context.FacesContext;
  * <p>
  * <b>Forma de Uso:</b>
  * <br>
- * Esta classe implementa serviço basicos para validaçao.
+ * Esta classe implementa serviço básicos para validação.
  * <br>
  *
  * @author Eduardo Mallmann <contato@eduardomallmann.com>
  */
 public class BaseValidator {
 
-    private static final String BUNDLE
-            = "org.sigmo.sicom.resources.ApplicationResources";
-
     /**
      * Adiciona mensagens no contexto corrente.
      *
      * @param severity   Define e severidade da mensagem.
-     * @param keyMessage Informa a chave da mensagem presente no bundle.
+     * @param subjectMsg Assunto da mensagem de erro.
+     * @param bodyMsg    Mensagem de erro.
      *
-     * @return mensagem da aplicaçao
+     * @return mensagem da aplicação.
      */
     protected FacesMessage createMessage(final Severity severity,
-                                         final String keyMessage) {
-
-        //Recupera o contexto corrente
-        FacesContext ctx = FacesContext.getCurrentInstance();
-
-        //Recupera o arquivo de mensagens do locale atual
-        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE,
-                                                         ctx.getViewRoot().getLocale());
-
-        //pega a mensagem associada a chave informada
-        String msg = bundle.getString(keyMessage);
+                                         final String subjectMsg,
+                                         final String bodyMsg) {
 
         //cria uma mensagem e adiciona ao contexto
-        return new FacesMessage(severity, msg, msg);
+        return new FacesMessage(severity, subjectMsg, bodyMsg);
     }
 }

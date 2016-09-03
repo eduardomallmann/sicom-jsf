@@ -42,7 +42,8 @@ public class CpfValidator extends BaseValidator implements Validator {
         boolean isValidCPF;
 
         //testa valores invalidos
-        if ((cpf.compareTo("00000000000") == 0)
+        if (cpf.length() != 11
+            ||(cpf.compareTo("00000000000") == 0)
             || (cpf.compareTo("11111111111") == 0)
             || (cpf.compareTo("22222222222") == 0)
             || (cpf.compareTo("33333333333") == 0)
@@ -63,10 +64,11 @@ public class CpfValidator extends BaseValidator implements Validator {
             isValidCPF = cpf.equals(cpf.substring(0, 9) + firstDigit.toString() + secondDigit.toString());
         }
 
-        if (isValidCPF) {
+        if (!isValidCPF) {
 
             throw new ValidatorException(super.createMessage(FacesMessage.SEVERITY_ERROR,
-                                                             "validator.cpf.invalid"));
+                                                             "Campo CPF: Este número de CPF não é válido.",
+                                                             "Número de CPF inválido."));
         }
 
     }

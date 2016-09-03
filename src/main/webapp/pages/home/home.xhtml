@@ -192,9 +192,7 @@
 
             <dialog id="login-dialog" class="mdl-dialog login-data">
 
-                <form id="login-content" 
-                      method="post" 
-                      action="j_security_check">
+                <h:form id="login-content">
 
                     <div class="login-txt">
                         <h:outputLabel value="Login" styleClass="mdl-dialog__title"/>
@@ -202,19 +200,17 @@
 
                     <div class="mdl-dialog__content login-input">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input id="login" 
-                                   type="text" 
-                                   class="mdl-textfield__input login-label"
-                                   name="j_username"></input>
+                            <h:inputText id="login" 
+                                         class="mdl-textfield__input login-label"
+                                         value="#{registerController.emailLogin}"/>
                             <label class="mdl-textfield__label login-label" 
                                    for="login">e-mail
                             </label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input id="nonFeedback" 
-                                   type="password" 
-                                   class="mdl-textfield__input login-label"
-                                   name="j_password"></input>
+                            <h:inputSecret id="nonFeedback" 
+                                           class="mdl-textfield__input login-label"
+                                           value="#{registerController.pwdLogin}"/>
                             <label class="mdl-textfield__label login-label" 
                                    for="login">senha
                             </label>
@@ -223,10 +219,9 @@
 
                     <div class="mdl-dialog__actions login-buttons">
 
-                        <input value="Entrar" 
-                               type="submit" 
-                               name="connect"
-                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt"/>
+                        <h:commandButton value="Entrar" 
+                                         action="#{registerController.login}"
+                                         class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt"/>
 
                         <input value="Esqueci a senha" 
                                type="submit" 
@@ -240,7 +235,7 @@
                         </button>
                     </div>
 
-                </form>
+                </h:form>
             </dialog>
 
             <dialog id="birlo-dialog" class="mdl-dialog dialoag-popup birlo-bkg">

@@ -16,4 +16,32 @@
         </locale-config>
     </application>
     
+    
+        <!-- Define a navegação para as páginas-->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/pages/home/home.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>cadastro</from-outcome>
+            <to-view-id>/pages/cadastro/cadastro.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>inscricao</from-outcome>
+            <to-view-id>/pages/inscricao/inscricao.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>oficinas</from-outcome>
+            <to-view-id>/pages/inscricao/oficinas.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>palestra</from-outcome>
+            <to-view-id>/pages/inscricao/palestras.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

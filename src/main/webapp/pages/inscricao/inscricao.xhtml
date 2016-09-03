@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/layout_base.xhtml">
+        <ui:define name="content">
+            <div class="inscription bkg-gray">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col">
+                        <h:outputLink target="_self"
+                                      styleClass="link-inscriptions"
+                                      value="../../pages/inscricao/oficinas.jsf">
+                            <div class="inscriptions-link workshops">
+                                <div class="txt-link">
+
+                                    <h:outputLabel value="Inscrições oficinas"
+                                                   style='cursor: pointer'
+                                                   styleClass="roboto medium s18 dark-blue"/>
+                                </div>
+                                <img src="../../resources/images/register/icone oficinas.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </div>
+                        </h:outputLink>
+
+                        <h:outputLink target="_self"
+                                      styleClass="link-inscriptions"
+                                      value="../../pages/inscricao/palestras.jsf">'
+                            <div class="inscriptions-link panels">
+                                <div class="txt-link">
+
+                                    <h:outputLabel value="Inscrições palestras" 
+                                                   style='cursor: pointer'
+                                                   styleClass="roboto medium s18 dark-blue"/>
+                                </div>
+                                <img src="../../resources/images/register/icone palestras.png" 
+                                     alt="" 
+                                     class="icon-img"/>
+                            </div>
+                        </h:outputLink>
+
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col register-input">
+                        <h:form id="inputRegister">
+                            <div class="register-header">
+                                <i class="material-icons md-54 md-color">account_circle</i>
+                                <div class="txt-header">
+                                    <h:outputLabel value="Meu cadastro" 
+                                                   styleClass="roboto normal s36 dark-blue"/>
+                                </div>
+                            </div>
+                            <div class="register-input">
+                                <div id="fullname" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsName"
+                                                 value="#{subscriberController.subscriber.fullName}" 
+                                                 required="true"
+                                                 requiredMessage="Campo 'Nome Completo' não preenchido"
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsName" 
+                                                   value="Nome Completo"
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="fullname">
+                                    <h:outputLabel value="Campo Obrigatorio" 
+                                                   class="roboto medium yellow"/>
+                                    <br/>
+                                    <h:outputLabel value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="roboto medium"/>
+                                </div>
+                                <div id="email" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsEmail" 
+                                                 required="true"
+                                                 requiredMessage="Campo 'E-mail' não preenchido"
+                                                 value="#{subscriberController.subscriber.email}" 
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space">
+                                        <f:validator validatorId="emailValidator"/>
+                                    </h:inputText>
+                                    <h:outputLabel for="subsEmail" 
+                                                   value="E-mail" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="email">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto medium yellow"/>
+                                </div>
+                                <div id="cpf" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsCPF"
+                                                 value="#{subscriberController.subscriber.cpf}"
+                                                 required="true"
+                                                 requiredMessage="Campo 'CPF' não preenchido"
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space">
+                                        <f:validator validatorId="cpfValidator"/>
+                                    </h:inputText>
+                                    <h:outputLabel for="subsCPF" 
+                                                   value="CPF" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="cpf">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto medium yellow"/>
+                                    <br/>
+                                    <h:outputLabel for="subsCPF" 
+                                                   value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="roboto medium"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsUniv" 
+                                                 value="#{subscriberController.subscriber.course}" 
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsUniv" 
+                                                   value="Universidade/Instituição" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsJob" 
+                                                 value="#{subscriberController.subscriber.job}" 
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsJob" 
+                                                   value="Profissão/Atuação" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                            </div>
+
+                            <div class="button-register-grid">
+                                <h:panelGroup id="registersbuttons">
+                                    <h:commandButton id="registerbutton"
+                                                     value="Alterar Cadastro"
+                                                     action="#{registerController.save()}"
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 button-register"/>
+                                    <h:commandButton id="changepwd"
+                                                     value="Alterar Senha"
+                                                     action="#"
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 change-pwd"/>
+                                </h:panelGroup>
+                            </div>
+                        </h:form>
+
+
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <div class="inscriptions-submited">
+                            <h:outputLabel value="Atividades as quais você já se inscreveu:"
+                                           styleClass="roboto medium s16 dark-blue"/>
+                            <p:dataList value="#{subscriberController.subscriberActualDetails}" 
+                                        var="details"
+                                        emptyMessage="Você não se inscreveu em nenhum evento até o momento."
+                                        type="none">
+                                <div class="order-list">
+                                    <i class="material-icons md-28 md-color">check_box</i>
+                                    <p:outputLabel value="#{details.workshop.description}"
+                                                   class="roboto medium s14 gray event-ordered"/>
+                                    <br/>
+                                </div>
+                            </p:dataList>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

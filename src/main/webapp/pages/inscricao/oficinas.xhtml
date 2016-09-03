@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/layout_base.xhtml">
+        <ui:define name="content">
+            <h:form id="workshops">
+
+                <h:outputLink target="_self"
+                              styleClass="link-inscriptions"
+                              value="../../pages/inscricao/inscricao.jsf">
+                    <div class="register-return">
+                        <div class="txt-header">
+                            <h:outputLabel value="Meu cadastro" 
+                                           style='cursor: pointer'
+                                           styleClass="roboto medium s16 dark-blue"/>
+                        </div>
+                        <i class="material-icons md-48 md-color">account_circle</i>
+                    </div>
+                </h:outputLink>
+                
+                <h:outputLink target="_self"
+                              styleClass="link-inscriptions"
+                              value="../../pages/inscricao/palestras.jsf">
+                    <div class="goto-event">
+                        <div class="txt-link">
+
+                            <h:outputLabel value="Palestras"
+                                           style='cursor: pointer'
+                                           styleClass="roboto medium s16 dark-blue"/>
+                        </div>
+                        <img src="../../resources/images/register/icone palestras.png" 
+                             alt=""
+                             class="icon-img"/>
+                    </div>
+                </h:outputLink>
+
+                <div class='workshops bkg-white'>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--4-col first-column">
+                            <div class='txt-workshops'>
+                                <h:outputLabel value='5 Oficinas' class="roboto bold s45 dark-blue"/>
+                                <br/>
+                                <h:outputLabel value='Temáticas' class="roboto bold s45 dark-blue"/>
+                            </div>
+                            <div class='txt-advertising'>
+                                <h:outputLabel value='Garanta a sua vaga e inscreva-se!' 
+                                               class="roboto bold s24 light-blue"/>
+                            </div>
+                            <div class='txt-advice'>
+                                <h:outputLabel value='As inscrições são apenas online.' class="roboto medium s14 light-blue"/>
+                                <br/>
+                                <h:outputLabel value='Todas as oficinas dão direito a certificado' 
+                                               class="roboto medium s14 light-blue"/>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/workshops/1.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="A Renda de Bilro no contexto local de moda" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Mary Clasen e Talyta Bastos" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Venha conhecer a prática da renda de bilro, marca urbana da cultura 
+                                                      açoriana, e sua relação com a moda."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="19/08/2016 - 14h às 18h30" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="birloDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(1)}" 
+                                                   rendered="#{!subscriberController.bilro}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+
+                                    <h:commandButton onclick="birloDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.bilro}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/workshops/2.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Ilustração para identidade corpotiva" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Doug Menegazzi" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Venha aprender técnicas de ilustração para o  
+                                                      desenvolvimento de símbolos para marcas, mascotes e outros 
+                                                      produtos gráficos de identidade corporativa."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="24/08/2016 - 18h às 21h30" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="corporateDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(2)}" 
+                                                   rendered="#{!subscriberController.identidade}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+                                    <h:commandButton onclick="corporateDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.identidade}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-grid second-row">
+                        <div class="mdl-cell mdl-cell--4-col fotografia">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/workshops/3.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Composição Fotográfica registro da arte grafite" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Sharlene Melanie e Richard Perassi" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="A relação das pessoas com as manifestações urbanas, como a 
+                                                      arte grafite, será nosso principal tema por meio de um ensaio 
+                                                      fotográfico realizado em Florianópolis."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="02/09/2016 e 09/09/2016" 
+                                                      class="roboto normal s13 gray"/>
+                                        <br/>
+                                        <h:outputText value="das 14h às 18h" 
+                                                      style="margin-left: 34px"
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="photoDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(3)}" 
+                                                   rendered="#{!subscriberController.fotografia}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+                                    <h:commandButton onclick="photoDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.fotografia}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col projetos">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/workshops/4.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Gestão Visual de projetos" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Julio Teixeira" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Uma forma ágil e diferente de
+                                                      desenvolver projetos inovadores. Faz
+                                                      uso do pensamento visual por meio
+                                                      de procedimentos e ferramentas que:
+                                                      facilitam processos, estimulam a
+                                                      participação e a cocriação."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="16/09/2016 - 14h20 às 19h20" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="projectDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(4)}" 
+                                                   rendered="#{!subscriberController.projetos}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+                                    <h:commandButton onclick="projectDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.projetos}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/workshops/5.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Comunicação de marcas a partir de arquétipos" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Felipe Machado" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Com base na Psicologia e na
+                                                      Antropologia do Consumo, o
+                                                      workshop pretende demonstrar
+                                                      exemplos com arquétipos aplicados
+                                                      em comunicações estratégicas e
+                                                      storytelling das marcas."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="21/09/2016 - 18h às 21h30" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="brandDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(5)}" 
+                                                   rendered="#{!subscriberController.arquetipos}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+                                    <h:commandButton onclick="brandDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.arquetipos}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
