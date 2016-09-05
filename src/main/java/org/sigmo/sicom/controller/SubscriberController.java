@@ -14,6 +14,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.sigmo.sicom.entity.Subscriber;
@@ -53,7 +54,6 @@ public class SubscriberController extends BaseController implements Serializable
     private SubscriberOrderService subscriberOrderService;
 
     private Subscriber subscriber;
-    private List<Workshop> workshops;
     private SubscriberOrder subscriberOrder = new SubscriberOrder();
     private List<SubscriberDetails> subscriberActualDetails = new ArrayList<>();
     private boolean bilro;
@@ -96,21 +96,62 @@ public class SubscriberController extends BaseController implements Serializable
         }
     }
 
-    public String saveOrder() {
+    /**
+     * Desconecta o usuário logado e retorna para a home.
+     * <p>
+     * @return página home.
+     */
+    public String logout() {
+
+        this.subscriber = null;
+        this.subscriberOrder = null;
+        this.subscriberActualDetails = null;
+        this.setEventsToFalse();
+        
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ExternalContext extc = ctx.getExternalContext();
+        extc.invalidateSession();
+
+        return "home";
+    }
+
+    /**
+     * Salva o pedido e inicia a conversação com o pagseguro.
+     */
+    public void saveOrder() {
         //verifica se existem itens dentro do pedido
         if (!this.subscriberOrder.getSubscriberDetailses().isEmpty()) {
             //salva o pedido
             this.subscriberOrderService.save(this.subscriberOrder);
-            //instancia novo pedido
-            this.subscriberOrder = new SubscriberOrder();
-            //define o usuário para a nova instância
-            this.subscriberOrder.setSubscriber(subscriber);
             //recupera os eventos já inscritos por este usuário
             this.getSubscriberActualDetails();
         }
-        return "/pages/inscricao/inscricao.jsf";
+    }
+
+    /**
+     * Remove o pedido salvo no banco.
+     */
+    public void cancelOrder() {
+        //remove o pedido do salvo do banco
+        this.subscriberOrderService.remove(SubscriberOrder.class, subscriberOrder.getId());
+        //cria novo pedido e destrói anterior
+        this.newOrder();
+        //recupera os eventos já inscritos por este usuário
+        this.getSubscriberActualDetails();
+        //atualiza a página para os workshops já inscritos
+        this.checkShops();
     }
     
+    /**
+     * Cria novo pedido e destrói anterior.
+     */
+    public void newOrder() {
+        //inicializa o objeto do pedido
+        this.subscriberOrder = new SubscriberOrder();
+        //define o usuário logado no pedido
+        this.subscriberOrder.setSubscriber(subscriber);
+    }
+
     /**
      * Insere o Workshop ao pedido.
      * <p>
@@ -162,65 +203,42 @@ public class SubscriberController extends BaseController implements Serializable
      * Atualiza a página para as oficinas e palestras compradas.
      */
     private void checkShops() {
+        this.setEventsToFalse();
         if (!subscriberOrder.getSubscriberDetailses().isEmpty()) {
             for (SubscriberDetails details : subscriberOrder.getSubscriberDetailses()) {
-                if (!this.bilro && details.getWorkshop().getDescription().toLowerCase().contains("bilro")) {
+                if (details.getWorkshop().getDescription().toLowerCase().contains("bilro")) {
                     this.setBilro(true);
-                    break;
-                } else if (!this.identidade
-                           && details.getWorkshop().getDescription().toLowerCase().contains("identidade")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("identidade")) {
                     this.setIdentidade(true);
-                    break;
-                } else if (!this.fotografia
-                           && details.getWorkshop().getDescription().toLowerCase().contains("grafite")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("grafite")) {
                     this.setFotografia(true);
-                    break;
-                } else if (!this.projetos
-                           && details.getWorkshop().getDescription().toLowerCase().contains("projetos")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("projetos")) {
                     this.setProjetos(true);
-                    break;
-                } else if (!this.arquetipos
-                           && details.getWorkshop().getDescription().toLowerCase().contains("arquétipos")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("arquétipos")) {
                     this.setArquetipos(true);
-                    break;
-                } else if (!this.empregabilidade
-                           && details.getWorkshop().getDescription().toLowerCase().contains("empregabilidade")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("empregabilidade")) {
                     this.setEmpregabilidade(true);
-                    break;
-                } else if (!this.driin && details.getWorkshop().getDescription().toLowerCase().contains("driin")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("driin")) {
                     this.setDriin(true);
-                    break;
                 }
             }
         }
         if (!subscriberActualDetails.isEmpty()) {
             for (SubscriberDetails details : subscriberActualDetails) {
-                if (!this.bilro && details.getWorkshop().getDescription().toLowerCase().contains("bilro")) {
+                if (details.getWorkshop().getDescription().toLowerCase().contains("bilro")) {
                     this.setBilro(true);
-                    break;
-                } else if (!this.identidade
-                           && details.getWorkshop().getDescription().toLowerCase().contains("identidade")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("identidade")) {
                     this.setIdentidade(true);
-                    break;
-                } else if (!this.fotografia
-                           && details.getWorkshop().getDescription().toLowerCase().contains("grafite")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("grafite")) {
                     this.setFotografia(true);
-                    break;
-                } else if (!this.projetos
-                           && details.getWorkshop().getDescription().toLowerCase().contains("projetos")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("projetos")) {
                     this.setProjetos(true);
-                    break;
-                } else if (!this.arquetipos
-                           && details.getWorkshop().getDescription().toLowerCase().contains("arquétipos")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("arquétipos")) {
                     this.setArquetipos(true);
-                    break;
-                } else if (!this.empregabilidade
-                           && details.getWorkshop().getDescription().toLowerCase().contains("empregabilidade")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("empregabilidade")) {
                     this.setEmpregabilidade(true);
-                    break;
-                } else if (!this.driin && details.getWorkshop().getDescription().toLowerCase().contains("driin")) {
+                } else if (details.getWorkshop().getDescription().toLowerCase().contains("driin")) {
                     this.setDriin(true);
-                    break;
                 }
             }
         }
@@ -253,6 +271,8 @@ public class SubscriberController extends BaseController implements Serializable
             if (description.equals(details.getWorkshop().getDescription())) {
                 //remove o evento
                 this.subscriberOrder.getSubscriberDetailses().remove(details);
+                //atualiza o valor total
+                this.updateOrderAmount();
                 //altera a visualização do evento na view
                 this.setEventViewToFalse(details.getWorkshop());
                 //finaliza o método
@@ -291,6 +311,19 @@ public class SubscriberController extends BaseController implements Serializable
      */
     public boolean isTotalShoppingCartRendered() {
         return !this.subscriberOrder.getSubscriberDetailses().isEmpty();
+    }
+
+    /**
+     * Define todos os eventos para não serem mostrados como inscritos na página.
+     */
+    private void setEventsToFalse() {
+        this.setBilro(false);
+        this.setIdentidade(false);
+        this.setFotografia(false);
+        this.setProjetos(false);
+        this.setArquetipos(false);
+        this.setEmpregabilidade(false);
+        this.setDriin(false);
     }
 
     /**
@@ -378,14 +411,6 @@ public class SubscriberController extends BaseController implements Serializable
         this.driin = driin;
     }
 
-    public List<Workshop> getWorkshops() {
-        return workshops;
-    }
-
-    public void setWorkshops(List<Workshop> workshops) {
-        this.workshops = workshops;
-    }
-
     public SubscriberOrder getSubscriberOrder() {
         return subscriberOrder;
     }
@@ -397,5 +422,4 @@ public class SubscriberController extends BaseController implements Serializable
     public void setSubscriberActualDetails(List<SubscriberDetails> subscriberActualDetails) {
         this.subscriberActualDetails = subscriberActualDetails;
     }
-
 }

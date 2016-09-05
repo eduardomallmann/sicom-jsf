@@ -45,7 +45,8 @@ public class SubscriberOrder implements BaseEntity {
     @ManyToOne
     @JoinColumn(name = "subscriber_id")
     private Subscriber subscriber;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private List<SubscriberDetails> subscriberDetailses;
     @Column(name = "amount")
     private BigDecimal amount;
@@ -59,7 +60,7 @@ public class SubscriberOrder implements BaseEntity {
         super();
         this.subscriberDetailses = new ArrayList<>();
     }
-    
+
     public Long getId() {
         return id;
     }

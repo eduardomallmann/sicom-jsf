@@ -43,11 +43,31 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                          alt=""
                          class="header-logo"/>
                 </div>
+
+                <h:form id="frmLogoff">
+                    <div id="logoffBtn" 
+                         class="logoff-position">
+                        <h:commandLink  target="_self" 
+                                        action="#{subscriberController.logout()}"
+                                        styleClass="logoff-link"
+                                        rendered="#{registerController.authenticated}"
+                                        type="button">
+                            <div class="logoff-button bkg-dark-blue">
+                                <i style="padding: 6px" class="material-icons md-28 md-white">power_settings_new</i>
+                            </div>
+                        </h:commandLink>
+                    </div>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="logoffBtn">
+                        <h:outputLabel value="Logoff" 
+                                       class="roboto medium"/>
+                    </div>
+                </h:form>
+
                 <h:form id="frmShoppingCart" styleClass="shopping-cart">
                     <p:commandLink id="shopCartBtn" 
                                    style="text-decoration: none"
                                    type="button" 
-                                   rendered="#{subscriberController.subscriberOrder != null}">
+                                   rendered="#{registerController.authenticated}">
 
                         <div class="mdl-badge mdl-badge--overlap" 
                              data-badge="#{subscriberController.subscriberOrder.subscriberDetailses.size()}">
@@ -71,7 +91,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                            styleClass="roboto medium s18 dark-blue"/>
                         </div>
 
-                        <h:outputLabel value="Você não se inscreveu em nenhum evento até o momento."
+                        <h:outputLabel value="Você não se inscreveu em nenhum novo evento até o momento."
                                        rendered="#{!subscriberController.totalShoppingCartRendered}"
                                        styleClass="roboto normal italic s14 dark-blue"/>
 
@@ -122,10 +142,12 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                             </h:column>
                         </h:dataTable>
 
-                        <p:commandButton value="Finalizar Inscrições"
-                                         action="#{subscriberController.saveOrder()}"
+                        <p:commandButton value="Finalizar Inscrição" 
+                                         onclick="confirmDialog.showModal();"
                                          rendered="#{subscriberController.totalShoppingCartRendered}"
-                                         styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
+                                         styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn">
+                            <f:ajax execute="@this" listener="#{subscriberController.saveOrder()}" event="click"/>
+                        </p:commandButton>
                     </p:overlayPanel>
                 </h:form>
             </div>
@@ -172,7 +194,110 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                 </div>
             </div>
             <h:form>
-                
+
+                <dialog id="confirm-dialog" class="mdl-dialog dialoag-popup confirm-bkg confirm">
+                    <div class="mdl-dialog__content confirm-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label confirm-panel">
+
+                            <h:outputLabel value="Olá #{subscriberController.subscriber.fullName},"
+                                           styleClass="roboto bold s20 white shadow"/>
+                            <br/>
+                            <br/>
+                            <h:outputLabel value="Muito obrigado por se inscrever em nossos eventos, 
+                                           confira abaixo suas inscrições:"
+                                           styleClass="roboto medium s18 white shadow"/>
+
+                            <h:dataTable id="confirmTable"
+                                         value="#{subscriberController.subscriberOrder.subscriberDetailses}"
+                                         styleClass="mdl-data-table mdl-js-data-table"
+                                         var="event">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Evento"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                    <h:outputLabel value="#{event.workshop.description}"
+                                                   styleClass="roboto normal s14 white shadow"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Data"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                    <h:outputLabel value="#{event.workshop.workshopDate}"
+                                                   styleClass="roboto normal s14 white shadow">
+                                        <f:convertDateTime locale="pt_BR" 
+                                                           type="both" 
+                                                           dateStyle="medium" 
+                                                           timeStyle="short" 
+                                                           timeZone="America/Sao_Paulo"/>
+                                    </h:outputLabel>
+                                    <f:facet name="footer">
+                                        <h:outputLabel value="Total"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Valor"
+                                                       styleClass="roboto medium s16 light-blue shadow value"/>
+                                    </f:facet>
+
+                                    <h:outputLabel value="#{event.workshop.price}"
+                                                   styleClass="roboto normal s14 white shadow">
+                                        <f:convertNumber type="currency" locale="pt_BR"/>
+                                    </h:outputLabel>
+                                    <f:facet name="footer">
+                                        <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
+                                                       styleClass="roboto medium s16 light-blue shadow">
+                                            <f:convertNumber type="currency" locale="pt_BR"/>
+                                        </h:outputLabel>
+                                    </f:facet>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+
+                        <div class="confirm-btns">
+                            <p:commandButton value="Cancelar"
+                                             onclick="confirmDialog.close()"
+                                             update="@(body)"
+                                             action="#{subscriberController.cancelOrder()}"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cancel-btn"/>
+                            <p:commandButton value="Confirmar"
+                                             rendered="#{subscriberController.subscriberOrder.amount gt 0}"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn"/>
+                            <p:commandButton value="Confirmar"
+                                             rendered="#{subscriberController.subscriberOrder.amount le 0}"
+                                             onclick="confirmDialog.close()"
+                                             action="#{subscriberController.newOrder()}"
+                                             update="@(body)"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn"/>
+                        </div>
+
+                        <div class="pagseguro-warn">
+                            <div class="pagseguro-warn-txt">
+                                <h:outputLabel value="Ao clicar em confirmar"
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                                <h:outputLabel value=" sua inscrição será finalizada."
+                                               style="word-wrap: break-word"
+                                               rendered="#{subscriberController.subscriberOrder.amount le 0}"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                                <h:outputLabel value=" você será redirecionado ao site do"
+                                               style="word-wrap: break-word"
+                                               rendered="#{subscriberController.subscriberOrder.amount gt 0}"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                            </div>
+                            <h:graphicImage alt="" 
+                                            class="pagseguro-img" 
+                                            rendered="#{subscriberController.subscriberOrder.amount gt 0}"
+                                            value="../../resources/images/template/logo_pagseguro.png"/>
+                        </div>
+
+                    </div>                
+                </dialog>
                 <dialog id="birlo-dialog" class="mdl-dialog dialoag-popup birlo-bkg">
                     <div class="mdl-dialog__content pop-content">
                         <div id="conteiner">
@@ -469,7 +594,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                         </button>
                     </div>
                 </dialog>
-                
+
                 <dialog id="job-dialog" class="mdl-dialog dialoag-popup job-bkg">
                     <div class="mdl-dialog__content pop-content">
                         <div id="conteiner">
@@ -598,6 +723,11 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                         document.getElementById('bodyArea').setAttribute('style', "height: " + minHeigth + "px");
                     }
                 };
+                // Confirm Dialog
+                var confirmDialog = document.querySelector('#confirm-dialog');
+                if (!confirmDialog.showModal) {
+                    dialogPolyfill.registerDialog(confirmDialog);
+                }
                 // Birlo Dialog
                 var birloDialog = document.querySelector('#birlo-dialog');
                 if (!birloDialog.showModal) {

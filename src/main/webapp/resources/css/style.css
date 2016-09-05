@@ -140,6 +140,11 @@ body {
 /* Shadow */
 .shadow { text-shadow: 1px 1px #000; }
 
+/* Text Align */
+.center { text-align: center; }
+.right  { text-align: right;  }
+.left   { text-align: left;   }
+.justify{ text-align: justify;}
 
 /**************************
     BACKGROUNDS
@@ -150,6 +155,7 @@ body {
 .bkg-gray       { background-color: #e3e0e2; }
 .bkg-dark-blue  { background-color: #104b62; }
 .bkg-light-blue { background-color: #229997; }
+.bkg-transparent{ background-color: transparent; }
 
 /*Bkg Images*/
 .bkg-img {
@@ -292,6 +298,25 @@ body {
 .cart-table .even {
     background-color: white;    
 }
+
+/* LOGOFF BUTTON */
+.logoff-position {
+    position: absolute;
+    top: 55px; 
+    right: 25px; 
+    float: right;    
+}
+
+.logoff-link {
+    text-decoration: none;
+}
+
+.logoff-button {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+}
+
 
 /**************************
     LOGIN DIALOG
@@ -693,6 +718,7 @@ body {
     width: 800px;
     padding: 0;
 }
+
 .dialoag-popup.birlo-bkg {
     background-image: url('../images/workshopsPopUps/banner workshop renda.jpg');
 }
@@ -714,6 +740,7 @@ body {
 .dialoag-popup.job-bkg {
     background-image: url('../images/palestrasPopUps/banner palestra marcio e gladyspsd.jpg');
 }
+
 .pop-content {
     margin-top: calc(235px + 28px);
     margin-left: 38px;
@@ -794,4 +821,86 @@ body {
 }
 .dialog-buttons label i {
     padding-top: 10px;
+}
+
+/**************************
+    CONFIRM DIALOG
+***************************/
+.dialoag-popup.confirm {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 800px;
+    height: 500px;
+}
+.dialoag-popup.confirm-bkg {
+    background-image: url('../images/template/confirm_bkg1.png');
+}
+.confirm-content {
+    top: 0;
+    height: 400px;
+    margin: 20px 40px;
+    padding: 0;
+    box-sizing: border-box;
+}
+.confirm-panel {
+    width: 100%;
+}
+.confirm .mdl-data-table {
+    background-color: transparent;
+    clear: both;
+    margin: 10px auto;
+}
+.confirm .mdl-data-table,
+.confirm .mdl-data-table td {
+    border: none;
+}
+.confirm .mdl-data-table td {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 32px;
+}
+.confirm .mdl-data-table th {
+    text-align: center;
+}
+.confirm .mdl-data-table tbody tr {
+    height: 32px
+}
+.confirm .mdl-data-table tbody tr:hover {
+    background-color: #229997;
+}
+
+.confirm .mdl-dialog__actions.dialog-buttons {
+    margin-bottom: 0;
+    padding: 0 0 20px 10px;
+}
+.pagseguro-warn {
+    width: 420px;
+    height: 100%;
+    display: inline-block;
+
+}
+.pagseguro-warn-txt {
+    clear: both;
+    margin: 0 auto;
+    width: 200px;
+    display: inline-block;
+    text-align: right; 
+}
+.pagseguro-img {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+.confirm-btns {
+    width: 340px;
+    display: inline-block;
+    height: 100%;
+}
+.confirm-btns .cancel-btn {
+    margin-left: 19px;
+    margin-right: 15px;
+}
+.confirm-btns .confirm-btn {
+    margin-left: 15px;
 }

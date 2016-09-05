@@ -11,7 +11,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.sigmo.sicom.entity.Subscriber;
 import org.sigmo.sicom.exception.BusinessException;
 import org.sigmo.sicom.service.SubscriberService;
@@ -42,6 +45,7 @@ public class registerController extends BaseController implements Serializable {
     private Subscriber newSubscriber;
     private boolean existingCpf = false;
     private boolean existingEmail = false;
+    private boolean authenticated;
     private String password;
     private String emailLogin;
     private String pwdLogin;
@@ -159,6 +163,35 @@ public class registerController extends BaseController implements Serializable {
             //adiciona mensagem de erro
             super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getExceptionMessage().toString());
         }
+    }
+
+    /**
+     * Verifica se o usuário está autenticado e retorna a sua propriedade.
+     * <p>
+     * @return booleano informando se o usuário está autenticado ou não.
+     */
+    public boolean isAuthenticated() {
+
+        try {
+
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
+            HttpSession session = req.getSession();
+            boolean auth = (Boolean) session.getAttribute("authenticated");
+
+            if (auth) {
+                this.authenticated = true;
+            }
+
+        } catch (Exception e) {
+            this.authenticated = false;
+        }
+
+        return authenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        this.authenticated = authenticated;
     }
 
     public Subscriber getSubscriber() {

@@ -158,8 +158,18 @@
                                                      value="Cadastrar"
                                                      action="#{registerController.autoLogin()}"
                                                      rendered="#{!registerController.existingCpf and !registerController.existingEmail}"
-                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 button-register">
-                                    </h:commandButton>
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 button-register"/>
+                                    <h:outputLink id="backHome"
+                                                  value="../../pages/home/home.jsf"
+                                                  target="_self"
+                                                  type="button"
+                                                  style="float: right; margin-right: 23px"
+                                                  rendered="#{!registerController.authenticated}"
+                                                  styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button-register">
+                                        <h:outputLabel value="VOLTAR" class="roboto medium s12"/>
+
+                                    </h:outputLink>
+
                                 </h:panelGroup>
                             </div>
                         </h:form>

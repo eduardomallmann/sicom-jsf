@@ -6,6 +6,7 @@
 package org.sigmo.sicom.entity;
 
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,7 +50,6 @@ public class SubscriberDetails implements BaseEntity {
     @Column(name = "payment")
     private boolean payment;
     @ManyToOne
-    @JoinColumn(name = "order_id")
     private SubscriberOrder order;
 
     public Long getId() {
