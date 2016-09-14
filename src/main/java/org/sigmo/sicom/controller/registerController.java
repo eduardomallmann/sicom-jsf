@@ -1,7 +1,6 @@
 /*
- * Copyright (c) 2009 Virtual Office.
- * Todos os direitos reservados.
- * Este software é confidencial e um produto proprietário da Virtual Office.
+ * Copyright (c) 2016 SIGMO. Todos os direitos reservados.
+ * Este software é confidencial e um produto proprietário do grupo de pesquisa da UFSC - SIGMO.
  * Qualquer uso não autorizado, reprodução ou transferência deste software é terminantemente proibida.
  */
 package org.sigmo.sicom.controller;
@@ -28,7 +27,7 @@ import org.sigmo.sicom.util.MD5Hash;
  * <p>
  * <b>Forma de Uso:</b>
  * <br>
- * Esta classe ...
+ * Esta classe as funcionalidades de acesso e registro ao sistema para os usuários.
  *
  * @author Eduardo Mallmann <eduardo.mallmann@sippulse.com>
  */
@@ -46,7 +45,6 @@ public class registerController extends BaseController implements Serializable {
     private boolean existingCpf = false;
     private boolean existingEmail = false;
     private boolean authenticated;
-    private String password;
     private String emailLogin;
     private String pwdLogin;
 
@@ -64,14 +62,14 @@ public class registerController extends BaseController implements Serializable {
      * Salva o objeto.
      */
     public void save() {
-        //guarda password não encriptado para ser utilizado no login
-        password = this.newSubscriber.getPassword();
         //encripta a senha informada pelo subscriber
-        this.newSubscriber.setPassword(MD5Hash.encripty(this.newSubscriber.getPassword()));
+        this.newSubscriber.setPassword(MD5Hash.encripty(this.newSubscriber.getUnencryptedPassword()));
         //seta o papel para o subscriber
         this.newSubscriber.setRole(SubscriberType.SUBSCRIBER.toString());
         //salva o subscriber e retorna o objeto com o id
         this.setSubscriber(this.subscriberService.save(this.newSubscriber));
+        //adiciona mensagem de sucesso
+        super.addMessage(FacesMessage.SEVERITY_INFO, "successful.create.subscriber");
     }
 
     /**
@@ -99,11 +97,11 @@ public class registerController extends BaseController implements Serializable {
                 return "inscricao";
             } else {
                 //envia mensagem de erro caso um dos campos não tenha sido preenchido
-                super.addMessage(FacesMessage.SEVERITY_ERROR, "Campos de e-mail ou senha devem ser preenchidos");
+                super.addMessage(FacesMessage.SEVERITY_ERROR, "error.login");
             }
         } catch (BusinessException ex) {
             //adiciona mensagem de erro
-            super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getExceptionMessage().toString());
+            super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getErrorMessages().get(0).getKey());
         }
         //retorna para a página home, caso login esteja errado.
         return "home";
@@ -126,6 +124,8 @@ public class registerController extends BaseController implements Serializable {
         if (countCPF > 0) {
             //altera a condição do booleano
             this.existingCpf = true;
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "error.cpf.duplicated");
         }
     }
 
@@ -146,7 +146,16 @@ public class registerController extends BaseController implements Serializable {
         if (emailCount > 0) {
             //altera a condição do booleano
             this.existingEmail = true;
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "error.email.duplicated");
         }
+    }
+
+    /**
+     * Envia a senha por e-mail.
+     */
+    public void forgottenPWD() {
+
     }
 
     /**
@@ -158,10 +167,11 @@ public class registerController extends BaseController implements Serializable {
     public void setSubscriber(Subscriber subscriber) {
         try {
             //cria o usuário principal no conteiner e o define na aplicação
-            this.subscriber = this.subscriberService.authentication(subscriber.getEmail(), this.password);
+            this.subscriber = this.subscriberService.authentication(subscriber.getEmail(), 
+                                                                    subscriber.getUnencryptedPassword());
         } catch (BusinessException ex) {
             //adiciona mensagem de erro
-            super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getExceptionMessage().toString());
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "error.authentication.subscriber");
         }
     }
 
@@ -220,14 +230,6 @@ public class registerController extends BaseController implements Serializable {
 
     public void setNewSubscriber(Subscriber newSubscriber) {
         this.newSubscriber = newSubscriber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmailLogin() {

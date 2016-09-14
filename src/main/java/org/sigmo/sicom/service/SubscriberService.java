@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.sigmo.sicom.entity.Subscriber;
 import org.sigmo.sicom.exception.BusinessException;
+import org.sigmo.sicom.exception.ExceptionMessage;
+import org.sigmo.sicom.util.MD5Hash;
 
 /**
  * <p>
@@ -55,11 +57,11 @@ public class SubscriberService extends BaseService<Subscriber> {
 
         } catch (NoResultException nre) {
 
-            throw new BusinessException("Login ou Senha inexiste.");
+            throw new BusinessException("Login ou Senha inexiste.", new ExceptionMessage("error.login.notmatched"));
 
         } catch (Exception e) {
 
-            throw new BusinessException("Problemas no acesso ao sistema.");
+            throw new BusinessException("Problemas no acesso ao sistema.", new ExceptionMessage("error.login.backend"));
         }
     }
 
@@ -92,7 +94,8 @@ public class SubscriberService extends BaseService<Subscriber> {
             //retorna o Subscriber autenticado
             return subscriber;
         } catch (ServletException ex) {
-            throw new BusinessException("Falha na autenticação do usuário.");
+            throw new BusinessException("Falha na autenticação do usuário.",
+                                        new ExceptionMessage("error.authentication.subscriber"));
         }
     }
 
@@ -113,9 +116,42 @@ public class SubscriberService extends BaseService<Subscriber> {
      * @return lista com os registros encontrados.
      */
     public List<Subscriber> listByRole(final String role) {
+        //cria a pesquisa
         Query query = super.getEm().createNamedQuery("Subscriber.listByRole");
+        //define o parâmetro da pesquisa
         query.setParameter("role", role);
+        //retorna os resultados da pesquisa
         return (List<Subscriber>) query.getResultList();
+    }
+
+    /**
+     * Altera a senha do registro.
+     * <p>
+     * @param newPwd       nova senha a ser inserida.
+     * @param subscriberId identificador do objeto.
+     * <p>
+     * @return objeto com senha alterada.
+     */
+    public Subscriber changePwd(final String newPwd, final Long subscriberId) {
+        
+        String password = MD5Hash.encripty(newPwd);        
+
+        //monta a pesquisa
+        StringBuffer str = new StringBuffer();
+        str.append("UPDATE Subscriber s ");
+        str.append(" SET s.password = '").append(password).append("', ");
+        str.append(" s.unencryptedPassword = '").append(newPwd).append("' ");
+        str.append(" WHERE s.id = ").append(subscriberId);
+        //cria a pesquisapesquisa
+        Query query = super.getEm().createQuery(str.toString());
+        //executa a pesquisa
+        query.executeUpdate();
+        //manda o db atualizar tudo q está só em memória
+        super.getEm().flush();
+        //recupera o objeto atualizado
+        Subscriber subsChanged = this.findOne(subscriberId);
+        //retorna o objeto atualizado
+        return subsChanged;
     }
 
     /**
@@ -127,6 +163,26 @@ public class SubscriberService extends BaseService<Subscriber> {
      */
     public Subscriber findOne(final Long id) {
         return super.find(Subscriber.class, id);
+    }
+
+    /**
+     * Recupera o registro conforme seu atributo email.
+     * <p>
+     * @param email atributo email do usuário a ser pesquisado.
+     * <p>
+     * @return usuário com o e-mail informado.
+     */
+    public Subscriber findByEmail(final String email) {
+        //cria os comandos SQL
+        StringBuffer strQuery = new StringBuffer();
+        strQuery.append(" SELECT s FROM Subscriber s ");
+        strQuery.append(" WHERE s.email = :email ");
+        //cria a pesquisa
+        Query query = super.getEm().createQuery(strQuery.toString());
+        //insere o parâmetro email
+        query.setParameter("email", email);
+        //retorna o usuário pelo e-mail cadastrado
+        return (Subscriber) query.getSingleResult();
     }
 
     /**

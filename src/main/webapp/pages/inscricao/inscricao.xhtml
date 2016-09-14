@@ -129,18 +129,16 @@
                             <div class="button-register-grid">
                                 <h:panelGroup id="registersbuttons">
                                     <h:commandButton id="registerbutton"
-                                                     value="Alterar Cadastro"
-                                                     action="#{registerController.save()}"
+                                                     value="Atualizar Dados"
+                                                     action="#{subscriberController.updateSubscriber()}"
                                                      styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 button-register"/>
-                                    <h:commandButton id="changepwd"
+                                    <p:commandButton id="changepwd"
                                                      value="Alterar Senha"
-                                                     action="#"
+                                                     onclick="pwdChangeDialog.showModal()"
                                                      styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 change-pwd"/>
                                 </h:panelGroup>
                             </div>
                         </h:form>
-
-
                     </div>
                     <div class="mdl-cell mdl-cell--4-col">
                         <div class="inscriptions-submited">
@@ -161,6 +159,66 @@
                     </div>
                 </div>
             </div>
+
+            <dialog id="pwdChange-dialog" class="mdl-dialog changepwd-dialog">
+
+                <h:form id="cpwd-content">
+
+                    <div class="cpwd-label">
+                        <h:outputLabel value="Alteração de Senha" 
+                                       styleClass="mdl-dialog__title roboto normal s22 white"/>
+                    </div>
+
+                    <div class="mdl-dialog__content">
+                        <div id="actual-pwd" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <h:inputText id="oldpwd"
+                                         required="true"
+                                         value="#{subscriberController.oldpwd}" 
+                                         requiredMessage="Campo 'Senha Atual' não preenchido"
+                                         styleClass="mdl-textfield__input roboto normal s18 white"/>
+                            <h:outputLabel for="oldpwd" 
+                                           value="Digite sua Senha Atual" 
+                                           class="mdl-textfield__label roboto normal s18 white"/>
+                        </div>
+                                                
+                        <div id="new-pwd" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <h:inputText id="newpwd"
+                                         required="true"
+                                         value="#{subscriberController.newpwd}" 
+                                         requiredMessage="Campo 'Nova Senha' não preenchido"
+                                         styleClass="mdl-textfield__input roboto normal s18 white"/>
+                            <h:outputLabel for="newpwd" 
+                                           value="Digite sua Nova Senha" 
+                                           class="mdl-textfield__label roboto normal s18 white"/>
+                        </div>
+                        
+                    </div>
+
+                    <div class="mdl-dialog__actions cpwd-buttons">
+
+                        <p:commandButton value="Alterar Senha" 
+                                         update=":messages"
+                                         onclick="pwdChangeDialog.close();"
+                                         styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            <f:ajax execute="@this" listener="#{subscriberController.changePwd()}" event="click"/>
+                        </p:commandButton>
+                        
+                        <button type="button" 
+                                onclick="pwdChangeDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+
+                </h:form>
+            </dialog>
+            <script>
+                // Pwd Change Dialog
+                var pwdChangeDialog = document.querySelector('#pwdChange-dialog');
+                if (!pwdChangeDialog.showModal) {
+                    dialogPolyfill.registerDialog(pwdChangeDialog);
+                }
+            </script>
         </ui:define>
     </ui:composition>
 </html>

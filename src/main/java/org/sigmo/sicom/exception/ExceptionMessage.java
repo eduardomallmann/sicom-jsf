@@ -5,6 +5,7 @@
  */
 package org.sigmo.sicom.exception;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -21,37 +22,61 @@ import java.util.Objects;
  */
 public class ExceptionMessage {
 
-    private String messageKey;
+    private String key;
+    private String[] args;
 
     /**
-     * Método construtor padrão.
-     *
-     * @param messageKey chave da mensagem internacionalizada
+     * Metodo construtor padrão vazio.
      */
-    public ExceptionMessage(final String messageKey) {
-        this.messageKey = messageKey;
+    public ExceptionMessage() {
     }
 
-    public String getMessageKey() {
-        return messageKey;
+    /**
+     * Metodo construtor opcional.
+     * 
+     * @param key chave do atributo no Resources I18n
+     * @param args argumentos do erro
+     */
+    public ExceptionMessage(final String key, final String[] args) {
+        this.key = key;
+        this.args = args;
     }
 
-    public void setMessageKey(final String messageKey) {
-        this.messageKey = messageKey;
+    /**
+     * Metodo construtor opcional.
+     * 
+     * @param key chave do atributo no Resources I18n
+     */
+    public ExceptionMessage(final String key) {
+        this.key = key;
+    }
+
+    public final String getKey() {
+        return key;
+    }
+
+    public final void setKey(final String key) {
+        this.key = key;
+    }
+
+    public final String[] getArgs() {
+        return args;
+    }
+
+    public final void setArgs(final String[] args) {
+        this.args = args;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.messageKey);
+    public final int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.key);
+        hash = 89 * hash + Arrays.deepHashCode(this.args);
         return hash;
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
+    public final boolean equals(final Object obj) {
         if (obj == null) {
             return false;
         }
@@ -59,15 +84,19 @@ public class ExceptionMessage {
             return false;
         }
         final ExceptionMessage other = (ExceptionMessage) obj;
-        if (!Objects.equals(this.messageKey, other.messageKey)) {
+        if (!Objects.equals(this.key, other.key)) {
+            return false;
+        }
+        if (!Arrays.deepEquals(this.args, other.args)) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
-        return "ExceptionMessage{" + "messageKey=" + messageKey + '}';
+    public final String toString() {
+        return "ErrorMessage{" + "key=" + key + ", args=" + args + '}';
     }
+
 
 }

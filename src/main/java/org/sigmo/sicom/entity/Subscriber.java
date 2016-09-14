@@ -58,6 +58,8 @@ public class Subscriber implements BaseEntity {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "unencrypted_password")
+    private String unencryptedPassword;
     @Column(name = "role")
     private String role;
     @Column(name = "event")
@@ -147,6 +149,14 @@ public class Subscriber implements BaseEntity {
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public String getUnencryptedPassword() {
+        return unencryptedPassword;
+    }
+
+    public void setUnencryptedPassword(String unencryptedPassword) {
+        this.unencryptedPassword = unencryptedPassword;
     }
 
     @Override

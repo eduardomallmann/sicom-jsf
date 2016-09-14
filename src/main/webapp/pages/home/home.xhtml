@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <f:view>
         <ui:insert name="viewParams"/>
@@ -26,6 +27,7 @@
             </title>
         </h:head>
         <h:body id="bodyArea">
+
             <div id="header-home" class="head">
                 <div class="brand">
                     <img src="../../resources/images/home/cabeЗalho marca.png" alt=""/>
@@ -198,10 +200,18 @@
                         <h:outputLabel value="Login" styleClass="mdl-dialog__title"/>
                     </div>
 
+                    <div id="msg">
+                        <p:growl id="messages"
+                                 autoUpdate="true"
+                                 sticky="false"/>
+                    </div>
+
                     <div class="mdl-dialog__content login-input">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <h:inputText id="login" 
                                          class="mdl-textfield__input login-label"
+                                         required="true"
+                                         requiredMessage="Favor preencher o campo de e-mail"
                                          value="#{registerController.emailLogin}"/>
                             <label class="mdl-textfield__label login-label" 
                                    for="login">e-mail
@@ -217,17 +227,15 @@
                         </div>
                     </div>
 
-                    <div class="mdl-dialog__actions login-buttons">
+                    <div id="registersbuttons" class="mdl-dialog__actions login-buttons">
 
                         <h:commandButton value="Entrar" 
                                          action="#{registerController.login}"
                                          class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt"/>
 
-                        <input value="Esqueci a senha" 
-                               type="submit" 
-                               name="connect"
-                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect forgotten-txt"/>
-
+                        <h:commandLink value="Esqueci a senha" 
+                                       action="#{registerController.login}"
+                                       class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect forgotten-txt"/>
 
                         <button type="button" 
                                 class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">

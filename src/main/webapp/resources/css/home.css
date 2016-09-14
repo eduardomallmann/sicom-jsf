@@ -485,3 +485,11 @@ body {
 .open-dialog .main-txt {
     cursor: pointer !important;
 }
+
+
+/* MESSAGES */
+.ui-growl {
+    background-color: #e3e0e2;
+    left: 40%;
+    top: 110px;
+}

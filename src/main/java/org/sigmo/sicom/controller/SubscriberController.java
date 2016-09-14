@@ -1,7 +1,6 @@
 /*
- * Copyright (c) 2009 Virtual Office.
- * Todos os direitos reservados.
- * Este software é confidencial e um produto proprietário da Virtual Office.
+ * Copyright (c) 2016 SIGMO. Todos os direitos reservados.
+ * Este software é confidencial e um produto proprietário do grupo de pesquisa da UFSC - SIGMO.
  * Qualquer uso não autorizado, reprodução ou transferência deste software é terminantemente proibida.
  */
 package org.sigmo.sicom.controller;
@@ -26,6 +25,7 @@ import org.sigmo.sicom.service.SubscriberDetailsService;
 import org.sigmo.sicom.service.SubscriberOrderService;
 import org.sigmo.sicom.service.SubscriberService;
 import org.sigmo.sicom.service.WorkshopService;
+import org.sigmo.sicom.util.MD5Hash;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ import org.sigmo.sicom.service.WorkshopService;
  * <p>
  * <b>Forma de Uso:</b>
  * <br>
- * Esta classe ...
+ * Esta classe implementa as funcionalidades de inscrição e alteração de cadastro aos usuários.
  *
  * @author Eduardo Mallmann <eduardo.mallmann@sippulse.com>
  */
@@ -63,6 +63,9 @@ public class SubscriberController extends BaseController implements Serializable
     private boolean arquetipos;
     private boolean empregabilidade;
     private boolean driin;
+    private final boolean pagseguroImpl = false;
+    private String oldpwd;
+    private String newpwd;
 
     /**
      * Acessa ao usuário logado e instância no objeto.
@@ -91,7 +94,7 @@ public class SubscriberController extends BaseController implements Serializable
             return subscriber;
         } catch (BusinessException e) {
             //adiciona mensagem de erro
-            super.addMessage(FacesMessage.SEVERITY_ERROR, e.getExceptionMessage().toString());
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "session.error");
             return null;
         }
     }
@@ -107,7 +110,7 @@ public class SubscriberController extends BaseController implements Serializable
         this.subscriberOrder = null;
         this.subscriberActualDetails = null;
         this.setEventsToFalse();
-        
+
         FacesContext ctx = FacesContext.getCurrentInstance();
         ExternalContext extc = ctx.getExternalContext();
         extc.invalidateSession();
@@ -117,14 +120,72 @@ public class SubscriberController extends BaseController implements Serializable
 
     /**
      * Salva o pedido e inicia a conversação com o pagseguro.
+     * <p>
+     * @return retorna para a pagina de inscrição.
      */
     public void saveOrder() {
         //verifica se existem itens dentro do pedido
         if (!this.subscriberOrder.getSubscriberDetailses().isEmpty()) {
+//            try {
             //salva o pedido
             this.subscriberOrderService.save(this.subscriberOrder);
+//            } catch (PagSeguroServiceException ex) {
+//                Logger.getLogger(SubscriberController.class.getName()).log(Level.SEVERE, null, ex);
+//                ex.printStackTrace();
+//            }
             //recupera os eventos já inscritos por este usuário
             this.getSubscriberActualDetails();
+            //destroy o objeto e o instancia novamente
+            this.newOrder();
+            //adiciona mensagem de sucesso
+            super.addMessage(FacesMessage.SEVERITY_INFO, "successful.save.order");
+        }
+        //retorna para a página de inscrição.
+//        return "inscricao.jsf";
+    }
+
+    /**
+     * Atualiza o objeto Subscriber caso tenha sido alterado.
+     */
+    public void updateSubscriber() {
+        //verifica os campos obrigatórios
+        if (this.verifySubscriber()) {
+            //salva o objeto
+            this.subscriber = this.subscriberService.save(subscriber);
+            //adiciona mensagem de sucesso
+            super.addMessage(FacesMessage.SEVERITY_INFO, "successful.save.subscriber");
+        } else {
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "error.save.subscriber");
+        }
+    }
+
+    /**
+     * Verifica se os valores no objeto Subscriber foram definidos.
+     * <p>
+     * @return verdadeiro ou falso.
+     */
+    private boolean verifySubscriber() {
+        return !(this.subscriber.getFullName() == null || "".equals(this.subscriber.getFullName())
+                 || this.subscriber.getEmail() == null || "".equals(this.subscriber.getEmail())
+                 || this.subscriber.getCpf() == null || "".equals(this.subscriber.getCpf()));
+    }
+
+    /**
+     * Altera a senha do usuário.
+     */
+    public void changePwd() {
+        //encripta a senha antiga para ser comparada
+        this.setOldpwd(MD5Hash.encripty(this.oldpwd));
+        //compara a senha antiga
+        if (this.subscriber.getPassword().equals(this.oldpwd)) {
+            //chama o método para salvar a nova senha
+            this.subscriber = this.subscriberService.changePwd(this.newpwd, this.subscriber.getId());
+            //adiciona mensagem de sucesso
+            super.addMessage(FacesMessage.SEVERITY_INFO, "successful.save.pwd");
+        } else {
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "error.save.pwd");
         }
     }
 
@@ -141,7 +202,7 @@ public class SubscriberController extends BaseController implements Serializable
         //atualiza a página para os workshops já inscritos
         this.checkShops();
     }
-    
+
     /**
      * Cria novo pedido e destrói anterior.
      */
@@ -178,9 +239,11 @@ public class SubscriberController extends BaseController implements Serializable
             this.checkShops();
             //atualiza o valor total da ordem
             updateOrderAmount();
+            //adiciona mensagem de sucesso
+            super.addMessage(FacesMessage.SEVERITY_INFO, "successful.save.event");
         } else {
-            super.addMessage(FacesMessage.SEVERITY_ERROR,
-                             "Oficina/Palestra não encontrada, favor contatar nosso suporte: suporte@sigmo.org");
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, "error.save.event");
             //TODO:enviar e-mail informando o erro para o suporte
         }
     }
@@ -193,7 +256,8 @@ public class SubscriberController extends BaseController implements Serializable
     private void checkWorkshop(Workshop workshop) {
         for (SubscriberDetails details : subscriberActualDetails) {
             if (workshop.equals(details.getWorkshop())) {
-                super.addMessage(FacesMessage.SEVERITY_INFO, "Você já está inscrito para este workshop");
+                //adiciona mensagem de erro
+                super.addMessage(FacesMessage.SEVERITY_ERROR, "error.check.event");
                 return;
             }
         }
@@ -275,6 +339,8 @@ public class SubscriberController extends BaseController implements Serializable
                 this.updateOrderAmount();
                 //altera a visualização do evento na view
                 this.setEventViewToFalse(details.getWorkshop());
+                //adiciona mensagem de sucesso
+                super.addMessage(FacesMessage.SEVERITY_INFO, "successful.remove.event");
                 //finaliza o método
                 return;
             }
@@ -422,4 +488,25 @@ public class SubscriberController extends BaseController implements Serializable
     public void setSubscriberActualDetails(List<SubscriberDetails> subscriberActualDetails) {
         this.subscriberActualDetails = subscriberActualDetails;
     }
+
+    public boolean isPagseguroImpl() {
+        return pagseguroImpl;
+    }
+
+    public String getOldpwd() {
+        return oldpwd;
+    }
+
+    public void setOldpwd(String oldpwd) {
+        this.oldpwd = oldpwd;
+    }
+
+    public String getNewpwd() {
+        return newpwd;
+    }
+
+    public void setNewpwd(String newpwd) {
+        this.newpwd = newpwd;
+    }
+
 }

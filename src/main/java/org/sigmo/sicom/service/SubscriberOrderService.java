@@ -5,9 +5,11 @@
  */
 package org.sigmo.sicom.service;
 
+import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import java.util.List;
 import javax.ejb.Stateless;
 import org.sigmo.sicom.entity.SubscriberOrder;
+import org.sigmo.sicom.helper.PagSeguroIntegrator;
 
 /**
  * <p>
@@ -49,18 +51,44 @@ public class SubscriberOrderService extends BaseService<SubscriberOrder> {
      *
      * @param subscriberOrder objeto a ser persistido.
      *
-     * @return objeto atualizado.
+     * @return objeto salvo.
      */
     public SubscriberOrder save(final SubscriberOrder subscriberOrder) {
-
+        //instancia novo objeto a receber as modificações a serem realizadas
         SubscriberOrder subscriberOrderPersisted;
-
+        //verifica se o objeto é novo ou será atualizado
         if (subscriberOrder.getId() == null) {
+            //persiste o novo objeto no banco de dados
             subscriberOrderPersisted = super.persist(subscriberOrder);
         } else {
+            //atualiza o objeto existente
             subscriberOrderPersisted = super.merge(subscriberOrder);
         }
+        //verifica se será necessário enviar ao pagseguro
+        if (subscriberOrder.getAmount().longValue() > 0) {
+            //recupera a url de redirecionamento para realizar o pagamento
+//            subscriberOrderPersisted = this.saveRedirectURL(subscriberOrderPersisted);
+        }
+        //retorna o subscriber salvo
         return subscriberOrderPersisted;
+    }
+
+    /**
+     * Recupera a url de redirecionamento para realizar o pagamento no pagseguro.
+     * <p>
+     * @param subscriberOrder objeto a ser atualizado.
+     * <p>
+     * @return objeto salvo
+     * <p>
+     * @throws PagSeguroServiceException caso ocorra erro.
+     */
+    public SubscriberOrder saveRedirectURL(final SubscriberOrder subscriberOrder) throws PagSeguroServiceException {
+        //recebe a url de redirecionamenot do site do pagseguro
+        String redirectURL = PagSeguroIntegrator.register(subscriberOrder);
+        //salva a url recebida no objeto
+        subscriberOrder.setRedirectURL(redirectURL);
+        //retorna o objeto atualizado no banco de dados
+        return super.merge(subscriberOrder);
     }
 
 }

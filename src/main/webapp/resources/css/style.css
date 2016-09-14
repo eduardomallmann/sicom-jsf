@@ -217,6 +217,13 @@ body {
     width: 250px;
 }
 
+/* MESSAGES */
+.ui-growl {
+    background-color: #e3e0e2;
+    left: 40%;
+    top: 110px;
+}
+
 /* SHOPPING CART */
 
 .shopping-cart {
@@ -248,12 +255,13 @@ body {
 .ui-overlaypanel-content {
     width: 250px;
     background-color: white;
+    text-align: center; //to align cart-btn without pagseguro
 }
 
 .cart-btn {
     margin-bottom: 15px;
     margin-top: 25px;
-    width: 100%;
+    /*width: 100%*/
     letter-spacing: 1px;
     background-color: #104b62 !important;
 }
@@ -540,6 +548,54 @@ body {
     vertical-align: super;
 }
 
+/* CHANGE PASSWORD */
+.changepwd-dialog {
+    background-color: rgba(16, 75, 98, 0.8);
+    border-radius: 3px;
+    box-shadow: 0px 0px 30px #000;
+    width: 250px;
+    padding: 30px
+}
+.cpwd-label {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.changepwd-dialog .mdl-dialog__content {
+    padding: 0;
+}
+
+.changepwd-dialog .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.changepwd-dialog .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+    font-family: roboto;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 16px;
+}
+.changepwd-dialog .mdl-textfield__input {
+    border-bottom: 1px solid rgba(255,255,255, 0.4) !important;
+}
+.changepwd-dialog .mdl-textfield__label:after {
+    background-color: #FFF;
+}
+
+.cpwd-buttons {
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 0;
+}
+.cpwd-buttons .close-btn {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height: 53px;
+    background: transparent;
+}
+.cpwd-buttons .close-btn:hover {
+    background: rgba(158,158,158,.2);
+}
 
 
 /**************************

@@ -69,6 +69,9 @@ public class BaseController {
      * @return mensagem de texto a ser apresentada.
      */
     protected String getBundleMessage(final String key) {
+        
+        System.out.println(getContext().getViewRoot().getLocale());
+        
         ResourceBundle bundleResource = ResourceBundle.getBundle(BUNDLE,
                                                                  getContext().getViewRoot().getLocale());
 

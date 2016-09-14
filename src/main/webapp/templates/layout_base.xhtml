@@ -142,9 +142,15 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                             </h:column>
                         </h:dataTable>
 
+                        <h:commandLink value="Finalizar Inscrição" 
+                                       target="_self"
+                                       action="./inscricao.jsf"
+                                       actionListener="#{subscriberController.saveOrder()}"
+                                       rendered="#{subscriberController.totalShoppingCartRendered}"
+                                       styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
                         <p:commandButton value="Finalizar Inscrição" 
                                          onclick="confirmDialog.showModal();"
-                                         rendered="#{subscriberController.totalShoppingCartRendered}"
+                                         rendered="#{subscriberController.totalShoppingCartRendered and subscriberController.pagseguroImpl}"
                                          styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn">
                             <f:ajax execute="@this" listener="#{subscriberController.saveOrder()}" event="click"/>
                         </p:commandButton>
@@ -153,7 +159,8 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
             </div>
 
             <div id="msg">
-                <p:growl id="messages" 
+                <p:growl id="messages"
+                         autoUpdate="true"
                          sticky="false"/>
             </div>
 
@@ -265,9 +272,14 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                              update="@(body)"
                                              action="#{subscriberController.cancelOrder()}"
                                              styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cancel-btn"/>
-                            <p:commandButton value="Confirmar"
-                                             rendered="#{subscriberController.subscriberOrder.amount gt 0}"
-                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn"/>
+                            <p:commandLink value="#{subscriberController.subscriberOrder.redirectURL}"
+                                           target="_self"
+                                           type="button"
+                                           actionListener="#{subscriberController.newOrder()}"
+                                           rendered="#{subscriberController.subscriberOrder.amount gt 0}"
+                                           styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn">
+                                <h:outputLabel value="Confirmar"/>
+                            </p:commandLink>
                             <p:commandButton value="Confirmar"
                                              rendered="#{subscriberController.subscriberOrder.amount le 0}"
                                              onclick="confirmDialog.close()"

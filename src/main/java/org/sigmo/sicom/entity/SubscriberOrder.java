@@ -52,6 +52,8 @@ public class SubscriberOrder implements BaseEntity {
     private BigDecimal amount;
     @Column(name = "transaction_id")
     private String transactionCode;
+    @Column(name = "redirect_url")
+    private String redirectURL;
 
     /**
      * Método construtor padrão.
@@ -101,21 +103,27 @@ public class SubscriberOrder implements BaseEntity {
         this.transactionCode = transactionCode;
     }
 
+    public String getRedirectURL() {
+        return redirectURL;
+    }
+
+    public void setRedirectURL(String redirectURL) {
+        this.redirectURL = redirectURL;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.subscriber);
-        hash = 67 * hash + Objects.hashCode(this.amount);
-        hash = 67 * hash + Objects.hashCode(this.transactionCode);
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.subscriber);
+        hash = 61 * hash + Objects.hashCode(this.amount);
+        hash = 61 * hash + Objects.hashCode(this.transactionCode);
+        hash = 61 * hash + Objects.hashCode(this.redirectURL);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -123,9 +131,6 @@ public class SubscriberOrder implements BaseEntity {
             return false;
         }
         final SubscriberOrder other = (SubscriberOrder) obj;
-        if (!Objects.equals(this.transactionCode, other.transactionCode)) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -135,12 +140,19 @@ public class SubscriberOrder implements BaseEntity {
         if (!Objects.equals(this.amount, other.amount)) {
             return false;
         }
+        if (!Objects.equals(this.transactionCode, other.transactionCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.redirectURL, other.redirectURL)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "SubscriberOrder{" + "id=" + id + ", amount=" + amount + ", transactionCode=" + transactionCode + '}';
+        return "SubscriberOrder{" + "id=" + id + ", amount=" + amount + ", transactionCode=" + transactionCode
+               + ", redirectURL=" + redirectURL + '}';
     }
 
 }
