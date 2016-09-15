@@ -101,7 +101,7 @@
                                                      class="roboto normal s13 dark-blue card-link"/>
 
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(6)}" 
-                                                   rendered="#{!subscriberController.empregabilidade}"
+                                                   rendered="#{!subscriberController.empregabilidade and subscriberController.renderingWorkshop(6)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>
@@ -153,7 +153,7 @@
                                                      value="Saiba mais..."
                                                      class="roboto normal s13 dark-blue card-link"/>
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(7)}" 
-                                                   rendered="#{!subscriberController.driin}"
+                                                   rendered="#{!subscriberController.driin and subscriberController.renderingWorkshop(7)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>

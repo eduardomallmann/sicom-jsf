@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -390,6 +391,22 @@ public class SubscriberController extends BaseController implements Serializable
         this.setArquetipos(false);
         this.setEmpregabilidade(false);
         this.setDriin(false);
+    }
+
+    /**
+     * Informa se o workshop aceita inscrição pela sua data.
+     * <p>
+     * @param workshopId identificador do workshop.
+     * <p>
+     * @return se o workshop recebe inscrição ou não.
+     */
+    public boolean renderingWorkshop(Long workshopId) {
+        //recupera a data atual
+        Date actualDate = new Date();
+        //recupera o workshop procurado
+        Workshop workshop = this.workshopService.findOne(workshopId);
+        //retorna se o workshop já aconteceu ou não
+        return workshop.getWorkshopDate().getTime() > actualDate.getTime();
     }
 
     /**

@@ -70,6 +70,59 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
+/**************************
+    FONTS
+***************************/
+/*Font*/
+.roboto { font-family: roboto; }
+
+/*Font Style*/
+.italic { font-style: italic; }
+
+/*Font Weigth*/
+.thin       { font-weight: 100; }
+.light      { font-weight: 300; }
+.normal     { font-weight: 400; }
+.medium     { font-weight: 500; }
+.bold       { font-weight: 700; }
+.ultra-bold { font-weight: 900; }
+
+/*Size*/
+.s12 { font-size: 0.85714rem; }
+.s13 { font-size: 0.92857rem; }
+.s14 { font-size: 1.00000rem; }
+.s16 { font-size: 1.14286rem; }
+.s17 { font-size: 1.21429rem; }
+.s18 { font-size: 1.28571rem; }
+.s20 { font-size: 1.42857rem; }
+.s22 { font-size: 1.57143rem; }
+.s24 { font-size: 1.71429rem; }
+.s25 { font-size: 1.78571rem; }
+.s28 { font-size: 2.00000rem; }
+.s30 { font-size: 2.14286rem; }
+.s32 { font-size: 2.28571rem; }
+.s36 { font-size: 2.57143rem; }
+.s42 { font-size: 3.00000rem; }
+.s45 { font-size: 3.21429rem; }
+.s48 { font-size: 3.42857rem; }
+.s56 { font-size: 4.00000rem; }
+
+/*Color*/
+.white      { color: #FFFFFF; }
+.dark-blue  { color: #104b62; }
+.light-blue { color: #229997; }
+.yellow     { color: #cddc39; }
+.gray       { color: #666666; }
+
+/* Shadow */
+.shadow { text-shadow: 1px 1px #000; }
+
+/* Text Align */
+.center { text-align: center; }
+.right  { text-align: right;  }
+.left   { text-align: left;   }
+.justify{ text-align: justify;}
+
 #-------------------------
 #   HOME PAGE
 #-------------------------
@@ -79,6 +132,10 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
     padding: 0;
     border-spacing: 0;
     border: none;
+}
+
+html {
+    font-size: 14px;
 }
 
 body {
@@ -92,27 +149,36 @@ body {
     top: 30px;
     height: 155px;
     width: 100%;
-    background-image: url('../resources/images/home/cabeЗalho inteiro.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
+}
+.head .img-bkg {
+    position: absolute;
+    z-index: -1;
+    height: inherit;
+}
+.head .img-bkg.side-left {
+    left: 0;
+    width: calc((100% - 642px)/2);
+}
+.head .img-bkg.side-right {
+    right: 0;
+    width: calc((100% - 642px)/2);
+}
+.head .img-bkg.central {
+    left: 50%;
+    transform: translate(-50%,0);
 }
 .head .brand {
     position: absolute;
-    left: 436px;
+    left: 50%;
+    transform: translate(-65%,0);
 }
 .head .login {
-    display: block;
-    margin-top: 85px;
-    margin-right: 150px;
-    float: right;
+    position: absolute;
+    top: 85px;
+    margin-right: 8%;
+    right: 0;
 }
 .button-txt {
-    font-family: roboto;
-    font-size: 14px;
-    color: #FFF;
-    font-weight: 600;
-    text-shadow: 1px 1px #000;
     letter-spacing: 1.5px !important;
 }
 .login {
@@ -199,7 +265,7 @@ body {
 }
 .home.content {
     position: absolute;
-    top: 181px;
+    top: 185px;
     width: 100%;
 }
 .home-grid {
@@ -211,12 +277,11 @@ body {
 .home-img {
     margin: 0 !important;
     width: calc(25%) !important;
-    height: 250px;
 }
 .bkg-img {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 101%;
+    background-size: cover;
 }
 .bkg-img.image1 {
     background-image: url('../resources/images/home/006 - Imagem_01.jpg');
@@ -267,33 +332,16 @@ body {
 .bkg-img.image8:hover {
     background-image: url('../resources/images/home/8.jpg');
 }
-
 .main-txt {
-    font-family: roboto;
-    font-size: 18px;
-    font-weight: bold;
-    color: #FFF;
-    text-shadow: 1px 1px #000;
+    cursor: pointer;
 }
 .footer-txt,
 .normal-txt {
-    font-family: roboto;
-    font-size: 14px;
     text-decoration: none !important;
-    color: #FFF;
-    font-weight: 300;
     vertical-align: top;
-    text-shadow: 1px 1px #000;
 }
-.low-bold-txt {
-    font-family: roboto;
-    font-size: 12px;
-    color: #FFF;
-    font-weight: 900;
-    text-shadow: 1px 1px #000;
-}
+
 .footer-txt {
-    font-size: 16px;
     vertical-align: middle;
 }
 .txt-shadow {
@@ -334,8 +382,8 @@ body {
 }
 .img-main-txt {
     display: inline-block;
-    margin-left: 16px;
-    width: 200px;
+    margin-left: 4.45%;
+    width: 56%;
     word-wrap: break-word;
     vertical-align: top;
 }
@@ -360,14 +408,13 @@ body {
     background-image: url('../resources/images/home/014 - RodapВ completo.jpg');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 101%;
+    background-size: cover;
 }
 .footer-home .footer-txt-grid {
-    margin-left: 403px;
     padding-top: 9px;
+    text-align: center;
 }
 .footer-txt-grid .footer-txt {
-    font-size: 16px;
     vertical-align: middle;
 }
 .footer-txt-grid .footer-txt:last-of-type {
@@ -486,10 +533,22 @@ body {
     cursor: pointer !important;
 }
 
-
 /* MESSAGES */
 .ui-growl {
     background-color: #e3e0e2;
     left: 40%;
     top: 110px;
+}
+
+@media screen and (max-width: 1439px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+
+    html {
+        font-size: 10px;
+    }
 }

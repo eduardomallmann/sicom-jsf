@@ -355,7 +355,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(1)}"
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.bilro}"
+                                         rendered="#{!subscriberController.bilro and subscriberController.renderingWorkshop(1)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button" 
@@ -411,7 +411,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(2)}" 
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.identidade}"
+                                         rendered="#{!subscriberController.identidade and subscriberController.renderingWorkshop(2)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button"
@@ -471,7 +471,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(3)}" 
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.fotografia}"
+                                         rendered="#{!subscriberController.fotografia and subscriberController.renderingWorkshop(3)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button"
@@ -533,7 +533,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(4)}" 
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.projetos}"
+                                         rendered="#{!subscriberController.projetos and subscriberController.renderingWorkshop(4)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button" 
@@ -596,7 +596,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(5)}" 
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.arquetipos}"
+                                         rendered="#{!subscriberController.arquetipos and subscriberController.renderingWorkshop(5)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button" 
@@ -652,7 +652,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(6)}" 
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.empregabilidade}"
+                                         rendered="#{!subscriberController.empregabilidade and subscriberController.renderingWorkshop(6)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button" 
@@ -709,7 +709,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     <div class="mdl-dialog__actions dialog-buttons">
                         <h:commandButton action="#{subscriberController.insertSubscriptions(7)}" 
                                          value="Inscreva-se"
-                                         rendered="#{!subscriberController.driin}"
+                                         rendered="#{!subscriberController.driin and subscriberController.renderingWorkshop(7)}"
                                          image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
                                          class="button-txt"/>
                         <button type="button" 

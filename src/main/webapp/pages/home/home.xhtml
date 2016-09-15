@@ -29,6 +29,9 @@
         <h:body id="bodyArea">
 
             <div id="header-home" class="head">
+                <img src="../../resources/images/home/cabeЗalho esquerdo.png" alt="" class="img-bkg side-left"/>
+                <img src="../../resources/images/home/cabeЗalho central.png" alt="" class="img-bkg central"/>
+                <img src="../../resources/images/home/cabeЗalho direito.png" alt="" class="img-bkg side-right"/>
                 <div class="brand">
                     <img src="../../resources/images/home/cabeЗalho marca.png" alt=""/>
                 </div>
@@ -37,20 +40,22 @@
                     <button id="show-login" 
                             type="button" 
                             class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect login-button">
-                        <h:outputLabel value="Login" styleClass="button-txt"/>
+                        <h:outputLabel value="Login" styleClass="roboto bold s14 white shadow button-txt"/>
                     </button>
                 </div>
             </div>
 
             <div class="home content">
-                <div class="mdl-grid home-grid">
+                <div id="content-top" class="mdl-grid home-grid">
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image1">
                         <div class="first-img-main-txt">
-                            <h:outputLabel value="Inscreva-se nas atividades" styleClass="main-txt"/>
+                            <h:outputLabel value="Inscreva-se nas atividades" 
+                                           styleClass="roboto bold s18 white shadow"/>
                         </div>
                         <div class="first-img-link">
                             <h:outputLink value="../cadastro/cadastro.jsf" title="Cadastre-se aqui">
-                                <h:outputText value="Cadastre-se aqui" styleClass="normal-txt"/>
+                                <h:outputText value="Cadastre-se aqui" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </h:outputLink>
                         </div>
                     </div>
@@ -60,18 +65,21 @@
                         <h:outputLink id="show-birlo" value="#" styleClass="open-dialog">
                             <div class="head-txt">
                                 <div class="img-date-txt">
-                                    <h:outputText value="19/08" styleClass="normal-txt"/>
+                                    <h:outputText value="19/08" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
                                 </div>
                                 <div class="img-main-txt">
 
-                                    <h:outputLabel value="A Renda de Birlo no contexto local de moda" styleClass="main-txt"/>
+                                    <h:outputLabel value="A Renda de Birlo no contexto local de moda" 
+                                                   styleClass="roboto bold s18 white shadow main-txt"/>
                                 </div>
                             </div>
                             <div class="img-panelist-txt">
-                                <h:outputText value="Mary Clasen e Talyta Bastos" styleClass="normal-txt"/>
+                                <h:outputText value="Mary Clasen e Talyta Bastos" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </div>
                             <div class="img-event-txt">
-                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                                <h:outputText value="Oficina" styleClass="roboto ultra-bold s12 white shadow"/>
                             </div>
                         </h:outputLink>
                     </div>
@@ -79,17 +87,20 @@
                         <h:outputLink id="show-corporateId" value="#" styleClass="open-dialog">
                             <div class="head-txt">
                                 <div class="img-date-txt">
-                                    <h:outputText value="24/08" styleClass="normal-txt"/>
+                                    <h:outputText value="24/08" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
                                 </div>
                                 <div class="img-main-txt">
-                                    <h:outputLabel value="Ilustração para identidade corporativa" styleClass="main-txt"/>
+                                    <h:outputLabel value="Ilustração para identidade corporativa" 
+                                                   styleClass="roboto bold s18 white shadow main-txt"/>
                                 </div>
                             </div>
                             <div class="img-panelist-txt">
-                                <h:outputText value="Doug Menegazzi" styleClass="normal-txt"/>
+                                <h:outputText value="Doug Menegazzi" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </div>
                             <div class="img-event-txt">
-                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                                <h:outputText value="Oficina" styleClass="roboto ultra-bold s12 white shadow"/>
                             </div>
                         </h:outputLink>
                     </div>
@@ -97,37 +108,49 @@
                         <h:outputLink id="show-photo" value="#" styleClass="open-dialog">
                             <div class="head-txt extended-date">
                                 <div class="img-date-txt extended-date">
-                                    <h:outputText value="02/09 e 09/09" styleClass="normal-txt"/>
+                                    <h:outputText value="02/09" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
+                                    <br/>
+                                    <h:outputText value="e" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
+                                    <br/>
+                                    <h:outputText value="09/09" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
                                 </div>
                                 <div class="img-main-txt">
-                                    <h:outputLabel value="Composição Fotográfica registro da arte grafite" styleClass="main-txt"/>
+                                    <h:outputLabel value="Composição Fotográfica registro da arte grafite" 
+                                                   styleClass="roboto bold s18 white shadow main-txt"/>
                                 </div>
                             </div>
                             <div class="img-panelist-txt">
-                                <h:outputText value="Sharlene Melanie e Richard Perassi" styleClass="normal-txt"/>
+                                <h:outputText value="Sharlene Melanie e Richard Perassi" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </div>
                             <div class="img-event-txt">
-                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                                <h:outputText value="Oficina" styleClass="roboto ultra-bold s12 white shadow"/>
                             </div>
                         </h:outputLink>
                     </div>
                 </div>
-                <div class="mdl-grid home-grid">
+                <div id="content-bottom" class="mdl-grid home-grid">
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image5">
                         <h:outputLink id="show-project" value="#" styleClass="open-dialog">
                             <div class="head-txt">
                                 <div class="img-date-txt">
-                                    <h:outputText value="16/09" styleClass="normal-txt"/>
+                                    <h:outputText value="16/09" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
                                 </div>
                                 <div class="img-main-txt">
-                                    <h:outputLabel value="Gestão Visual de projetos" styleClass="main-txt"/>
+                                    <h:outputLabel value="Gestão Visual de projetos" 
+                                                   styleClass="roboto bold s18 white shadow main-txt"/>
                                 </div>
                             </div>
                             <div class="img-panelist-txt">
-                                <h:outputText value="Julio Teixeira" styleClass="normal-txt"/>
+                                <h:outputText value="Julio Teixeira" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </div>
                             <div class="img-event-txt">
-                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                                <h:outputText value="Oficina" styleClass="roboto ultra-bold s12 white shadow"/>
                             </div>
                         </h:outputLink>
                     </div>
@@ -135,48 +158,57 @@
                         <h:outputLink id="show-brand" value="#" styleClass="open-dialog">
                             <div class="head-txt">
                                 <div class="img-date-txt">
-                                    <h:outputText value="21/09" styleClass="normal-txt"/>
+                                    <h:outputText value="21/09" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
                                 </div>
                                 <div class="img-main-txt">
-                                    <h:outputLabel value="Comunicação de marcas a partir de arquétipos" styleClass="main-txt"/>
+                                    <h:outputLabel value="Comunicação de marcas a partir de arquétipos" 
+                                                   styleClass="roboto bold s18 white shadow main-txt"/>
                                 </div>
                             </div>
                             <div class="img-panelist-txt">
-                                <h:outputText value="Felipe Machado" styleClass="normal-txt"/>
+                                <h:outputText value="Felipe Machado" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </div>
                             <div class="img-event-txt">
-                                <h:outputText value="Oficina" styleClass="low-bold-txt"/>
+                                <h:outputText value="Oficina" styleClass="roboto ultra-bold s12 white shadow"/>
                             </div>
                         </h:outputLink>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image7">
                         <div class="img-panel-txt">
-                            <h:outputLabel value="Palestras" styleClass="main-txt"/>
+                            <h:outputLabel value="Palestras" styleClass="roboto bold s18 white shadow"/>
                         </div>
                         <div class="img-panelist-txt">
                             <h:outputLink id="show-driin" value="#" styleClass="open-dialog">
-                                <h:outputText value="Driin" styleClass="normal-txt"/>
+                                <h:outputText value="Driin" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </h:outputLink>
                             <br/>
                             <h:outputLink id="show-job" value="#" styleClass="open-dialog">
-                                <h:outputText value="Márcio Miranda e Gladys Prado" styleClass="normal-txt"/>
+                                <h:outputText value="Márcio Miranda e Gladys Prado" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </h:outputLink>
                         </div>
                         <div class="img-event-txt">
-                            <h:outputText value="Gratuita" styleClass="low-bold-txt"/>
+                            <h:outputText value="Gratuita" 
+                                          styleClass="roboto ultra-bold s12 white shadow"/>
                         </div>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image8">
                         <div class="head-txt seminar">
                             <div class="img-date-txt">
-                                <h:outputText value="19/10" styleClass="normal-txt"/>
+                                <h:outputText value="19/10" 
+                                              styleClass="roboto light s14 white shadow normal-txt"/>
                             </div>
                             <div class="img-main-txt">
-                                <h:outputLabel value="III Seminário de Informação e Comunicação da marca" styleClass="main-txt"/>
+                                <h:outputLabel value="III Seminário de Informação e Comunicação da marca" 
+                                               styleClass="roboto bold s18 white shadow"/>
                             </div>
                         </div>
                         <div class="img-event-txt">
-                            <h:outputText value="Evento Gratuito" styleClass="low-bold-txt"/>
+                            <h:outputText value="Evento Gratuito" 
+                                          styleClass="roboto ultra-bold s12 white shadow"/>
                         </div>
                     </div>
                 </div>
@@ -184,9 +216,11 @@
             <div id="footer-home">
                 <div class="footer-home">
                     <div class="footer-txt-grid">
-                        <h:outputText value="Universidade Federal de Santa Catarina - UFSC" styleClass="footer-txt"/>
+                        <h:outputText value="Universidade Federal de Santa Catarina - UFSC" 
+                                      styleClass="roboto light s14 white shadow footer-txt"/>
                         <i class="material-icons md-light md-08">brightness_1</i>
-                        <h:outputText value="Florianópolis - SC" styleClass="footer-txt"/>
+                        <h:outputText value="Florianópolis - SC" 
+                                      styleClass="roboto light s14 white shadow footer-txt"/>
                     </div>
                 </div>
 
@@ -234,7 +268,7 @@
                                          class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt"/>
 
                         <h:commandLink value="Esqueci a senha" 
-                                       action="#{registerController.login}"
+                                       action="#{registerController.forgottenPWD()}"
                                        class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect forgotten-txt"/>
 
                         <button type="button" 
@@ -605,12 +639,20 @@
                     var bigHeight = Math.max(body.scrollHeight, body.offsetHeight,
                             html.clientHeight, html.scrollHeight, html.offsetHeight);
                     var minHeigth = window.innerHeight;
+                    var contentHeigth;
 
                     if (bigHeight > minHeigth) {
                         bigHeight += 20;
                         document.getElementById('bodyArea').setAttribute('style', "height: " + bigHeight + "px");
+                        contentHeigth = (bigHeight - 225) / 2;
+                        document.getElementById('content-top').setAttribute('style', "height: " + contentHeigth + "px");
+                        document.getElementById('content-bottom').setAttribute('style', "height: " + contentHeigth + "px");
                     } else {
                         document.getElementById('bodyArea').setAttribute('style', "height: " + minHeigth + "px");
+                        contentHeigth = (minHeigth - 225) / 2;
+                        document.getElementById('content-top').setAttribute('style', "height: " + contentHeigth + "px");
+                        document.getElementById('content-bottom').setAttribute('style', "height: " + contentHeigth + "px");
+
                     }
                 };
 

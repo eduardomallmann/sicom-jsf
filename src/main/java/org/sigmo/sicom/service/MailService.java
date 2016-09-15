@@ -33,23 +33,20 @@ import org.sigmo.sicom.exception.ExceptionMessage;
 @Stateless
 public class MailService extends BaseService<Subscriber> {
 
-    @Resource(name = "mail/GmailService")
+    @Resource(name = "sigmo/GmailService")
     private Session mailSession;
-    
+
     @EJB
     private SubscriberService subscriberService;
-    
-    @EJB
-    private SubscriberOrderService subscriberOrderService;
-    
+
     public void sentPasswordByEmail(final String email) throws BusinessException {
-        
+
         //recupera o usuário que esqueceu a senha
         Subscriber subscriber = this.subscriberService.findByEmail(email);
         Date date = new Date();
         String dayFormat = new SimpleDateFormat("dd/MM/yyyy").format(date);
         String timeFormat = new SimpleDateFormat("HH:mm").format(date);
-        
+
         try {
             //Criando a sessão da mensagem
             Message msg = new MimeMessage(mailSession);
@@ -60,14 +57,18 @@ public class MailService extends BaseService<Subscriber> {
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(subscriber.getEmail()));
             //monta o corpo da mensagem
             StringBuffer bodyMessage = new StringBuffer();
-            /* HTML CONFIG */
+            /*
+             * HTML CONFIG
+             */
             bodyMessage.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" ");
             bodyMessage.append(" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
             bodyMessage.append("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             bodyMessage.append("<head>");
             bodyMessage.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
             bodyMessage.append("<meta name=\"viewport\" content=\"width=device-width\"/>");
-            /* ESTILOS */
+            /*
+             * ESTILOS
+             */
             bodyMessage.append("<style>");
             bodyMessage.append("body{ width:100% !important; min-width: 100%; -webkit-text-size-adjust:100%; ");
             bodyMessage.append(" -ms-text-size-adjust:100%; margin:0; padding:0; }");
@@ -177,13 +178,15 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("table[class=\"body\"] .left-text-pad { padding-right: 10px !important; }");
             bodyMessage.append("}");
             bodyMessage.append("</style>");
-            /* CORPO DO E-MAIL */
+            /*
+             * CORPO DO E-MAIL
+             */
             bodyMessage.append("<body>");
             bodyMessage.append("<table class=\"body\">");
             bodyMessage.append("<tr>");
             bodyMessage.append("<td class=\"center\" align=\"center\" valign=\"top\">");
             bodyMessage.append("<center>");
-            
+
             bodyMessage.append("<table class=\"row header\">");
             bodyMessage.append("<tr>");
             bodyMessage.append("<td class=\"center\" align=\"center\">");
@@ -206,11 +209,11 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
-            
+
             bodyMessage.append("<table class=\"container\">");
             bodyMessage.append("<tr>");
             bodyMessage.append("<td>");
-            
+
             bodyMessage.append("<table class=\"row\">");
             bodyMessage.append("<tr>");
             bodyMessage.append("<td class=\"wrapper last\">");
@@ -233,10 +236,10 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
-            
+
             bodyMessage.append("<table class=\"row footer\">");
             bodyMessage.append("<tr>");
-            
+
             bodyMessage.append("<td class=\"wrapper\">");
             bodyMessage.append("<table class=\"six columns\">");
             bodyMessage.append("<tr>");
@@ -254,7 +257,7 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
             bodyMessage.append("</td>");
-            
+
             bodyMessage.append("<td class=\"wrapper last\">");
             bodyMessage.append("<table class=\"six columns\">");
             bodyMessage.append("<tr>");
@@ -267,33 +270,40 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
             bodyMessage.append("</td>");
-            
+
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
-            
+
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
-            
+
             bodyMessage.append("</center>");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
             bodyMessage.append("</table>");
-            
+
             bodyMessage.append("</body>");
             bodyMessage.append("</html>");
-            
-            
+
             //define o conteudo da mensagem
             msg.setContent(bodyMessage.toString(),
-                    "text/html; charset=UTF-8");
+                           "text/html; charset=UTF-8");
             //executa o envio
             Transport.send(msg);
-            
+
         } catch (Exception e) {
             throw new BusinessException(e.getMessage(), new ExceptionMessage("error.mail.sent"));
         }
-        
-        
+
     }
+
+    public Session getMailSession() {
+        return mailSession;
+    }
+
+    public void setMailSession(Session mailSession) {
+        this.mailSession = mailSession;
+    }
+
 }

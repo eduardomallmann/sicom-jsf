@@ -133,9 +133,8 @@ public class SubscriberService extends BaseService<Subscriber> {
      * @return objeto com senha alterada.
      */
     public Subscriber changePwd(final String newPwd, final Long subscriberId) {
-        
-        String password = MD5Hash.encripty(newPwd);        
-
+        //encripta a senha
+        String password = MD5Hash.encripty(newPwd);
         //monta a pesquisa
         StringBuffer str = new StringBuffer();
         str.append("UPDATE Subscriber s ");
@@ -243,5 +242,4 @@ public class SubscriberService extends BaseService<Subscriber> {
         }
         return subscriberPersisted;
     }
-
 }

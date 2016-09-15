@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.sigmo.sicom.entity.Subscriber;
 import org.sigmo.sicom.exception.BusinessException;
+import org.sigmo.sicom.exception.ExceptionMessage;
+import org.sigmo.sicom.service.MailService;
 import org.sigmo.sicom.service.SubscriberService;
 import org.sigmo.sicom.type.SubscriberType;
 import org.sigmo.sicom.util.MD5Hash;
@@ -39,6 +41,8 @@ public class registerController extends BaseController implements Serializable {
 
     @EJB
     private SubscriberService subscriberService;
+    @EJB
+    private MailService mailService;
 
     private Subscriber subscriber;
     private Subscriber newSubscriber;
@@ -153,9 +157,29 @@ public class registerController extends BaseController implements Serializable {
 
     /**
      * Envia a senha por e-mail.
+     * <p>
+     * @throws BusinessException caso ocorra exceção.
      */
-    public void forgottenPWD() {
-
+    public void forgottenPWD() throws BusinessException {
+        try {
+            //retorna quantos usuários estão cadastrados com este email no db
+            Long emailCount = this.subscriberService.countByEmail(emailLogin);
+            //verifica se existe apenas um registro
+            if (emailCount > 0 && emailCount < 2) {
+                //chama o método do service que envia o e-mail
+                this.mailService.sentPasswordByEmail(emailLogin);
+                //adiciona mensagem de sucesso
+                super.addMessage(FacesMessage.SEVERITY_INFO, "successful.mail.pwdsent");
+            } else if (emailCount > 1) {
+                //envia erro caso existam mais de um e-mail igual cadastrado
+                throw new BusinessException("Mais de um e-mail", new ExceptionMessage("error.email.alot"));
+            } else if (emailCount < 1) {
+                //envia erro caso o e-mail não exista na base
+                throw new BusinessException("Nao ha e-mail", new ExceptionMessage("error.email.notfound"));
+            }
+        } catch (BusinessException e) {
+            throw new BusinessException(e.getMessage(), e.getErrorMessages().get(0));
+        }
     }
 
     /**
@@ -167,7 +191,7 @@ public class registerController extends BaseController implements Serializable {
     public void setSubscriber(Subscriber subscriber) {
         try {
             //cria o usuário principal no conteiner e o define na aplicação
-            this.subscriber = this.subscriberService.authentication(subscriber.getEmail(), 
+            this.subscriber = this.subscriberService.authentication(subscriber.getEmail(),
                                                                     subscriber.getUnencryptedPassword());
         } catch (BusinessException ex) {
             //adiciona mensagem de erro

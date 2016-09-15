@@ -91,7 +91,7 @@
                                                      class="roboto normal s13 dark-blue card-link"/>
 
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(1)}" 
-                                                   rendered="#{!subscriberController.bilro}"
+                                                   rendered="#{!subscriberController.bilro and subscriberController.renderingWorkshop(1)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>
@@ -142,7 +142,7 @@
                                                      value="Saiba mais..."
                                                      class="roboto normal s13 dark-blue card-link"/>
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(2)}" 
-                                                   rendered="#{!subscriberController.identidade}"
+                                                   rendered="#{!subscriberController.identidade and subscriberController.renderingWorkshop(2)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>
@@ -198,7 +198,7 @@
                                                      value="Saiba mais..."
                                                      class="roboto normal s13 dark-blue card-link"/>
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(3)}" 
-                                                   rendered="#{!subscriberController.fotografia}"
+                                                   rendered="#{!subscriberController.fotografia and subscriberController.renderingWorkshop(3)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>
@@ -251,7 +251,7 @@
                                                      value="Saiba mais..."
                                                      class="roboto normal s13 dark-blue card-link"/>
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(4)}" 
-                                                   rendered="#{!subscriberController.projetos}"
+                                                   rendered="#{!subscriberController.projetos and subscriberController.renderingWorkshop(4)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>
@@ -304,7 +304,7 @@
                                                      value="Saiba mais..."
                                                      class="roboto normal s13 dark-blue card-link"/>
                                     <h:commandLink action="#{subscriberController.insertSubscriptions(5)}" 
-                                                   rendered="#{!subscriberController.arquetipos}"
+                                                   rendered="#{!subscriberController.arquetipos and subscriberController.renderingWorkshop(5)}"
                                                    class="card-link check-register">
                                         <h:outputText value="Inscreva-se" 
                                                       class="roboto normal s13 dark-blue"/>
