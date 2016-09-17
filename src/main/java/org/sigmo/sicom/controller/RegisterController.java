@@ -25,8 +25,8 @@ import org.sigmo.sicom.util.MD5Hash;
 /**
  * <p>
  * <b>Descrição da Classe:</b>
- * <br>Classe registerController.
- * <p>
+ * <br>Classe RegisterController.
+ <p>
  * <b>Forma de Uso:</b>
  * <br>
  * Esta classe as funcionalidades de acesso e registro ao sistema para os usuários.
@@ -35,7 +35,7 @@ import org.sigmo.sicom.util.MD5Hash;
  */
 @Named("registerController")
 @SessionScoped
-public class registerController extends BaseController implements Serializable {
+public class RegisterController extends BaseController implements Serializable {
 
     private static final long serialVersionUID = -4770797471613018053L;
 

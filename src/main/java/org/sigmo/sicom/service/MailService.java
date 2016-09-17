@@ -33,7 +33,7 @@ import org.sigmo.sicom.exception.ExceptionMessage;
 @Stateless
 public class MailService extends BaseService<Subscriber> {
 
-    @Resource(name = "sigmo/GmailService")
+    @Resource(name = "mail/SicomGmailService")
     private Session mailSession;
 
     @EJB

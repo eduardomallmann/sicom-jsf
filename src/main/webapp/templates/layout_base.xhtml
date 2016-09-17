@@ -34,137 +34,182 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
         </h:head>
         <h:body id="bodyArea">
 
-            <div class="header bkg-white">
-                <div class="sigmo-logo">
-                    <img src="../../resources/images/template/cabeЗalho completo.png" 
-                         alt=""
-                         class="header-banner"/>
-                    <img src="../../resources/images/template/marca cabeЗalho.png" 
-                         alt=""
-                         class="header-logo"/>
-                </div>
-
-                <h:form id="frmLogoff">
-                    <div id="logoffBtn" 
-                         class="logoff-position">
-                        <h:commandLink  target="_self" 
-                                        action="#{subscriberController.logout()}"
-                                        styleClass="logoff-link"
-                                        rendered="#{registerController.authenticated}"
-                                        type="button">
-                            <div class="logoff-button bkg-dark-blue">
-                                <i style="padding: 6px" class="material-icons md-28 md-white">power_settings_new</i>
-                            </div>
-                        </h:commandLink>
-                    </div>
-                    <div class="mdl-tooltip mdl-tooltip--large" for="logoffBtn">
-                        <h:outputLabel value="Logoff" 
-                                       class="roboto medium"/>
-                    </div>
-                </h:form>
-
-                <h:form id="frmShoppingCart" styleClass="shopping-cart">
-                    <p:commandLink id="shopCartBtn" 
-                                   style="text-decoration: none"
-                                   type="button" 
-                                   rendered="#{registerController.authenticated}">
-
-                        <div class="mdl-badge mdl-badge--overlap" 
-                             data-badge="#{subscriberController.subscriberOrder.subscriberDetailses.size()}">
-                            <h:outputLabel value="Ver novas inscrições" 
-                                           styleClass="roboto medium s16 dark-blue cart-label"/>
-                            <img src="../../resources/images/workshops/icone carrinho.png"
-                                 alt=""
-                                 class="img-cart"/>
+            <div class="header bkg-img header">
+                <div class="mdl-grid">
+                    <div id="logo-area" class="logo-area">
+                        <div id="logo-header" class="logo-square">
+                            <img src="../../resources/images/template/marca cabeЗalho.png" 
+                                 alt=""/>
                         </div>
-                    </p:commandLink>
+                    </div>
 
-                    <p:overlayPanel id="shoppingCart" 
-                                    for="shopCartBtn" 
-                                    showEffect="fold"
-                                    hideEffect="fold"
-                                    dynamic="true"
-                                    my="left bottom"
-                                    appendToBody="true">
-                        <div class="shopcart-label">
-                            <h:outputLabel value="Inscrições" 
-                                           styleClass="roboto medium s18 dark-blue"/>
-                        </div>
+                    <div id="menu-area" class="menu-area">
 
-                        <h:outputLabel value="Você não se inscreveu em nenhum novo evento até o momento."
-                                       rendered="#{!subscriberController.totalShoppingCartRendered}"
-                                       styleClass="roboto normal italic s14 dark-blue"/>
-
-                        <h:dataTable id="shoppingCartTable"
-                                     value="#{subscriberController.subscriberOrder.subscriberDetailses}"
-                                     styleClass="cart-table"
-                                     rendered="#{subscriberController.totalShoppingCartRendered}"
-                                     rowClasses="odd,even"
-                                     var="event">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputLabel value="Eventos"
-                                                   styleClass="roboto medium s14 dark-blue"/>
-                                </f:facet>
-                                <h:outputLabel value="#{event.workshop.description}"
-                                               styleClass="roboto normal italic s12 dark-blue"/>
-                                <f:facet name="footer">
-                                    <h:outputLabel value="Total"
-                                                   styleClass="roboto medium s14 dark-blue"/>
-                                </f:facet>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputLabel value="Valores"
-                                                   styleClass="roboto medium s14 dark-blue value"/>
-                                </f:facet>
-
-                                <h:outputLabel value="GRATUITO"
-                                               rendered="#{event.workshop.price le 0}"
-                                               styleClass="roboto medium s12 dark-blue"/>
-
-                                <h:outputLabel value="#{event.workshop.price}"
-                                               rendered="#{event.workshop.price gt 0}"
-                                               styleClass="roboto normal s14 dark-blue">
-                                    <f:convertNumber type="currency" locale="pt_BR"/>
-                                </h:outputLabel>
-                                <f:facet name="footer">
-                                    <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
-                                                   styleClass="roboto medium s14 dark-blue">
-                                        <f:convertNumber type="currency" locale="pt_BR"/>
-                                    </h:outputLabel>
-                                </f:facet>
-                            </h:column>
-                            <h:column>
-                                <h:commandLink action="#{subscriberController.removeItem(event.workshop.description)}">
-                                    <i class="material-icons md-18 md-red">delete_forever</i>
+                        <h:form id="frmLogoff">
+                            <div id="logoffBtn" 
+                                 class="menu-btn">
+                                <h:commandLink  target="_self" 
+                                                action="#{subscriberController.logout()}"
+                                                styleClass="logoff-link"
+                                                rendered="#{registerController.authenticated}"
+                                                type="button">
+                                    <div class="logoff-button bkg-dark-blue">
+                                        <i style="padding: 6px" class="material-icons md-28 md-white">power_settings_new</i>
+                                    </div>
                                 </h:commandLink>
-                            </h:column>
-                        </h:dataTable>
+                            </div>
+                            <div class="mdl-tooltip mdl-tooltip--large" for="logoffBtn">
+                                <h:outputLabel value="Logoff" 
+                                               class="roboto medium"/>
+                            </div>
+                        </h:form>
 
-                        <h:commandLink value="Finalizar Inscrição" 
-                                       target="_self"
-                                       action="./inscricao.jsf"
-                                       actionListener="#{subscriberController.saveOrder()}"
-                                       rendered="#{subscriberController.totalShoppingCartRendered}"
-                                       styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
-                        <p:commandButton value="Finalizar Inscrição" 
-                                         onclick="confirmDialog.showModal();"
-                                         rendered="#{subscriberController.totalShoppingCartRendered and subscriberController.pagseguroImpl}"
-                                         styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn">
-                            <f:ajax execute="@this" listener="#{subscriberController.saveOrder()}" event="click"/>
-                        </p:commandButton>
-                    </p:overlayPanel>
-                </h:form>
+                        <h:form id="frmShoppingCart" styleClass="menu-btn shopping-cart">
+                            <p:commandLink id="shopCartBtn" 
+                                           style="text-decoration: none"
+                                           type="button" 
+                                           rendered="#{registerController.authenticated}">
+
+                                <div class="mdl-badge mdl-badge--overlap" 
+                                     data-badge="#{subscriberController.subscriberOrder.subscriberDetailses.size()}">
+                                    <h:outputLabel value="Ver novas inscrições" 
+                                                   styleClass="roboto medium s16 dark-blue cart-label"/>
+                                    <img src="../../resources/images/workshops/icone carrinho.png"
+                                         alt=""
+                                         class="img-cart"/>
+                                </div>
+                            </p:commandLink>
+
+                            <p:overlayPanel id="shoppingCart" 
+                                            for="shopCartBtn" 
+                                            showEffect="fold"
+                                            hideEffect="fold"
+                                            dynamic="true"
+                                            my="left bottom"
+                                            appendToBody="true">
+                                <div class="shopcart-label">
+                                    <h:outputLabel value="Inscrições" 
+                                                   styleClass="roboto medium s18 dark-blue"/>
+                                </div>
+
+                                <h:outputLabel value="Você não se inscreveu em nenhum novo evento até o momento."
+                                               rendered="#{!subscriberController.totalShoppingCartRendered}"
+                                               styleClass="roboto normal italic s14 dark-blue"/>
+
+                                <h:dataTable id="shoppingCartTable"
+                                             value="#{subscriberController.subscriberOrder.subscriberDetailses}"
+                                             styleClass="cart-table"
+                                             rendered="#{subscriberController.totalShoppingCartRendered}"
+                                             rowClasses="odd,even"
+                                             var="event">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputLabel value="Eventos"
+                                                           styleClass="roboto medium s14 dark-blue"/>
+                                        </f:facet>
+                                        <h:outputLabel value="#{event.workshop.description}"
+                                                       styleClass="roboto normal italic s12 dark-blue"/>
+                                        <f:facet name="footer">
+                                            <h:outputLabel value="Total"
+                                                           styleClass="roboto medium s14 dark-blue"/>
+                                        </f:facet>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputLabel value="Valores"
+                                                           styleClass="roboto medium s14 dark-blue value"/>
+                                        </f:facet>
+
+                                        <h:outputLabel value="GRATUITO"
+                                                       rendered="#{event.workshop.price le 0}"
+                                                       styleClass="roboto medium s12 dark-blue"/>
+
+                                        <h:outputLabel value="#{event.workshop.price}"
+                                                       rendered="#{event.workshop.price gt 0}"
+                                                       styleClass="roboto normal s14 dark-blue">
+                                            <f:convertNumber type="currency" locale="pt_BR"/>
+                                        </h:outputLabel>
+                                        <f:facet name="footer">
+                                            <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
+                                                           styleClass="roboto medium s14 dark-blue">
+                                                <f:convertNumber type="currency" locale="pt_BR"/>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandLink action="#{subscriberController.removeItem(event.workshop.description)}">
+                                            <i class="material-icons md-18 md-red">delete_forever</i>
+                                        </h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+
+                                <h:commandLink value="Finalizar Inscrição" 
+                                               target="_self"
+                                               action="./inscricao.jsf"
+                                               actionListener="#{subscriberController.saveOrder()}"
+                                               rendered="#{subscriberController.totalShoppingCartRendered}"
+                                               styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
+                                <p:commandButton value="Finalizar Inscrição" 
+                                                 onclick="confirmDialog.showModal();"
+                                                 rendered="#{subscriberController.totalShoppingCartRendered and subscriberController.pagseguroImpl}"
+                                                 styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn">
+                                    <f:ajax execute="@this" listener="#{subscriberController.saveOrder()}" event="click"/>
+                                </p:commandButton>
+                            </p:overlayPanel>
+                        </h:form>
+                        <div class="menu-btn">
+                            <h:outputLink target="_self"
+                                          rendered="#{subscriberController.showPanelButton}"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/inscricao/palestras.jsf">
+                                <div class="goto-event">
+                                    <div class="txt-link">
+
+                                        <h:outputLabel value="Palestras"
+                                                       styleClass="roboto medium s16 dark-blue link-inscriptions"/>
+                                    </div>
+                                    <img src="../../resources/images/register/icone palestras.png" 
+                                         alt=""
+                                         class="icon-img"/>
+                                </div>
+                            </h:outputLink>
+                            <h:outputLink target="_self"
+                                          rendered="#{subscriberController.showWorkshopButton}"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/inscricao/oficinas.jsf">
+                                <div class="txt-link">
+                                    <h:outputLabel value="Oficinas"
+                                                   styleClass="roboto medium s16 dark-blue link-inscriptions"/>
+                                </div>
+                                <img src="../../resources/images/register/icone oficinas.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </h:outputLink>
+                        </div>
+                        <div class="menu-btn">
+                            <h:outputLink target="_self"
+                                          rendered="#{subscriberController.showInscriptionButton}"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/inscricao/inscricao.jsf">
+                                <div class="txt-header">
+                                    <h:outputLabel value="Meu cadastro" 
+                                                   styleClass="roboto medium s16 dark-blue link-inscriptions"/>
+                                </div>
+                                <img src="../../resources/images/register/icone cadastro.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </h:outputLink>
+                        </div>
+                    </div>
+                </div>
             </div>
-
             <div id="msg">
                 <p:growl id="messages"
                          autoUpdate="true"
                          sticky="false"/>
             </div>
 
-            <div class="contentArea">
+            <div id="content-area" class="contentArea">
                 <ui:insert name="content"/>
             </div>
 
@@ -202,114 +247,6 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
             </div>
             <h:form>
 
-                <dialog id="confirm-dialog" class="mdl-dialog dialoag-popup confirm-bkg confirm">
-                    <div class="mdl-dialog__content confirm-content">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label confirm-panel">
-
-                            <h:outputLabel value="Olá #{subscriberController.subscriber.fullName},"
-                                           styleClass="roboto bold s20 white shadow"/>
-                            <br/>
-                            <br/>
-                            <h:outputLabel value="Muito obrigado por se inscrever em nossos eventos, 
-                                           confira abaixo suas inscrições:"
-                                           styleClass="roboto medium s18 white shadow"/>
-
-                            <h:dataTable id="confirmTable"
-                                         value="#{subscriberController.subscriberOrder.subscriberDetailses}"
-                                         styleClass="mdl-data-table mdl-js-data-table"
-                                         var="event">
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputLabel value="Evento"
-                                                       styleClass="roboto medium s16 light-blue shadow"/>
-                                    </f:facet>
-                                    <h:outputLabel value="#{event.workshop.description}"
-                                                   styleClass="roboto normal s14 white shadow"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputLabel value="Data"
-                                                       styleClass="roboto medium s16 light-blue shadow"/>
-                                    </f:facet>
-                                    <h:outputLabel value="#{event.workshop.workshopDate}"
-                                                   styleClass="roboto normal s14 white shadow">
-                                        <f:convertDateTime locale="pt_BR" 
-                                                           type="both" 
-                                                           dateStyle="medium" 
-                                                           timeStyle="short" 
-                                                           timeZone="America/Sao_Paulo"/>
-                                    </h:outputLabel>
-                                    <f:facet name="footer">
-                                        <h:outputLabel value="Total"
-                                                       styleClass="roboto medium s16 light-blue shadow"/>
-                                    </f:facet>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputLabel value="Valor"
-                                                       styleClass="roboto medium s16 light-blue shadow value"/>
-                                    </f:facet>
-
-                                    <h:outputLabel value="#{event.workshop.price}"
-                                                   styleClass="roboto normal s14 white shadow">
-                                        <f:convertNumber type="currency" locale="pt_BR"/>
-                                    </h:outputLabel>
-                                    <f:facet name="footer">
-                                        <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
-                                                       styleClass="roboto medium s16 light-blue shadow">
-                                            <f:convertNumber type="currency" locale="pt_BR"/>
-                                        </h:outputLabel>
-                                    </f:facet>
-                                </h:column>
-                            </h:dataTable>
-                        </div>
-                    </div>
-                    <div class="mdl-dialog__actions dialog-buttons">
-
-                        <div class="confirm-btns">
-                            <p:commandButton value="Cancelar"
-                                             onclick="confirmDialog.close()"
-                                             update="@(body)"
-                                             action="#{subscriberController.cancelOrder()}"
-                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cancel-btn"/>
-                            <p:commandLink value="#{subscriberController.subscriberOrder.redirectURL}"
-                                           target="_self"
-                                           type="button"
-                                           actionListener="#{subscriberController.newOrder()}"
-                                           rendered="#{subscriberController.subscriberOrder.amount gt 0}"
-                                           styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn">
-                                <h:outputLabel value="Confirmar"/>
-                            </p:commandLink>
-                            <p:commandButton value="Confirmar"
-                                             rendered="#{subscriberController.subscriberOrder.amount le 0}"
-                                             onclick="confirmDialog.close()"
-                                             action="#{subscriberController.newOrder()}"
-                                             update="@(body)"
-                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn"/>
-                        </div>
-
-                        <div class="pagseguro-warn">
-                            <div class="pagseguro-warn-txt">
-                                <h:outputLabel value="Ao clicar em confirmar"
-                                               style="word-wrap: break-word"
-                                               styleClass="roboto medium s14 yellow shadow"/>
-                                <h:outputLabel value=" sua inscrição será finalizada."
-                                               style="word-wrap: break-word"
-                                               rendered="#{subscriberController.subscriberOrder.amount le 0}"
-                                               styleClass="roboto medium s14 yellow shadow"/>
-                                <h:outputLabel value=" você será redirecionado ao site do"
-                                               style="word-wrap: break-word"
-                                               rendered="#{subscriberController.subscriberOrder.amount gt 0}"
-                                               styleClass="roboto medium s14 yellow shadow"/>
-                            </div>
-                            <h:graphicImage alt="" 
-                                            class="pagseguro-img" 
-                                            rendered="#{subscriberController.subscriberOrder.amount gt 0}"
-                                            value="../../resources/images/template/logo_pagseguro.png"/>
-                        </div>
-
-                    </div>                
-                </dialog>
                 <dialog id="birlo-dialog" class="mdl-dialog dialoag-popup birlo-bkg">
                     <div class="mdl-dialog__content pop-content">
                         <div id="conteiner">
@@ -728,18 +665,22 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     var bigHeight = Math.max(body.scrollHeight, body.offsetHeight,
                             html.clientHeight, html.scrollHeight, html.offsetHeight);
                     var minHeigth = window.innerHeight;
-
+                    var contentHeigth;
                     if (bigHeight > minHeigth) {
                         document.getElementById('bodyArea').setAttribute('style', "height: " + bigHeight + "px");
+                        contentHeigth = bigHeight - 257;
+                        document.getElementById('content-area').setAttribute('style', "height: " + contentHeigth + "px");
                     } else {
                         document.getElementById('bodyArea').setAttribute('style', "height: " + minHeigth + "px");
+                        contentHeigth = minHeigth - 257;
+                        document.getElementById('content-area').setAttribute('style', "height: " + contentHeigth + "px");
                     }
                 };
                 // Confirm Dialog
-                var confirmDialog = document.querySelector('#confirm-dialog');
-                if (!confirmDialog.showModal) {
-                    dialogPolyfill.registerDialog(confirmDialog);
-                }
+//                var confirmDialog = document.querySelector('#confirm-dialog');
+//                if (!confirmDialog.showModal) {
+//                    dialogPolyfill.registerDialog(confirmDialog);
+//                }
                 // Birlo Dialog
                 var birloDialog = document.querySelector('#birlo-dialog');
                 if (!birloDialog.showModal) {

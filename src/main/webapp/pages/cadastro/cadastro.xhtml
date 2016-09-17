@@ -10,7 +10,7 @@
             <div class="register bkg-gray">
 
                 <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
                         <div class="register-txt-field">
                             <div class="register-label">
                                 <h:outputLabel value="III SICOM" 
@@ -37,13 +37,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col register-input">
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
                         <h:form id="inputRegister">
                             <div class="register-header">
                                 <i class="material-icons md-54 md-color">account_circle</i>
                                 <div class="txt-header">
                                     <h:outputLabel value="Meu cadastro" 
-                                                   styleClass="roboto normal s36 dark-blue"/>
+                                                   styleClass="roboto medium s32 dark-blue"/>
                                 </div>
                             </div>
                             <div class="register-input">
@@ -163,9 +163,8 @@
                                                   value="../../pages/home/home.jsf"
                                                   target="_self"
                                                   type="button"
-                                                  style="float: right; margin-right: 23px"
                                                   rendered="#{!registerController.authenticated}"
-                                                  styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button-register">
+                                                  styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button-register back-btn">
                                         <h:outputLabel value="VOLTAR" class="roboto medium s12"/>
 
                                     </h:outputLink>
@@ -174,7 +173,7 @@
                             </div>
                         </h:form>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
                         <div class="register-txt-field">
                             <div class="register-label">
                                 <h:outputLabel value="Oficinas" 
@@ -190,7 +189,7 @@
                                 <h:outputText value="Todas as oficinas dão direito à certificado." 
                                               styleClass="roboto light s14 light-blue"/>
                             </div>
-                            <div class="inscriptions-link">
+                            <div id="workshop-inscription" class="inscriptions-link">
                                 <div class="txt-link">
                                     <h:outputLabel value="Inscrições oficinas" 
                                                    styleClass="roboto medium s18 dark-blue vertical-middle"/>
@@ -199,9 +198,17 @@
                                      alt=""
                                      class="icon-img"/>
                             </div>
+                            <div class="mdl-tooltip mdl-tooltip--bottom mdl-tooltip--large" for="workshop-inscription">
+                                <h:outputLabel value="Atenção!" 
+                                               class="roboto medium yellow"/>
+                                <br/>
+                                <h:outputLabel value="Realize seu cadastro para ter acesso as inscrições nas oficinas." 
+                                               class="roboto medium"/>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
                         <div class="register-txt-field">
                             <div class="register-label">
                                 <h:outputLabel value="Palestras" 
@@ -215,7 +222,7 @@
                                               realizada também no local e dia de cada palestra." 
                                               styleClass="roboto light s14 light-blue"/>
                             </div>
-                            <div class="inscriptions-link">
+                            <div id="panels-inscription" class="inscriptions-link">
                                 <div class="txt-link">
                                     <h:outputLabel value="Inscrições palestras" 
                                                    styleClass="roboto medium s18 dark-blue"/>
@@ -223,6 +230,13 @@
                                 <img src="../../resources/images/register/icone palestras.png" 
                                      alt="" 
                                      class="icon-img"/>
+                            </div>
+                            <div class="mdl-tooltip mdl-tooltip--bottom mdl-tooltip--large" for="panels-inscription">
+                                <h:outputLabel value="Atenção!" 
+                                               class="roboto medium yellow"/>
+                                <br/>
+                                <h:outputLabel value="Realize seu cadastro para ter acesso as inscrições nas palestras." 
+                                               class="roboto medium"/>
                             </div>
                         </div>
                     </div>

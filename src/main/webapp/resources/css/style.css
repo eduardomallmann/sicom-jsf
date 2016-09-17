@@ -86,6 +86,10 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
     border: none;
 }
 
+html {
+    font-size: 14px;
+}
+
 body {
     background-color: #FFF;
     box-sizing: border-box;
@@ -111,24 +115,24 @@ body {
 .ultra-bold { font-weight: 900; }
 
 /*Size*/
-.s12 { font-size: 12px; }
-.s13 { font-size: 13px; }
-.s14 { font-size: 14px; }
-.s16 { font-size: 16px; }
-.s17 { font-size: 17px; }
-.s18 { font-size: 18px; }
-.s20 { font-size: 20px; }
-.s22 { font-size: 22px; }
-.s24 { font-size: 24px; }
-.s25 { font-size: 25px; }
-.s28 { font-size: 28px; }
-.s30 { font-size: 30px; }
-.s32 { font-size: 32px; }
-.s36 { font-size: 36px; }
-.s42 { font-size: 42px; }
-.s45 { font-size: 45px; }
-.s48 { font-size: 48px; }
-.s56 { font-size: 56px; }
+.s12 { font-size: 0.85714rem; }
+.s13 { font-size: 0.92857rem; }
+.s14 { font-size: 1.00000rem; }
+.s16 { font-size: 1.14286rem; }
+.s17 { font-size: 1.21429rem; }
+.s18 { font-size: 1.28571rem; }
+.s20 { font-size: 1.42857rem; }
+.s22 { font-size: 1.57143rem; }
+.s24 { font-size: 1.71429rem; }
+.s25 { font-size: 1.78571rem; }
+.s28 { font-size: 2.00000rem; }
+.s30 { font-size: 2.14286rem; }
+.s32 { font-size: 2.28571rem; }
+.s36 { font-size: 2.57143rem; }
+.s42 { font-size: 3.00000rem; }
+.s45 { font-size: 3.21429rem; }
+.s48 { font-size: 3.42857rem; }
+.s56 { font-size: 4.00000rem; }
 
 /*Color*/
 .white      { color: #FFFFFF; }
@@ -161,10 +165,14 @@ body {
 .bkg-img {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 101%;
+    background-size: cover;
 }
 .bkg-img.full-footer { background-image: url("../images/template/rodapВ completo.png"); }
-
+.bkg-img.header { 
+    background-image: url("../images/template/cabeЗalho completo.png"); 
+    background-size: contain;
+    background-position-y: top;
+}
 
 
 /**************************
@@ -173,21 +181,26 @@ body {
 
 .header {
     position: relative;
-    float: top;
     width: 100%;
     height: 127px;
 }
-.header-banner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.header .logo-area {
+    width: 45%;
+    height: 100%;
 }
-.header-logo {
-    position: absolute;
-    top: 47px;
-    left: 319px;
+
+.logo-square {
+    margin-top: 6%;
+    float: right;
+    background-color: transparent;
+    text-align: center;
 }
+
+.header .menu-area {
+    width: 55%;
+    height: 100%;
+}
+
 .footer {
     position: relative;
     bottom: 0;
@@ -203,7 +216,7 @@ body {
 .footer-block {
     display: inline-block;
     border-right: 1px solid #FFF;
-    width: 200px;
+    width: 20%;
     height: 60px;
     margin-top: 25px;
     padding-top: 20px;
@@ -214,7 +227,7 @@ body {
     border-right: none;
 }
 .footer-block:first-of-type {
-    width: 250px;
+    width: 25%;
 }
 
 /* MESSAGES */
@@ -224,15 +237,14 @@ body {
     top: 110px;
 }
 
-/* SHOPPING CART */
-
-.shopping-cart {
-    position: absolute;
-    top: 55px; 
-    right: 120px; 
+/***** MENU BUTTONS ******/
+.menu-area .menu-btn {
     float: right;
+    margin-top: 8%;
+    margin-right: 3%;
 }
 
+/* SHOPPING CART */
 .shopcart-label {
     width: 100%; 
     text-align: center; 
@@ -308,13 +320,6 @@ body {
 }
 
 /* LOGOFF BUTTON */
-.logoff-position {
-    position: absolute;
-    top: 55px; 
-    right: 25px; 
-    float: right;    
-}
-
 .logoff-link {
     text-decoration: none;
 }
@@ -323,6 +328,25 @@ body {
     width: 41px;
     height: 41px;
     border-radius: 50%;
+}
+
+/* NAVEGAÇÃO MEU CADASTRO */
+.menu-btn .txt-header {
+    display: inline-block;
+    margin-left: 13px;
+    vertical-align: -10px;
+}
+
+/* NAVEGAÇÃO OFICINAS E PALESTRAS */
+.menu-btn .txt-link {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: -10px;
+}
+.menu-btn .icon-img {
+    margin-top: 3px;
+    width: 41px; 
+    height: 41px;
 }
 
 
@@ -406,19 +430,24 @@ body {
     margin: 0;
 }
 
+.register-grid {
+    width: calc(25%);
+}
+
 .register,
 .inscription {
     position: relative; 
-    width: 100%; 
+    width: 100%;
+    height: 100%;
 }
 .register-txt-field {
+    clear: both;
+    margin: 0 auto;
     margin-top: 95px;
     box-sizing: border-box;
+    width: calc(70%);
 }
-.register-txt-field:first-of-type {
-    margin-left: 55px;
-    width: 220px;
-}
+
 .register-label {
     margin-bottom: 30px;
 }
@@ -456,7 +485,7 @@ body {
 }
 
 .register-input {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .register-input .input-txt-space {
@@ -487,7 +516,14 @@ body {
 .button-register-grid {
     margin-top: 10px;
     margin-bottom: 40px;
+    width: 100%
 }
+.button-register-grid .back-btn {
+    float: right;
+    margin-right: 10%;
+}
+
+
 .change-pwd,
 .button-register {
     background-color: #104b62 !important;
@@ -512,7 +548,7 @@ body {
 
 .change-pwd {
     float: right;
-    margin-right: 23px;
+    margin-right: 10%;
 }
 
 .inscription .icon-img {
@@ -520,7 +556,9 @@ body {
     margin-right: 40px;
 }
 .inscription .inscriptions-link {
-    margin-left: 55px;
+    clear: both;
+    margin: 0 auto;
+    width: 260px;
 }
 .inscription .inscriptions-link.workshops {
     margin-top: 110px;
@@ -546,6 +584,10 @@ body {
 .event-ordered {
     margin-left: 5px;
     vertical-align: super;
+}
+
+#inputRegister .mdl-textfield {
+    width: 90%;
 }
 
 /* CHANGE PASSWORD */
@@ -601,46 +643,22 @@ body {
 /**************************
     OFICINAS E PALESTRAS
 ***************************/
-/* Botão de retorno */
-.register-return {
-    position: absolute;
-    top: 52px;
-    left: 700px;
-}
-.register-return .txt-header {
-    display: inline-block;
-    margin-left: 13px;
-    vertical-align: 10px;
-}
-
-.goto-event {
-    position: absolute;
-    top: 52px;
-    left: 880px;
-}
-.goto-event .txt-link {
-    display: inline-block;
-    margin-right: 5px;
-    vertical-align: -13.5px;
-}
-.goto-event .icon-img {
-    margin-top: 3px;
-    width: 41px; 
-    height: 41px;
-}
-
-
 /* Chamada */
+.palestras {
+    transform: translate(0,15%);
+}
 .palestras .first-column,
 .workshops .first-column {
-    padding-left: 127px;
+    clear: both;
+}
+.workshops .first-column .demo-card-square.mdl-card {
+    text-align: center;
 }
 .palestras .txt-palestras,
 .workshops .txt-workshops {
     margin-top: 134px;
     padding-bottom: 25px;
     border-bottom: 1px solid #229997; 
-    width: 212px;
 }
 .palestras .txt-palestras {
     width: 250px;
@@ -657,7 +675,6 @@ body {
 .palestras .txt-advertising,
 .workshops .txt-advertising {
     margin-top: 41px;
-    width: 212px;
 }
 .palestras .txt-advertising {
     width: 250px;
@@ -666,16 +683,14 @@ body {
     margin-top: 36px;
     border-top: 1px solid #229997; 
     padding-top: 11px;
-    width: 212px;
 }
 
 /* Configuração Cards Oficinas */
 .demo-card-square.mdl-card {
     width: 260px;
     height: 460px;
-    margin-top: 25px;
-    margin-left: 100px;
-    margin-bottom: 45px;
+    clear: both;
+    margin: 25px auto 45px auto;
 }
 .demo-card-square > .mdl-card__title {
     color: #fff;
@@ -959,4 +974,42 @@ body {
 }
 .confirm-btns .confirm-btn {
     margin-left: 15px;
+}
+
+@media screen and (max-width: 1199px) {
+
+    html {
+        font-size: 12px;
+    }
+
+    .menu-area .menu-btn {
+        margin-right: 2%;
+    }
+    
+    /*    .button-register-grid .back-btn {
+            margin-left: auto;
+            float: right;
+        }*/
+}
+
+@media screen and (max-width: 1069px) {
+
+    html {
+        font-size: 10px;
+    }
+
+    /*    .button-register-grid .back-btn {
+            margin-left: auto;
+            float: right;
+        }*/
+
+    .inscription .inscriptions-link {
+        width: 210px;
+    }
+}
+
+@media screen and (max-height: 899px) {
+    .palestras {
+        transform: none;
+    }
 }

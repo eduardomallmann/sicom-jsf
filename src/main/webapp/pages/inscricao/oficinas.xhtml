@@ -8,53 +8,25 @@
     <ui:composition template="/templates/layout_base.xhtml">
         <ui:define name="content">
             <h:form id="workshops">
-
-                <h:outputLink target="_self"
-                              styleClass="link-inscriptions"
-                              value="../../pages/inscricao/inscricao.jsf">
-                    <div class="register-return">
-                        <div class="txt-header">
-                            <h:outputLabel value="Meu cadastro" 
-                                           style='cursor: pointer'
-                                           styleClass="roboto medium s16 dark-blue"/>
-                        </div>
-                        <i class="material-icons md-48 md-color">account_circle</i>
-                    </div>
-                </h:outputLink>
-                
-                <h:outputLink target="_self"
-                              styleClass="link-inscriptions"
-                              value="../../pages/inscricao/palestras.jsf">
-                    <div class="goto-event">
-                        <div class="txt-link">
-
-                            <h:outputLabel value="Palestras"
-                                           style='cursor: pointer'
-                                           styleClass="roboto medium s16 dark-blue"/>
-                        </div>
-                        <img src="../../resources/images/register/icone palestras.png" 
-                             alt=""
-                             class="icon-img"/>
-                    </div>
-                </h:outputLink>
-
                 <div class='workshops bkg-white'>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--4-col first-column">
-                            <div class='txt-workshops'>
-                                <h:outputLabel value='5 Oficinas' class="roboto bold s45 dark-blue"/>
-                                <br/>
-                                <h:outputLabel value='Temáticas' class="roboto bold s45 dark-blue"/>
-                            </div>
-                            <div class='txt-advertising'>
-                                <h:outputLabel value='Garanta a sua vaga e inscreva-se!' 
-                                               class="roboto bold s24 light-blue"/>
-                            </div>
-                            <div class='txt-advice'>
-                                <h:outputLabel value='As inscrições são apenas online.' class="roboto medium s14 light-blue"/>
-                                <br/>
-                                <h:outputLabel value='Todas as oficinas dão direito a certificado' 
-                                               class="roboto medium s14 light-blue"/>
+                            <div class="demo-card-square mdl-card">
+                                <div class='txt-workshops'>
+                                    <h:outputLabel value='5 Oficinas' class="roboto bold s45 dark-blue"/>
+                                    <br/>
+                                    <h:outputLabel value='Temáticas' class="roboto bold s45 dark-blue"/>
+                                </div>
+                                <div class='txt-advertising'>
+                                    <h:outputLabel value='Garanta a sua vaga e inscreva-se!' 
+                                                   class="roboto bold s24 light-blue"/>
+                                </div>
+                                <div class='txt-advice'>
+                                    <h:outputLabel value='As inscrições são apenas online.' class="roboto medium s14 light-blue"/>
+                                    <br/>
+                                    <h:outputLabel value='Todas as oficinas dão direito a certificado' 
+                                                   class="roboto medium s14 light-blue"/>
+                                </div>
                             </div>
                         </div>
                         <div class="mdl-cell mdl-cell--4-col">

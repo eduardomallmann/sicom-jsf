@@ -410,6 +410,48 @@ public class SubscriberController extends BaseController implements Serializable
     }
 
     /**
+     * Verifica se o botão do menu referente as palestras será renderizado.
+     * <p>
+     * @return valor booleano do algoritmo.
+     */
+    public boolean getShowPanelButton() {
+        if (FacesContext.getCurrentInstance() != null) {
+            String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return context.contains("oficinas");
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Verifica se o botão do menu referente as oficinas será renderizado.
+     * <p>
+     * @return valor booleano do algoritmo.
+     */
+    public boolean getShowWorkshopButton() {
+        if (FacesContext.getCurrentInstance() != null) {
+            String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return context.contains("palestras");
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Verifica se o botão do menu referente ao "meu cadastro" será renderizado.
+     * <p>
+     * @return valor booleano do algoritmo.
+     */
+    public boolean getShowInscriptionButton() {
+        if (FacesContext.getCurrentInstance() != null) {
+            String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return context.contains("oficinas") || context.contains("palestras");
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Recupera a lista de detalhes dos usuários de pedidos já realizados.
      * <p>
      * @return lista com detalhes de pedidos já realizados.

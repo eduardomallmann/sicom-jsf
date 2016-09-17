@@ -8,60 +8,32 @@
     <ui:composition template="/templates/layout_base.xhtml">
         <ui:define name="content">
             <h:form id="workshops">
-
-                <h:outputLink target="_self"
-                              styleClass="link-inscriptions"
-                              value="../../pages/inscricao/inscricao.jsf">
-                    <div class="register-return">
-                        <div class="txt-header">
-                            <h:outputLabel value="Meu cadastro" 
-                                           style='cursor: pointer'
-                                           styleClass="roboto medium s16 dark-blue"/>
-                        </div>
-                        <i class="material-icons md-48 md-color">account_circle</i>
-                    </div>
-                </h:outputLink>
-
-                <h:outputLink target="_self"
-                              styleClass="link-inscriptions"
-                              value="../../pages/inscricao/oficinas.jsf">
-                    <div class="goto-event">
-                        <div class="txt-link">
-
-                            <h:outputLabel value="Oficinas"
-                                           style='cursor: pointer'
-                                           styleClass="roboto medium s16 dark-blue"/>
-                        </div>
-                        <img src="../../resources/images/register/icone oficinas.png" 
-                             alt=""
-                             class="icon-img"/>
-                    </div>
-                </h:outputLink>
-
                 <div class='palestras bkg-white'>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--4-col first-column">
-                            <div class='txt-palestras'>
-                                <h:outputLabel value='Palestras' class="roboto bold s42 dark-blue"/>
-                                <br/>
-                                <h:outputLabel value='Gratuitas' class="roboto bold s42 dark-blue"/>
-                            </div>
-                            <div class='txt-advertising'>
-                                <h:outputLabel value='Para receber o certificado é' 
-                                               class="roboto bold s22 light-blue"/>
-                                <br/>
-                                <h:outputLabel value='necessária a inscrição.' 
-                                               class="roboto bold s22 dark-blue"/>
-                                <br/>
-                                <br/>
-                                <h:outputLabel value='A inscrição'
-                                               class="roboto bold s22 light-blue"/>
-                                <h:outputLabel value=' também ' 
-                                               class="roboto bold s22 dark-blue"/>
-                                <h:outputLabel value='pode ser realizada ' 
-                                               class="roboto bold s22 light-blue"/>
-                                <h:outputLabel value='no local e dia do evento.' 
-                                               class="roboto bold s22 dark-blue"/>
+                            <div class="demo-card-square mdl-card">
+                                <div class='txt-palestras'>
+                                    <h:outputLabel value='Palestras' class="roboto bold s42 dark-blue"/>
+                                    <br/>
+                                    <h:outputLabel value='Gratuitas' class="roboto bold s42 dark-blue"/>
+                                </div>
+                                <div class='txt-advertising'>
+                                    <h:outputLabel value='Para receber o certificado é' 
+                                                   class="roboto bold s22 light-blue"/>
+                                    <br/>
+                                    <h:outputLabel value='necessária a inscrição.' 
+                                                   class="roboto bold s22 dark-blue"/>
+                                    <br/>
+                                    <br/>
+                                    <h:outputLabel value='A inscrição'
+                                                   class="roboto bold s22 light-blue"/>
+                                    <h:outputLabel value=' também ' 
+                                                   class="roboto bold s22 dark-blue"/>
+                                    <h:outputLabel value='pode ser realizada ' 
+                                                   class="roboto bold s22 light-blue"/>
+                                    <h:outputLabel value='no local e dia do evento.' 
+                                                   class="roboto bold s22 dark-blue"/>
+                                </div>
                             </div>
                         </div>
                         <div class="mdl-cell mdl-cell--4-col empregabilidade">
