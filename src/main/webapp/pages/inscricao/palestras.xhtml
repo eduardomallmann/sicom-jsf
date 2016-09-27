@@ -36,12 +36,73 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <img src="../../resources/images/palestras/2.jpg" 
+                                         class="card-bkg-img"
+                                         alt=""/>
+                                    <div class="event-passed">
+                                        <h:outputLabel value="Evento já realizado!" 
+                                                       rendered="#{!subscriberController.renderingWorkshop(7)}"
+                                                       class="mdl-card__title-text roboto bold s18 red shadow"/>
+                                    </div>
+                                    <div class="card-header">
+                                        <h:outputLabel value="Palestra" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <h:outputLabel value="Painel com o artista Driin" 
+                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
+                                        <br/>
+                                        <h:outputLabel value="Pedro Driin" 
+                                                       class="mdl-card__title-text roboto light s14 white"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <div class="card-description">
+                                        <h:outputText value="Driin é artista e tatuador. Em sua palestra ele falará 
+                                                      sobre a experiência de pintar muros em Florianópolis, mostrando 
+                                                      como a arte grafite pode marcar uma cidade."
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <div class="card-date">
+                                        <i class="material-icons md-24 md-color">date_range</i>
+                                        <h:outputText value="04/10/2016 - 19h" 
+                                                      class="roboto normal s13 gray"/>
+                                    </div>
+                                    <h:commandButton onclick="driinDialog.showModal()" 
+                                                     type="button"
+                                                     value="Saiba mais..."
+                                                     class="roboto normal s13 dark-blue card-link"/>
+                                    <h:commandLink action="#{subscriberController.insertSubscriptions(7)}" 
+                                                   rendered="#{!subscriberController.driin and subscriberController.renderingWorkshop(7)}"
+                                                   class="card-link check-register">
+                                        <h:outputText value="Inscreva-se" 
+                                                      class="roboto normal s13 dark-blue"/>
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandLink>
+                                    <h:commandButton onclick="driinDialog.showModal()" 
+                                                     type="button"
+                                                     rendered="#{subscriberController.driin}"
+                                                     value="Inscrito!"
+                                                     class="roboto medium s16 dark-blue card-link checked-register">
+                                        <i class="material-icons md-24 md-color">check_box</i>
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mdl-cell mdl-cell--4-col empregabilidade">
                             <div class="demo-card-square mdl-card mdl-shadow--6dp">
                                 <div class="mdl-card__title mdl-card--expand">
                                     <img src="../../resources/images/palestras/1.jpg" 
                                          class="card-bkg-img"
                                          alt=""/>
+                                    <div class="event-passed">
+                                        <h:outputLabel value="Evento já realizado!" 
+                                                       rendered="#{!subscriberController.renderingWorkshop(6)}"
+                                                       class="mdl-card__title-text roboto bold s18 red shadow"/>
+                                    </div>
                                     <div class="card-header">
                                         <h:outputLabel value="Palestra" 
                                                        class="mdl-card__title-text roboto bold s18 white shadow"/>
@@ -83,57 +144,6 @@
                                     <h:commandButton onclick="jobDialog.showModal()" 
                                                      type="button"
                                                      rendered="#{subscriberController.empregabilidade}"
-                                                     value="Inscrito!"
-                                                     class="roboto medium s16 dark-blue card-link checked-register">
-                                        <i class="material-icons md-24 md-color">check_box</i>
-                                    </h:commandButton>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mdl-cell mdl-cell--4-col">
-                            <div class="demo-card-square mdl-card mdl-shadow--6dp">
-                                <div class="mdl-card__title mdl-card--expand">
-                                    <img src="../../resources/images/palestras/2.jpg" 
-                                         class="card-bkg-img"
-                                         alt=""/>
-                                    <div class="card-header">
-                                        <h:outputLabel value="Palestra" 
-                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
-                                        <h:outputLabel value="Painel com o artista Driin" 
-                                                       class="mdl-card__title-text roboto bold s18 white shadow"/>
-                                        <br/>
-                                        <h:outputLabel value="Pedro Driin" 
-                                                       class="mdl-card__title-text roboto light s14 white"/>
-                                    </div>
-                                </div>
-                                <div class="mdl-card__supporting-text">
-                                    <div class="card-description">
-                                        <h:outputText value="Driin é artista e tatuador. Em sua palestra ele falará 
-                                                      sobre a experiência de pintar muros em Florianópolis, mostrando 
-                                                      como a arte grafite pode marcar uma cidade."
-                                                      class="roboto normal s13 gray"/>
-                                    </div>
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <div class="card-date">
-                                        <i class="material-icons md-24 md-color">date_range</i>
-                                        <h:outputText value="04/10/2016 - 19h" 
-                                                      class="roboto normal s13 gray"/>
-                                    </div>
-                                    <h:commandButton onclick="driinDialog.showModal()" 
-                                                     type="button"
-                                                     value="Saiba mais..."
-                                                     class="roboto normal s13 dark-blue card-link"/>
-                                    <h:commandLink action="#{subscriberController.insertSubscriptions(7)}" 
-                                                   rendered="#{!subscriberController.driin and subscriberController.renderingWorkshop(7)}"
-                                                   class="card-link check-register">
-                                        <h:outputText value="Inscreva-se" 
-                                                      class="roboto normal s13 dark-blue"/>
-                                        <i class="material-icons md-24 md-color">check_box</i>
-                                    </h:commandLink>
-                                    <h:commandButton onclick="driinDialog.showModal()" 
-                                                     type="button"
-                                                     rendered="#{subscriberController.driin}"
                                                      value="Inscrito!"
                                                      class="roboto medium s16 dark-blue card-link checked-register">
                                         <i class="material-icons md-24 md-color">check_box</i>

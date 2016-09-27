@@ -124,7 +124,7 @@ public class SubscriberController extends BaseController implements Serializable
      * <p>
      * @return retorna para a pagina de inscrição.
      */
-    public void saveOrder() {
+    public String saveOrder() {
         //verifica se existem itens dentro do pedido
         if (!this.subscriberOrder.getSubscriberDetailses().isEmpty()) {
 //            try {
@@ -142,7 +142,7 @@ public class SubscriberController extends BaseController implements Serializable
             super.addMessage(FacesMessage.SEVERITY_INFO, "successful.save.order");
         }
         //retorna para a página de inscrição.
-//        return "inscricao.jsf";
+        return "inscricao.jsf";
     }
 
     /**

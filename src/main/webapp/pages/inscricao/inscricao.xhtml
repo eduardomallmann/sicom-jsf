@@ -157,6 +157,22 @@
                             </p:dataList>
                         </div>
                     </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <div class="register-txt-field">
+                            <div class="inscription-txt">
+                                <h:outputText value="Você está automaticamente inscrito no III SICOM." 
+                                              styleClass="roboto light s14 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="A participação no evento é gratuita." 
+                                              styleClass="roboto light s14 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Para receber o certificado você deve comparecer ao evento." 
+                                              styleClass="roboto light s14 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -180,7 +196,7 @@
                                            value="Digite sua Senha Atual" 
                                            class="mdl-textfield__label roboto normal s18 white"/>
                         </div>
-                                                
+
                         <div id="new-pwd" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <h:inputText id="newpwd"
                                          required="true"
@@ -191,7 +207,7 @@
                                            value="Digite sua Nova Senha" 
                                            class="mdl-textfield__label roboto normal s18 white"/>
                         </div>
-                        
+
                     </div>
 
                     <div class="mdl-dialog__actions cpwd-buttons">
@@ -202,7 +218,7 @@
                                          styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                             <f:ajax execute="@this" listener="#{subscriberController.changePwd()}" event="click"/>
                         </p:commandButton>
-                        
+
                         <button type="button" 
                                 onclick="pwdChangeDialog.close()"
                                 class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">

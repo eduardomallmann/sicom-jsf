@@ -115,6 +115,10 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 .yellow     { color: #cddc39; }
 .gray       { color: #666666; }
 
+/* Decoration */
+.underline { text-decoration: underline; }
+.overline  { text-decoration: overline;  }
+
 /* Shadow */
 .shadow { text-shadow: 1px 1px #000; }
 
@@ -173,20 +177,29 @@ body {
     left: 50%;
     transform: translate(-65%,0);
 }
-.head .login {
+.head .login,
+.head .register-btn {
     position: absolute;
     top: 85px;
     margin-right: 8%;
     right: 0;
 }
+.head .register-btn {
+    margin-right: 14.3%;
+}
 .button-txt {
     letter-spacing: 1.5px !important;
 }
+
+.register-btn,
 .login {
     display: inline;
     height: 35px;
     border-left: 1px solid #FFF;
     vertical-align: middle;
+}
+.register-btn {
+    border: none;
 }
 .login .login-button {
     margin-left: 5px;

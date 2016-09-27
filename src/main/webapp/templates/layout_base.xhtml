@@ -21,7 +21,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
             <h:outputStylesheet name="material.min.css" library="css"/>
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
             <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"></link>
-            <h:outputScript name="material.js" library="js"/>
+            <h:outputScript name="material.min.js" library="js"/>
             <h:outputScript name="dialog-polyfill.js" library="dialog-polyfill"/>
             <h:outputStylesheet name="dialog-polyfill.css" library="dialog-polyfill"/>
             <link rel="stylesheet" href="../../resources/css/style.css" type="text/css"></link>
@@ -143,18 +143,10 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                     </h:column>
                                 </h:dataTable>
 
-                                <h:commandLink value="Finalizar Inscrição" 
-                                               target="_self"
-                                               action="./inscricao.jsf"
-                                               actionListener="#{subscriberController.saveOrder()}"
-                                               rendered="#{subscriberController.totalShoppingCartRendered}"
-                                               styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
                                 <p:commandButton value="Finalizar Inscrição" 
                                                  onclick="confirmDialog.showModal();"
-                                                 rendered="#{subscriberController.totalShoppingCartRendered and subscriberController.pagseguroImpl}"
-                                                 styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn">
-                                    <f:ajax execute="@this" listener="#{subscriberController.saveOrder()}" event="click"/>
-                                </p:commandButton>
+                                                 rendered="#{subscriberController.totalShoppingCartRendered}"
+                                                 styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
                             </p:overlayPanel>
                         </h:form>
                         <div class="menu-btn">
@@ -275,8 +267,8 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                     <i class="material-icons md-28 md-color">attach_money</i>
                                     <h:outputText value="30,00"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
-                                    <h:outputText value="(via PagSeguro)"
-                                                  styleClass="roboto light s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
                                 </div>
                             </div>
                             <div class="panel-description">
@@ -319,7 +311,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                 </div>
                                 <div class="panel-info">
                                     <i class="material-icons md-28 md-color">date_range</i>
-                                    <h:outputText value="24/08/2016 - 18h às 21h30"
+                                    <h:outputText value="27/09/2016 - 18h às 21h30"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
                                 </div>
                                 <div class="panel-info">
@@ -331,8 +323,8 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                     <i class="material-icons md-28 md-color">attach_money</i>
                                     <h:outputText value="25,00"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
-                                    <h:outputText value="(via PagSeguro)"
-                                                  styleClass="roboto light s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
                                 </div>
                             </div>
                             <div class="panel-description">
@@ -391,8 +383,6 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                     <i class="material-icons md-28 md-color">attach_money</i>
                                     <h:outputText value="50,00"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
-                                    <h:outputText value="(via PagSeguro)"
-                                                  styleClass="roboto light s16 light-blue panelist-txt"/>
                                 </div>
                             </div>
                             <div class="panel-description">
@@ -435,7 +425,7 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                 </div>
                                 <div class="panel-info">
                                     <i class="material-icons md-28 md-color">date_range</i>
-                                    <h:outputText value="16/09/2016 - 14h20 às 19h20"
+                                    <h:outputText value="30/09/2016 - 13h30 às 19h20"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
                                 </div>
                                 <div class="panel-info">
@@ -447,8 +437,8 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                     <i class="material-icons md-28 md-color">attach_money</i>
                                     <h:outputText value="30,00"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
-                                    <h:outputText value="(via PagSeguro)"
-                                                  styleClass="roboto light s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
                                 </div>
                             </div>
                             <div class="panel-description">
@@ -509,8 +499,8 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                                     <i class="material-icons md-28 md-color">attach_money</i>
                                     <h:outputText value="25,00"
                                                   styleClass="roboto bold s16 light-blue panelist-txt"/>
-                                    <h:outputText value="(via PagSeguro)"
-                                                  styleClass="roboto light s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
                                 </div>
                             </div>
                             <div class="panel-description">
@@ -656,6 +646,100 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                         </button>
                     </div>
                 </dialog>
+
+                <dialog id="confirm-dialog" class="mdl-dialog dialoag-popup confirm-bkg confirm">
+                    <div class="mdl-dialog__content confirm-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label confirm-panel">
+
+                            <h:outputLabel value="Olá #{subscriberController.subscriber.fullName},"
+                                           styleClass="roboto bold s20 white shadow"/>
+                            <br/>
+                            <br/>
+                            <h:outputLabel value="Muito obrigado por se inscrever em nossos eventos, 
+                                           confira abaixo suas inscrições:"
+                                           styleClass="roboto medium s18 white shadow"/>
+
+                            <h:dataTable id="confirmTable"
+                                         value="#{subscriberController.subscriberOrder.subscriberDetailses}"
+                                         styleClass="mdl-data-table mdl-js-data-table"
+                                         var="event">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Evento"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                    <h:outputLabel value="#{event.workshop.description}"
+                                                   styleClass="roboto normal s14 white shadow"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Data"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                    <h:outputLabel value="#{event.workshop.workshopDate}"
+                                                   styleClass="roboto normal s14 white shadow">
+                                        <f:convertDateTime locale="pt_BR" 
+                                                           type="both" 
+                                                           dateStyle="medium" 
+                                                           timeStyle="short" 
+                                                           timeZone="America/Sao_Paulo"/>
+                                    </h:outputLabel>
+                                    <f:facet name="footer">
+                                        <h:outputLabel value="Total"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Valor"
+                                                       styleClass="roboto medium s16 light-blue shadow value"/>
+                                    </f:facet>
+
+                                    <h:outputLabel value="#{event.workshop.price}"
+                                                   styleClass="roboto normal s14 white shadow">
+                                        <f:convertNumber type="currency" locale="pt_BR"/>
+                                    </h:outputLabel>
+                                    <f:facet name="footer">
+                                        <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
+                                                       styleClass="roboto medium s16 light-blue shadow">
+                                            <f:convertNumber type="currency" locale="pt_BR"/>
+                                        </h:outputLabel>
+                                    </f:facet>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+
+                        <div class="confirm-btns">
+                            <p:commandButton value="Cancelar"
+                                             onclick="confirmDialog.close()"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cancel-btn"/>
+                            <p:commandButton value="Confirmar"
+                                             onclick="confirmDialog.close()"
+                                             update="@(body)"
+                                             action="#{subscriberController.saveOrder()}"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn">
+                            </p:commandButton>
+                        </div>
+
+                        <div class="pagseguro-warn">
+                            <div class="pagseguro-warn-txt">
+                                <h:outputLabel value="Ao clicar em confirmar"
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                                <h:outputLabel value=" sua inscrição será finalizada."
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                                <h:outputLabel value=" Pagamento em dinheiro no local do evento."
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                            </div>
+                        </div>
+
+                    </div>                
+                </dialog>
+
             </h:form>
             <script>
                 // Page Height Size
@@ -677,10 +761,10 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                     }
                 };
                 // Confirm Dialog
-//                var confirmDialog = document.querySelector('#confirm-dialog');
-//                if (!confirmDialog.showModal) {
-//                    dialogPolyfill.registerDialog(confirmDialog);
-//                }
+                var confirmDialog = document.querySelector('#confirm-dialog');
+                if (!confirmDialog.showModal) {
+                    dialogPolyfill.registerDialog(confirmDialog);
+                }
                 // Birlo Dialog
                 var birloDialog = document.querySelector('#birlo-dialog');
                 if (!birloDialog.showModal) {
@@ -716,6 +800,23 @@ Qualquer uso nÃ£o autorizado, reproduÃ§Ã£o ou transferÃªncia deste softw
                 if (!driinDialog.showModal) {
                     dialogPolyfill.registerDialog(driinDialog);
                 }
+            </script>
+            <script>
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r;
+                    i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                    a = s.createElement(o),
+                            m = s.getElementsByTagName(o)[0];
+                    a.async = 1;
+                    a.src = g;
+                    m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'UA-84665907-1', 'auto');
+                ga('send', 'pageview');
+
             </script>
         </h:body>
     </f:view>
