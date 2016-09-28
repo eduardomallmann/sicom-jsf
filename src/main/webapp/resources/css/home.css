@@ -462,6 +462,9 @@ body {
 .dialoag-popup.job-bkg {
     background-image: url('../resources/images/palestrasPopUps/banner palestra marcio e gladyspsd.jpg');
 }
+.dialoag-popup.sicom-bkg {
+    background-image: url('../resources/images/home/banner-sicom.jpg');
+}
 .pop-content {
     margin-top: calc(235px + 28px);
     margin-left: 38px;

@@ -203,20 +203,22 @@
                         </div>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col home-img bkg-img image8">
-                        <div class="head-txt seminar">
-                            <div class="img-date-txt">
-                                <h:outputText value="19/10" 
-                                              styleClass="roboto light s14 white shadow normal-txt"/>
+                        <h:outputLink id="show-sicom" value="#" styleClass="open-dialog">
+                            <div class="head-txt seminar">
+                                <div class="img-date-txt">
+                                    <h:outputText value="19/10" 
+                                                  styleClass="roboto light s14 white shadow normal-txt"/>
+                                </div>
+                                <div class="img-main-txt">
+                                    <h:outputLabel value="III Seminário de Informação e Comunicação da marca" 
+                                                   styleClass="roboto bold s18 white shadow main-txt"/>
+                                </div>
                             </div>
-                            <div class="img-main-txt">
-                                <h:outputLabel value="III Seminário de Informação e Comunicação da marca" 
-                                               styleClass="roboto bold s18 white shadow"/>
+                            <div class="img-event-txt">
+                                <h:outputText value="Evento Gratuito" 
+                                              styleClass="roboto ultra-bold s12 white shadow"/>
                             </div>
-                        </div>
-                        <div class="img-event-txt">
-                            <h:outputText value="Evento Gratuito" 
-                                          styleClass="roboto ultra-bold s12 white shadow"/>
-                        </div>
+                        </h:outputLink>
                     </div>
                 </div>
             </div>
@@ -628,6 +630,52 @@
                 </div>
             </dialog>
 
+            <dialog id="sicom-dialog" class="mdl-dialog dialoag-popup sicom-bkg">
+                <div class="mdl-dialog__content pop-content">
+                    <div id="conteiner">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">date_range</i>
+                                <h:outputText value="19/10/2016 - 8h30m às 18h"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">location_on</i>
+                                <h:outputText value="Auditório EFI/UFSC"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                            <div class="panel-info">
+                                <i class="material-icons md-28 md-color">attach_money</i>
+                                <h:outputText value="Gratuito"
+                                              styleClass="panelist-txt"/>
+                            </div>
+                        </div>
+                        <div class="panel-description">
+                            <h:outputText value="O III SICOM visa reunir a comunidade interessada nos estudos sobre as 
+                                          marcas em suas diversas expressões, seja nas organizações, na mídia ou na 
+                                          cidade. É um evento gratuito e ao fazer o cadastre neste site sua inscrição é 
+                                          realizada automaticamente. Esperamos você no dia 19 de outubro para conferir 
+                                          os trabalhos acadêmicos, as rodas de conversas, as palestras e uma exposição 
+                                          fotográfica sobre o graffiti da cidade de Florianópolis. Até lá!"
+                                          styleClass="panel-description-txt"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-dialog__actions dialog-buttons">
+                    <h:outputLink value="http://sigmo.paginas.ufsc.br" 
+                                  target="_blank">
+                        <img src="../../resources/images/home/botao_mais-sicom-completo.jpg" 
+                             alt="http://sigmo.paginas.ufsc.br" 
+                             style="width: 200px"/>
+                    </h:outputLink>
+                    <button type="button" 
+                            class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                        <i class="material-icons md-light md-18">close</i>
+                    </button>
+                </div>
+            </dialog>
+
             <script>
                 // Page Height Size
                 document.onreadystatechange = function () {
@@ -755,6 +803,18 @@
                 });
                 driinDialog.querySelector('.close').addEventListener('click', function () {
                     driinDialog.close();
+                });
+                // Sicom Dialog
+                var sicomDialog = document.querySelector('#sicom-dialog');
+                var showSicomDialogButton = document.querySelector('#show-sicom');
+                if (!sicomDialog.showModal) {
+                    dialogPolyfill.registerDialog(sicomDialog);
+                }
+                showSicomDialogButton.addEventListener('click', function () {
+                    sicomDialog.showModal();
+                });
+                sicomDialog.querySelector('.close').addEventListener('click', function () {
+                    sicomDialog.close();
                 });
             </script>
             <script>
