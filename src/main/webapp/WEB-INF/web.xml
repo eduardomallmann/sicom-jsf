@@ -37,7 +37,7 @@
     
     
     
-<!--    
+    
     <security-constraint>
         <display-name>SubscriberConstraint</display-name>
         <web-resource-collection>
@@ -69,6 +69,19 @@
             <description/>
             <role-name>*</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>ErroConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Error</web-resource-name>
+            <description/>
+            <url-pattern>/pages/home/home.jsf</url-pattern>
+        </web-resource-collection>
         <user-data-constraint>
             <description/>
             <transport-guarantee>NONE</transport-guarantee>
@@ -111,6 +124,6 @@
         <description/>
         <role-name>INTERNAL_SECURITY</role-name>
     </security-role>
-    -->
+    
     
 </web-app>

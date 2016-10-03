@@ -165,15 +165,19 @@ body {
     left: 50%;
     transform: translate(-65%,0);
 }
-.head .login,
-.head .register-btn {
+.head .home-btn {
     position: absolute;
     top: 85px;
-    margin-right: 8%;
+    margin-right: 5%;
     right: 0;
 }
+.head .login,
 .head .register-btn {
-    margin-right: 14.3%;
+    position: relative;
+    display: inline-block;
+}
+.head .register-btn {
+    margin-right: 1px;
 }
 .button-txt {
     letter-spacing: 1.5px !important;
