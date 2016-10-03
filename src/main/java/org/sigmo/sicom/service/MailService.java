@@ -409,8 +409,8 @@ public class MailService extends BaseService<Subscriber> {
              * INFORMAÇÃO DO CADASTRO
              */
             bodyMessage.append("<tr>");
-            bodyMessage.append("<td align=\"center\" style=\"padding: 20px 0 0 0; font-size: 16px; line-height: 25px;");
-            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color: #666666;\" class=\"padding-copy\"> ");
+            bodyMessage.append("<td align=\"justify\" style=\"padding: 20px 0 0 0; font-size: 16px; line-height: 25px;");
+            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color: #666666;\" class=\"padding\"> ");
             bodyMessage.append("Olá ").append(subscriber.getFullName()).append(", ");
             bodyMessage.append("você se inscreveu no III Sicom a ser realizado no dia 19 de outubro a partir das 08h30m");
             bodyMessage.append(", com a apresentação dos trabalhos selecionados e finalizado ");
@@ -421,11 +421,17 @@ public class MailService extends BaseService<Subscriber> {
              * CREDENCIAMENTO
              */
             bodyMessage.append("<tr>");
-            bodyMessage.append("<td align=\"center\" style=\"padding: 20px 0 0 0; font-size: 16px; line-height: 25px;");
+            bodyMessage.append("<td align=\"center\" style=\"padding: 20px 0 0 0; font-size: 25px; line-height: 25px;");
             bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color: #666666;\" class=\"padding-copy\"> ");
-            bodyMessage.append("Atenção! Apenas o credenciamento garantirá o certificado de participação no evento. ");
+            bodyMessage.append("<strong>Atenção!</strong>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"justify\" style=\"padding: 20px 0 0 0; font-size: 16px; line-height: 25px;");
+            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color: #666666;\" class=\"padding\"> ");
+            bodyMessage.append("Apenas o credenciamento garantirá o certificado de participação no evento. ");
             bodyMessage.append("O credenciamento ocorrerá no dia do evento, 19 de outubro de 2016, das 08h00 às 10h00.");
-            bodyMessage.append(" Após este período não haverá mais credenciamentos e a participação será livre, porém");
+            bodyMessage.append(" Após este período não haverá mais credenciamento e a participação será livre, porém");
             bodyMessage.append(" sem direito a certificado.");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>"); //Fim credenciamento
