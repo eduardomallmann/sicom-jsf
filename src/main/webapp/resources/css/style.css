@@ -565,7 +565,7 @@ body {
     cursor: pointer;
 }
 .inscription-txt {
-    text-align: center;
+    text-align: left;
     border-color: #104b62;
 }
 .inscriptions-submited {

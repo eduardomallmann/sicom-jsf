@@ -39,6 +39,13 @@ public class MailService extends BaseService<Subscriber> {
     @EJB
     private SubscriberService subscriberService;
 
+    /**
+     * Envia email com a senha
+     * <p>
+     * @param email endereço de e-mail
+     * <p>
+     * @throws BusinessException caso ocorra erro no envio de e-mail
+     */
     public void sentPasswordByEmail(final String email) throws BusinessException {
 
         //recupera o usuário que esqueceu a senha
@@ -131,24 +138,24 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("<td valign=\"top\" class=\"wrap-cell\" style=\"padding-top:30px; ");
             bodyMessage.append("padding-bottom:30px;\">");
             bodyMessage.append("<table cellpadding=\"0\" cellspacing=\"0\" class=\"force-full-width\">");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td height=\"60\" style=\"text-align: center\" valign=\"top\" class=\"header-cell\">");
             bodyMessage.append("<img src=\"https://s3-sa-east-1.amazonaws.com/sigmo-email/marca-sicom\" ");
             bodyMessage.append("alt=\"III - SICOM\">");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td valign=\"top\" style=\"padding-top:15px;\"class=\"body-cell\">");
             bodyMessage.append("<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" bgcolor=\"#ffffff\">");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td valign=\"top\" style=\"padding-bottom:15px; background-color:#ffffff;\">");
             bodyMessage.append("<h1>Olá ").append(subscriber.getFullName()).append(",</h1>");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td valign=\"top\" style=\"padding-bottom:20px; background-color:#ffffff;\">");
             bodyMessage.append("Conforme solicitado em ").append(dayFormat).append(" às ").append(timeFormat);
@@ -157,7 +164,7 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("<b>Senha: ").append(subscriber.getUnencryptedPassword()).append("</b>");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td>");
             bodyMessage.append("<table cellspacing=\"0\" cellpadding=\"0\" width=\"100%\" bgcolor=\"#ffffff\">");
@@ -189,7 +196,7 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("</table>");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td style=\"padding-top:20px;background-color:#ffffff;\">");
             bodyMessage.append("Muito obrigado por participar de nossos eventos,");
@@ -197,11 +204,11 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("Grupo Sigmo.");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("</table>");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("<tr>");
             bodyMessage.append("<td valign=\"top\" class=\"footer-cell\">");
             bodyMessage.append("Sigmo - UFSC");
@@ -209,7 +216,7 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("Grupo de Pesquisa");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
-            
+
             bodyMessage.append("</table>");
             bodyMessage.append("</td>");
             bodyMessage.append("</tr>");
@@ -220,7 +227,7 @@ public class MailService extends BaseService<Subscriber> {
             bodyMessage.append("</table>");
             bodyMessage.append("</body>");
             bodyMessage.append("</html>");
-            
+
             //define o conteudo da mensagem
             msg.setContent(bodyMessage.toString(),
                            "text/html; charset=UTF-8");
@@ -232,13 +239,272 @@ public class MailService extends BaseService<Subscriber> {
         }
 
     }
-    
+
     public Session getMailSession() {
         return mailSession;
     }
 
     public void setMailSession(Session mailSession) {
         this.mailSession = mailSession;
+    }
+
+    /**
+     * Envia e-mail após cadastro do usuário.
+     * <p>
+     * @param subscriber usuário cadastrado.
+     * <p>
+     * @throws BusinessException caso ocorra erro no envio do e-mail.
+     */
+    public void registerConfirmationMail(Subscriber subscriber) throws BusinessException {
+
+        //recupera o usuário que esqueceu a senha
+        Date date = new Date();
+        String dayFormat = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        String timeFormat = new SimpleDateFormat("HH:mm").format(date);
+
+        try {
+            //Criando a sessão da mensagem
+            Message msg = new MimeMessage(mailSession);
+            //Inserindo o assunto do e-mail
+            String subject = "Inscrição III SICOM";
+            msg.setSubject(subject);
+            // define os destinatarios
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(subscriber.getEmail()));
+            //monta o corpo da mensagem
+            StringBuffer bodyMessage = new StringBuffer();
+            /*
+             * HTML CONFIG
+             */
+            bodyMessage.append("<!DOCTYPE html>");
+            bodyMessage.append("<html lang=\"pt\">");
+            /*
+             * HTML HEAD
+             */
+            bodyMessage.append("<head>");
+            bodyMessage.append("<title>Confirmação de Inscrição SICOM</title>");
+            bodyMessage.append("<meta charset=\"utf-8\">");
+            bodyMessage.append("<meta name=\"viewport\" content=\"width=device-width\">");
+            /*
+             * ESTILOS
+             */
+            bodyMessage.append("<style type=\"text/css\">");
+            /*
+             * CLIENT-SPECIFIC STYLES
+             */
+            bodyMessage.append("#outlook a{padding:0;}");// Force Outlook to provide a "view in browser" message
+            bodyMessage.append(".ReadMsgBody{width:100%;} .ExternalClass{width:100%;}");// Force Hotmail to display emails at full width
+            bodyMessage.append(".ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font,");
+            bodyMessage.append(".ExternalClass td, .ExternalClass div {line-height: 100%;}");// Force Hotmail to display normal line spacing
+            bodyMessage.append("body, table, td, a{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;}");// Prevent WebKit and Windows mobile changing default text sizes
+            bodyMessage.append("table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;}");// Remove spacing between tables in Outlook 2007 and up
+            bodyMessage.append("img{-ms-interpolation-mode:bicubic;}");// Allow smoother rendering of resized image in Internet Explorer
+            /*
+             * RESET STYLES
+             */
+            bodyMessage.append("body{margin:0; padding:0;}");
+            bodyMessage.append("img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}");
+            bodyMessage.append("table{border-collapse:collapse !important;}");
+            bodyMessage.append("body{height:100% !important; margin:0; padding:0; width:100% !important;}");
+            /*
+             * iOS BLUE LINKS
+             */
+            bodyMessage.append(".appleBody a {color:#68440a; text-decoration: none;}");
+            bodyMessage.append(".appleFooter a {color:#999999; text-decoration: none;}");
+            /*
+             * MOBILE STYLES
+             */
+            bodyMessage.append("@media screen and (max-width: 525px) {");
+            /*
+             * ALLOWS FOR FLUID TABLES
+             */
+            bodyMessage.append("table[class=\"wrapper\"]{ width:100% !important; }");
+            /*
+             * ADJUSTS LAYOUT OF LOGO IMAGE
+             */
+            bodyMessage.append("d[class=\"logo\"]{ text-align: left; padding: 20px 0 20px 0 !important; }");
+            bodyMessage.append("td[class=\"logo\"] img{ margin:0 auto!important; }");
+            /*
+             * USE THESE CLASSES TO HIDE CONTENT ON MOBILE
+             */
+            bodyMessage.append("td[class=\"mobile-hide\"]{ display:none;}");
+            bodyMessage.append("img[class=\"mobile-hide\"]{ display: none !important; }");
+            bodyMessage.append("img[class=\"img-max\"]{ max-width: 100% !important; height:auto !important; }");
+            /*
+             * FULL-WIDTH TABLES
+             */
+            bodyMessage.append("table[class=\"responsive-table\"]{ width:100%!important; }");
+            /*
+             * UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE
+             */
+            bodyMessage.append("td[class=\"padding\"]{ padding: 10px 5% 15px 5% !important; }");
+            bodyMessage.append("td[class=\"padding-copy\"]{padding: 10px 5% 10px 5% !important; text-align: center;}");
+            bodyMessage.append("td[class=\"padding-meta\"]{ padding: 30px 5% 0px 5% !important; text-align: center; }");
+            bodyMessage.append("td[class=\"no-pad\"]{ padding: 0 0 20px 0 !important; }");
+            bodyMessage.append("td[class=\"no-padding\"]{ padding: 0 !important; }");
+            bodyMessage.append("td[class=\"section-padding\"]{ padding: 50px 15px 50px 15px !important; }");
+            bodyMessage.append("td[class=\"section-padding-bottom-image\"]{ padding: 50px 15px 0 15px !important; }");
+            /*
+             * ADJUST BUTTONS ON MOBILE
+             */
+            bodyMessage.append("td[class=\"mobile-wrapper\"]{ padding: 10px 5% 15px 5% !important; }");
+            bodyMessage.append("table[class=\"mobile-button-container\"]{ margin:0 auto; width:100% !important; }");
+            bodyMessage.append("a[class=\"mobile-button\"]{ width:80% !important; padding: 15px !important; ");
+            bodyMessage.append("border: 0 !important; font-size: 16px !important; }");
+            bodyMessage.append("}");
+            bodyMessage.append("</style>");//Fim Estilos
+            bodyMessage.append("</head>");//Fim Head
+            /*
+             * CORPO DO EMAIL
+             */
+            bodyMessage.append("<body style=\"margin: 0; padding: 0;\">");
+            bodyMessage.append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td bgcolor=\"#ffffff\" align=\"center\" style=\"padding: 70px 15px 70px 15px;\"");
+            bodyMessage.append("class=\"section-padding\">");
+            bodyMessage.append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"500\" ");
+            bodyMessage.append("class=\"responsive-table\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td>");
+            bodyMessage.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
+            /*
+             * IMAGEM CABEÇALHO
+             */
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td>");
+            bodyMessage.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
+            bodyMessage.append("<tbody>");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td class=\"padding-copy\">");
+            bodyMessage.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td>");
+            bodyMessage.append("<a href=\"http://sigmo.org/sicom\" target=\"_blank\"> ");
+            bodyMessage.append("<img src=\"https://s3-sa-east-1.amazonaws.com/sigmo-email/banner-sicom.jpg\" ");
+            bodyMessage.append("border=\"0\" alt=\"III - SICOM\" style=\"display: block; padding: 0; color: #666666; ");
+            bodyMessage.append("text-decoration: none; font-family: Helvetica, arial, sans-serif; font-size: 16px; ");
+            bodyMessage.append("width: 500px; height: 200px;\" class=\"img-max\">");
+            bodyMessage.append("</a>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</tbody>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");//Fim imagem cabeçalho
+            /*
+             * SAUDAÇÃO
+             */
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td>");
+            bodyMessage.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"center\" style=\"font-size: 25px; font-family: Helvetica, Arial, ");
+            bodyMessage.append("sans-serif; color: #333333; padding-top: 30px;\" class=\"padding-copy\"> ");
+            bodyMessage.append("Sua inscrição foi realizada com sucesso!");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");//Fim saudação
+            /*
+             * INFORMAÇÃO DO CADASTRO
+             */
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"center\" style=\"padding: 20px 0 0 0; font-size: 16px; line-height: 25px;");
+            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color: #666666;\" class=\"padding-copy\"> ");
+            bodyMessage.append("Olá ").append(subscriber.getFullName()).append(", ");
+            bodyMessage.append("você se inscreveu no III Sicom a ser realizado no dia 19 de outubro a partir das 08h30m");
+            bodyMessage.append(", com a apresentação dos trabalhos selecionados e finalizado ");
+            bodyMessage.append("com a palestra de Gilberto Strunck.");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>"); //Fim informação do cadastro
+            /*
+             * CREDENCIAMENTO
+             */
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"center\" style=\"padding: 20px 0 0 0; font-size: 16px; line-height: 25px;");
+            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color: #666666;\" class=\"padding-copy\"> ");
+            bodyMessage.append("Atenção! Apenas o credenciamento garantirá o certificado de participação no evento. ");
+            bodyMessage.append("O credenciamento ocorrerá no dia do evento, 19 de outubro de 2016, das 08h00 às 10h00.");
+            bodyMessage.append(" Após este período não haverá mais credenciamentos e a participação será livre, porém");
+            bodyMessage.append(" sem direito a certificado.");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>"); //Fim credenciamento
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            /*
+             * BOTÃO ACESSO SICOM
+             */
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td>");
+            bodyMessage.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"mobile-button-container\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"center\" style=\"padding: 25px 0 0 0;\" class=\"padding-copy\">");
+            bodyMessage.append("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"responsive-table\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"center\"> ");
+            bodyMessage.append("<a href=\"http://sigmo.org/sicom\" target=\"_blank\" style=\"font-size: 16px; ");
+            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; ");
+            bodyMessage.append("text-decoration: none; background-color: #5D9CEC; border-top: 15px solid #5D9CEC; ");
+            bodyMessage.append("border-bottom: 15px solid #5D9CEC; border-left: 25px solid #5D9CEC; ");
+            bodyMessage.append("border-right: 25px solid #5D9CEC; border-radius: 3px; -webkit-border-radius: 3px; ");
+            bodyMessage.append("-moz-border-radius: 3px; display: inline-block;\" class=\"mobile-button\"> ");
+            bodyMessage.append("Acesse ao SICOM &rarr;");
+            bodyMessage.append("</a>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>"); //Fim botão de acesso SICOM
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>"); //Fim Corpo do e-mail
+            /*
+             * FOOTER
+             */
+            bodyMessage.append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td bgcolor=\"#ffffff\" align=\"center\">");
+            bodyMessage.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td style=\"padding: 20px 0px 20px 0px;\">");
+            bodyMessage.append("<table width=\"500\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"");
+            bodyMessage.append("class=\"responsive-table\">");
+            bodyMessage.append("<tr>");
+            bodyMessage.append("<td align=\"center\" valign=\"middle\" style=\"font-size: 12px; line-height: 18px; ");
+            bodyMessage.append("font-family: Helvetica, Arial, sans-serif; color:#666666;\">");
+            bodyMessage.append("<span class=\"appleFooter\" style=\"color:#666666;\">");
+            bodyMessage.append("SIGMO - Universidade Federal de Santa Catarina (UFSC), Florianópolis - SC");
+            bodyMessage.append("</span>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>");
+            bodyMessage.append("</td>");
+            bodyMessage.append("</tr>");
+            bodyMessage.append("</table>"); //Fim Footer
+            bodyMessage.append("</body>"); //Fim Body
+            bodyMessage.append("</html>"); //Fim email
+
+            //define o conteudo da mensagem
+            msg.setContent(bodyMessage.toString(),
+                           "text/html; charset=UTF-8");
+            //executa o envio
+            Transport.send(msg);
+
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage(), new ExceptionMessage("error.mail.sent"));
+        }
+
     }
 
 }

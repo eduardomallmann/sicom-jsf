@@ -6,6 +6,8 @@
 package org.sigmo.sicom.controller;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -26,7 +28,7 @@ import org.sigmo.sicom.util.MD5Hash;
  * <p>
  * <b>Descrição da Classe:</b>
  * <br>Classe RegisterController.
- <p>
+ * <p>
  * <b>Forma de Uso:</b>
  * <br>
  * Esta classe as funcionalidades de acesso e registro ao sistema para os usuários.
@@ -66,12 +68,20 @@ public class RegisterController extends BaseController implements Serializable {
      * Salva o objeto.
      */
     public void save() {
-        //encripta a senha informada pelo subscriber
-        this.newSubscriber.setPassword(MD5Hash.encripty(this.newSubscriber.getUnencryptedPassword()));
-        //seta o papel para o subscriber
-        this.newSubscriber.setRole(SubscriberType.SUBSCRIBER.toString());
-        //salva o subscriber e retorna o objeto com o id
-        this.setSubscriber(this.subscriberService.save(this.newSubscriber));
+        try {
+            //encripta a senha informada pelo subscriber
+            this.newSubscriber.setPassword(MD5Hash.encripty(this.newSubscriber.getUnencryptedPassword()));
+            //seta o papel para o subscriber
+            this.newSubscriber.setRole(SubscriberType.SUBSCRIBER.toString());
+            //salva o subscriber e retorna o objeto com o id
+            this.setSubscriber(this.subscriberService.save(this.newSubscriber));
+            //envia e-mail informando cadastro
+            this.mailService.registerConfirmationMail(this.subscriber);
+        } catch (BusinessException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            //adiciona mensagem de erro
+            super.addMessage(FacesMessage.SEVERITY_ERROR, ex.getErrorMessages().get(0).getKey());
+        }
         //adiciona mensagem de sucesso
         super.addMessage(FacesMessage.SEVERITY_INFO, "successful.create.subscriber");
     }
@@ -130,6 +140,8 @@ public class RegisterController extends BaseController implements Serializable {
             this.existingCpf = true;
             //adiciona mensagem de erro
             super.addMessage(FacesMessage.SEVERITY_ERROR, "error.cpf.duplicated");
+        } else {
+            this.existingCpf = false;
         }
     }
 
@@ -152,6 +164,8 @@ public class RegisterController extends BaseController implements Serializable {
             this.existingEmail = true;
             //adiciona mensagem de erro
             super.addMessage(FacesMessage.SEVERITY_ERROR, "error.email.duplicated");
+        } else {
+            this.existingEmail = false;
         }
     }
 
