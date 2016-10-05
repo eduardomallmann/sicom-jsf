@@ -11,6 +11,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -57,6 +58,7 @@ public class SubscriberController extends BaseController implements Serializable
     private Subscriber subscriber;
     private SubscriberOrder subscriberOrder = new SubscriberOrder();
     private List<SubscriberDetails> subscriberActualDetails = new ArrayList<>();
+    private List<Subscriber> subscribers = new ArrayList<>();
     private boolean bilro;
     private boolean identidade;
     private boolean fotografia;
@@ -67,6 +69,12 @@ public class SubscriberController extends BaseController implements Serializable
     private final boolean pagseguroImpl = false;
     private String oldpwd;
     private String newpwd;
+    private boolean presence;
+
+    @PostConstruct
+    public void init() {
+        this.populateSubscribers();
+    }
 
     /**
      * Acessa ao usuário logado e instância no objeto.
@@ -422,7 +430,7 @@ public class SubscriberController extends BaseController implements Serializable
             return false;
         }
     }
-    
+
     /**
      * Verifica se o botão do menu referente as oficinas será renderizado.
      * <p>
@@ -436,7 +444,7 @@ public class SubscriberController extends BaseController implements Serializable
             return false;
         }
     }
-    
+
     /**
      * Verifica se o botão do menu referente ao "meu cadastro" será renderizado.
      * <p>
@@ -445,7 +453,7 @@ public class SubscriberController extends BaseController implements Serializable
     public boolean getShowInscriptionButton() {
         if (FacesContext.getCurrentInstance() != null) {
             String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-            return context.contains("oficinas") || context.contains("palestras");
+            return context.contains("oficinas") || context.contains("palestras") || context.contains("report");
         } else {
             return false;
         }
@@ -474,6 +482,24 @@ public class SubscriberController extends BaseController implements Serializable
         }
 
         return subscriberActualDetails;
+    }
+
+    /**
+     * Instância lista com inscritos para o evento.
+     */
+    public void populateSubscribers() {
+        this.subscribers = this.subscriberService.listByRole("SUBSCRIBER");
+    }
+
+    /**
+     * Define presença ao usuário cadastrado.
+     * <p>
+     * @param sub usuário selecionado.
+     */
+    public void presence(Subscriber sub) {
+        this.subscriberService.save(sub);
+        this.populateSubscribers();
+        super.addMessage(FacesMessage.SEVERITY_INFO, "successful.presence.change");
     }
 
     public void setSubscriber(Subscriber subscriber) {
@@ -566,6 +592,22 @@ public class SubscriberController extends BaseController implements Serializable
 
     public void setNewpwd(String newpwd) {
         this.newpwd = newpwd;
+    }
+
+    public List<Subscriber> getSubscribers() {
+        return this.subscribers;
+    }
+
+    public void setSubscribers(List<Subscriber> subscribers) {
+        this.subscribers = subscribers;
+    }
+
+    public boolean isPresence() {
+        return presence;
+    }
+
+    public void setPresence(boolean presence) {
+        this.presence = presence;
     }
 
 }

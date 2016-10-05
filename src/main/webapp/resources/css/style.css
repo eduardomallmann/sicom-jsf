@@ -46,6 +46,7 @@ Qualquer uso não autorizado, reprodução ou transferência deste software é t
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-28 { font-size: 28px; }
+.material-icons.md-32 { font-size: 32px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 .material-icons.md-54 { font-size: 54px; }
@@ -342,6 +343,31 @@ body {
     height: 41px;
 }
 
+/* NAVEGAÇÃO RELATÓRIOS */
+.link-report {
+    position: absolute;
+    top: 58px;
+}
+.report-link {
+    display: inline-block;
+}
+.report-link .txt-link {
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+.sicom-icon {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background-color: #104b62;
+    float: left;
+    text-align: center;
+    padding-top: 5px;
+    box-sizing: border-box;
+    margin-left: 30px;
+    display: inline-block;
+}
 
 /**************************
     LOGIN DIALOG
@@ -427,6 +453,7 @@ body {
     width: calc(25%);
 }
 
+.reports,
 .register,
 .inscription {
     position: relative; 
@@ -635,7 +662,6 @@ body {
 .cpwd-buttons .close-btn:hover {
     background: rgba(158,158,158,.2);
 }
-
 
 /**************************
     OFICINAS E PALESTRAS
@@ -979,6 +1005,101 @@ body {
 }
 .confirm-btns .confirm-btn {
     margin-left: 15px;
+}
+
+/************************
+ * RELATÓRIOS
+ ***********************/
+.report-table {
+    clear: both;
+    margin: 0 auto;
+}
+.report-column1 {
+    width: 500px;
+    text-align: left !important;
+}
+.report-column2 {
+    width: 200px;
+    text-align: center !important;
+}
+.report-column3 {
+    width: 100px;
+    text-align: center !important;
+}
+
+/*Style For Checkbox --------------------------------------------------------------------------------------*/
+.ui-selectmanycheckbox label {
+  margin: -2px 15px 0px 0px !important;
+  color: #546e7a;
+  font-size: 16px;
+}
+.ui-chkbox .ui-chkbox-box {
+  background: none;
+  box-shadow: none;
+  margin-right: 5px;
+  margin-top: 2px;
+  color: #a9a9a9;
+  border: solid 2px #546e7a;
+  cursor: pointer;
+  width: 16px !important;
+  height: 16px !important;
+  background-color: #ffffff;
+}
+.ui-chkbox .ui-state-active {
+  border-color: #546e7a;
+}
+.ui-chkbox .ui-state-focus {
+  outline: dotted 1px #778d9b;
+  outline-offset: 2px;
+}
+.ui-chkbox-box .ui-icon-blank {
+  background-image: none !important;
+  background-size: 100%;
+  background-position: center;
+  border-bottom: solid 2px transparent;
+  border-right: solid 2px transparent;
+  width: 5px;
+  height: 10px;
+  position: relative;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: rotate(0deg) scale(1);
+  -moz-transform: rotate(0deg) scale(1);
+  -o-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+}
+.ui-chkbox-box .ui-icon-check {
+  border-radius: 0px;
+  background-image: none !important;
+  background-size: 100%;
+  position: relative;
+  background-position: center;
+  background-color: transparent;
+  border-bottom: solid 3px #26c6da;
+  border-right: solid 3px #26c6da;
+  width: 5px;
+  height: 10px;
+  margin-left: 4px;
+  margin-top: -4px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: rotate(45deg) scale(1.7);
+  -moz-transform: rotate(45deg) scale(1.7);
+  -o-transform: rotate(45deg) scale(1.7);
+  -ms-transform: rotate(45deg) scale(1.7);
+  transform: rotate(45deg) scale(1.7);
+}
+.ui-chkbox .ui-chkbox-label {
+  margin: 1px 15px 0px 5px !important;
+  font-size: 16px;
+  color: #546e7a;
 }
 
 @media screen and (max-width: 1199px) {

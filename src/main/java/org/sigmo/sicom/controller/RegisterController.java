@@ -51,6 +51,8 @@ public class RegisterController extends BaseController implements Serializable {
     private boolean existingCpf = false;
     private boolean existingEmail = false;
     private boolean authenticated;
+    private boolean showSecretary;
+    private boolean showAdmin;
     private String emailLogin;
     private String pwdLogin;
 
@@ -107,6 +109,10 @@ public class RegisterController extends BaseController implements Serializable {
             if (emailLogin != null || pwdLogin != null || !"".equals(emailLogin) || !"".equals(pwdLogin)) {
                 //Autentica o usuário e retorna o objet instanciado
                 this.subscriber = subscriberService.authentication(emailLogin, pwdLogin);
+                //verifica se o usuário é do secretáriado
+                this.setShowSecretary("SECRETARY".equals(this.subscriber.getRole()));
+                //verifica se o usuário é da administração
+                this.setShowAdmin("ADMINISTRATOR".equals(this.subscriber.getRole()));
                 //retorna para a página de inscrição
                 return "inscricao";
             } else {
@@ -214,6 +220,15 @@ public class RegisterController extends BaseController implements Serializable {
     }
 
     /**
+     * Verifica se o papel do usuário é de administração ou de secretariado.
+     * <p>
+     * @return valor booleano.
+     */
+    public Boolean showByRole() {
+        return showAdmin || showSecretary;
+    }
+
+    /**
      * Verifica se o usuário está autenticado e retorna a sua propriedade.
      * <p>
      * @return booleano informando se o usuário está autenticado ou não.
@@ -284,6 +299,22 @@ public class RegisterController extends BaseController implements Serializable {
 
     public void setPwdLogin(String pwdLogin) {
         this.pwdLogin = pwdLogin;
+    }
+
+    public boolean isShowSecretary() {
+        return showSecretary;
+    }
+
+    public void setShowSecretary(boolean showSecretary) {
+        this.showSecretary = showSecretary;
+    }
+
+    public boolean isShowAdmin() {
+        return showAdmin;
+    }
+
+    public void setShowAdmin(boolean showAdmin) {
+        this.showAdmin = showAdmin;
     }
 
 }

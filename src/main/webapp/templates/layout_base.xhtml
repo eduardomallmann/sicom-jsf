@@ -33,6 +33,27 @@
 
             <div class="header bkg-img header">
                 <div class="mdl-grid">
+
+                    <h:panelGroup rendered="#{registerController.showByRole()}">
+                        <h:outputLink target="_self"
+                                      styleClass="link-report"
+                                      value="../../pages/relatorios/sicom-report.jsf">'
+                            <div class="report-link">
+
+                                <i class="material-icons md-32 md-white sicom-icon">event_note</i>
+
+                                <div class="txt-link">
+                                    <h:outputLabel value="Presença Sicom" 
+                                                   style='cursor: pointer'
+                                                   styleClass="roboto medium s16 dark-blue"/>
+                                </div>
+
+                            </div>
+                        </h:outputLink>
+                    </h:panelGroup>
+
+
+
                     <div id="logo-area" class="logo-area">
                         <div id="logo-header" class="logo-square">
                             <img src="../../resources/images/template/marca cabeЗalho.png" 
