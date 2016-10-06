@@ -10,49 +10,43 @@
             <div class="reports bkg-gray">
                 <h:form id="report">
 
-                    <div>
-                        <div style="width: 400px" 
-                             id="name-field"
-                             class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                             mdl-textfield--floating-label">
-                            <label class="mdl-button mdl-js-button mdl-button--icon" for="search-name">
-                                <i class="material-icons">search</i>
-                            </label>
-                            <div class="mdl-textfield__expandable-holder">
-                                <input class="mdl-textfield__input" type="text" id="search-name">
-                                    <f:ajax event="keypress" execute="@this" listener="#"/>
-                                </input>
-                                <label class="mdl-textfield__label" for="search-name">
-                                    Busca por nome completo
-                                </label>
-                            </div>
+                    <div class="search-report">
+                        <i class="material-icons md-color">search</i>
+                        <div id="name-field" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <h:inputText id="name"
+                                         value="#{subscriberController.name}" 
+                                         class="mdl-textfield__input roboto medium s14 dark-blue">
+                                <p:ajax event="keyup" 
+                                        update="subsTable"
+                                        listener="#{subscriberController.searchByParams()}"/>
+                            </h:inputText>
+                            <h:outputLabel for="name" 
+                                           value="Busca por Nome"
+                                           class="mdl-textfield__label roboto medium s14 light-blue"/>
                         </div>
-                        <div class="mdl-tooltip mdl-tooltip--large" for="name-field">
-                            Print
+                        <i class="material-icons md-color">search</i>
+                        <div id="name-field" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <h:inputText id="cpf"
+                                         value="#{subscriberController.cpf}" 
+                                         maxlength="11"
+                                         class="mdl-textfield__input roboto medium s14 dark-blue">
+                                <p:ajax event="keyup" 
+                                        update="subsTable"
+                                        listener="#{subscriberController.searchByParams()}"/>
+                            </h:inputText>
+                            <h:outputLabel for="cpf" 
+                                           value="Busca por CPF"
+                                           class="mdl-textfield__label roboto medium s14 light-blue"/>
                         </div>
-                        <div style="width: 200px" 
-                             id="cpf-field"
-                             class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                             mdl-textfield--floating-label">
-                            <label class="mdl-button mdl-js-button mdl-button--icon" for="search-cpf">
-                                <i class="material-icons">search</i>
-                            </label>
-                            <div class="mdl-textfield__expandable-holder">
-                                <input class="mdl-textfield__input" type="text" pattern="[0-9]*" id="search-cpf">
-                                    <f:ajax event="keypress" execute="@this" listener="#"/>
-                                </input>
-                                <label class="mdl-textfield__label" for="search-cpf">
-                                    Busca por cpf
-                                </label>
-                                <span class="mdl-textfield__error">Digits only</span>
-                            </div>
-                        </div>
-                        <div class="mdl-tooltip mdl-tooltip--large" for="cpf-field">
-                            Print
-                        </div>
+                        <h:commandLink>
+                            <i class="material-icons md-color">search</i>
+                            <p:dataExporter type="csv" target="subsTable" fileName="cars" pageOnly="true" />
+                        </h:commandLink>
                     </div>
                     <div>
-                        <h:dataTable value="#{subscriberController.subscribers}" 
+                        <!-- Mudar a tabela para PrimeFaces -->
+                        <h:dataTable id="subsTable" 
+                                     value="#{subscriberController.subscribers}" 
                                      columnClasses="report-column1, report-column2, report-column3"
                                      headerClass="report-column3"
                                      class="mdl-data-table mdl-js-data-table mdl-shadow--2dp report-table"
@@ -85,7 +79,7 @@
                                                    class="roboto medium s16 dark-blue"/>
                                 </f:facet>
                                 <p:selectBooleanCheckbox value="#{sub.event}">
-                                    <p:ajax update=":report" listener="#{subscriberController.presence(sub)}" />
+                                    <p:ajax update="subsTable" listener="#{subscriberController.presence(sub)}" />
                                 </p:selectBooleanCheckbox>
                             </h:column>
                         </h:dataTable>

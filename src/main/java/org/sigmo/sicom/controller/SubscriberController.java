@@ -70,6 +70,8 @@ public class SubscriberController extends BaseController implements Serializable
     private String oldpwd;
     private String newpwd;
     private boolean presence;
+    private String name;
+    private String cpf;
 
     @PostConstruct
     public void init() {
@@ -490,6 +492,18 @@ public class SubscriberController extends BaseController implements Serializable
     public void populateSubscribers() {
         this.subscribers = this.subscriberService.listByRole("SUBSCRIBER");
     }
+    
+    public void searchByParams() {
+        
+        if (this.name == null) {
+            this.name = "";
+        }
+        if (this.cpf == null) {
+            this.cpf = "";
+        }
+        
+        this.subscribers = this.subscriberService.listByParams("SUBSCRIBER", this.name, this.cpf);
+    }
 
     /**
      * Define presença ao usuário cadastrado.
@@ -608,6 +622,22 @@ public class SubscriberController extends BaseController implements Serializable
 
     public void setPresence(boolean presence) {
         this.presence = presence;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
 }

@@ -1027,6 +1027,18 @@ body {
     text-align: center !important;
 }
 
+.search-report {
+    width: 800px;
+    clear: both;
+    margin: 0 auto;
+}
+#search-name.mdl-textfield__input {
+    width: 300px;
+}
+#search-cpf.mdl-textfield__input {
+    width: 200px;
+}
+
 /*Style For Checkbox --------------------------------------------------------------------------------------*/
 .ui-selectmanycheckbox label {
   margin: -2px 15px 0px 0px !important;
