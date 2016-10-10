@@ -5,7 +5,13 @@
  */
 package org.sigmo.sicom.service;
 
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 import javax.persistence.NoResultException;
@@ -125,6 +131,24 @@ public class SubscriberService extends BaseService<Subscriber> {
     }
 
     /**
+     * Recupera os usuários com presença no sicom.
+     * <p>
+     * @return lista instanciada.
+     */
+    public List<Subscriber> listSubscriberByPresence() {
+
+        StringBuffer str = new StringBuffer();
+        str.append("SELECT s FROM Subscriber s ");
+        str.append(" WHERE s.role = 'SUBSCRIBER' ");
+        str.append(" AND s.event = true ");
+
+        Query query = super.getEm().createQuery(str.toString());
+
+        //retorna os resultados da pesquisa
+        return (List<Subscriber>) query.getResultList();
+    }
+
+    /**
      * Recupera os registros conforme os parâmetros informados.
      * <p>
      * @param role papel do usuário.
@@ -139,10 +163,10 @@ public class SubscriberService extends BaseService<Subscriber> {
         str.append("SELECT s FROM Subscriber s ");
         str.append(" WHERE s.role = '").append(role).append("' ");
         if (!"".equals(name)) {
-            str.append(" AND s.fullName like '%").append(name).append("%' ");
+            str.append(" AND s.fullName like '").append(name).append("%' ");
         }
         if (!"".equals(cpf)) {
-            str.append(" AND s.cpf like '%").append(cpf).append("%' ");
+            str.append(" AND s.cpf like '").append(cpf).append("%' ");
         }
 
         Query query = super.getEm().createQuery(str.toString());
@@ -269,4 +293,5 @@ public class SubscriberService extends BaseService<Subscriber> {
         }
         return subscriberPersisted;
     }
+
 }

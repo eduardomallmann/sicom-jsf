@@ -5,12 +5,18 @@
  */
 package org.sigmo.sicom.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -38,7 +44,7 @@ import org.sigmo.sicom.util.MD5Hash;
  * <br>
  * Esta classe implementa as funcionalidades de inscrição e alteração de cadastro aos usuários.
  *
- * @author Eduardo Mallmann <eduardo.mallmann@sippulse.com>
+ * @author Eduardo Mallmann <contato@eduardomallmann.com>
  */
 @Named(value = "subscriberController")
 @SessionScoped
@@ -59,6 +65,7 @@ public class SubscriberController extends BaseController implements Serializable
     private SubscriberOrder subscriberOrder = new SubscriberOrder();
     private List<SubscriberDetails> subscriberActualDetails = new ArrayList<>();
     private List<Subscriber> subscribers = new ArrayList<>();
+    private List<Subscriber> subscribersPresence = new ArrayList<>();
     private boolean bilro;
     private boolean identidade;
     private boolean fotografia;
@@ -198,6 +205,13 @@ public class SubscriberController extends BaseController implements Serializable
             //adiciona mensagem de erro
             super.addMessage(FacesMessage.SEVERITY_ERROR, "error.save.pwd");
         }
+    }
+
+    /**
+     * Instância lista dos presentes no sicom.
+     */
+    public void presenceSearch() {
+        this.subscribersPresence = this.subscriberService.listSubscriberByPresence();
     }
 
     /**
@@ -448,6 +462,48 @@ public class SubscriberController extends BaseController implements Serializable
     }
 
     /**
+     * Verifica se a view atual é referente aos relatórios.
+     * <p>
+     * @return valor booleano do algoritmo.
+     */
+    public boolean getViewReport() {
+        if (FacesContext.getCurrentInstance() != null) {
+            String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return context.contains("report");
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Verifica se a view atual é referente a pagina sicom-report.
+     * <p>
+     * @return valor booleano do algoritmo.
+     */
+    public boolean getViewSicomReport() {
+        if (FacesContext.getCurrentInstance() != null) {
+            String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return context.contains("sicom-report");
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Verifica se a view atual é referente aos presence-report.
+     * <p>
+     * @return valor booleano do algoritmo.
+     */
+    public boolean getViewPresenceReport() {
+        if (FacesContext.getCurrentInstance() != null) {
+            String context = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return context.contains("presence-report");
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Verifica se o botão do menu referente ao "meu cadastro" será renderizado.
      * <p>
      * @return valor booleano do algoritmo.
@@ -459,6 +515,15 @@ public class SubscriberController extends BaseController implements Serializable
         } else {
             return false;
         }
+    }
+
+    /**
+     * Retorna os atributos da localização pt_BR.
+     * <p>
+     * @return os atributos da localização pt_BR.
+     */
+    public Locale getBrasil() {
+        return new Locale.Builder().setLanguage("pt").setRegion("BR").build();
     }
 
     /**
@@ -492,16 +557,16 @@ public class SubscriberController extends BaseController implements Serializable
     public void populateSubscribers() {
         this.subscribers = this.subscriberService.listByRole("SUBSCRIBER");
     }
-    
+
     public void searchByParams() {
-        
+
         if (this.name == null) {
             this.name = "";
         }
         if (this.cpf == null) {
             this.cpf = "";
         }
-        
+
         this.subscribers = this.subscriberService.listByParams("SUBSCRIBER", this.name, this.cpf);
     }
 
@@ -514,6 +579,50 @@ public class SubscriberController extends BaseController implements Serializable
         this.subscriberService.save(sub);
         this.populateSubscribers();
         super.addMessage(FacesMessage.SEVERITY_INFO, "successful.presence.change");
+    }
+
+    /**
+     * Exporta a lista de presença do sicom conforme padrão.
+     */
+    public void downloadSubscriberPresence() {
+
+        try {
+
+            StringBuilder sb = new StringBuilder();
+
+            this.presenceSearch();
+
+            for (Subscriber sub : this.subscribersPresence) {
+                sb.append(sub.getCpf()).append(";").append(sub.getFullName()).append("\n");
+            }
+
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ExternalContext ctx = fc.getExternalContext();
+            ctx.responseReset();
+
+            ctx.setResponseHeader("Content-Disposition", "attachment;filename=sicom.doc");
+            ctx.setResponseContentType("text/plain");
+
+            OutputStream output;
+            try (InputStream input = new ByteArrayInputStream(sb.toString().getBytes("UTF8"))) {
+                int read;
+                byte[] bytes = new byte[1024];
+                output = ctx.getResponseOutputStream();
+                while ((read = input.read(bytes)) != -1) {
+                    output.write(bytes, 0, read);
+                }
+                output.flush();
+            }
+            output.close();
+
+            fc.responseComplete();
+
+        } catch (FileNotFoundException ex) {
+            super.addMessage(FacesMessage.SEVERITY_INFO, "error.presence.download");
+        } catch (IOException ex) {
+            super.addMessage(FacesMessage.SEVERITY_INFO, "error.presence.creation");
+        }
+
     }
 
     public void setSubscriber(Subscriber subscriber) {
@@ -640,4 +749,12 @@ public class SubscriberController extends BaseController implements Serializable
         this.cpf = cpf;
     }
 
+    public List<Subscriber> getSubscribersPresence() {
+        this.presenceSearch();
+        return subscribersPresence;
+    }
+
+    public void setSubscribersPresence(List<Subscriber> subscribersPresence) {
+        this.subscribersPresence = subscribersPresence;
+    }
 }

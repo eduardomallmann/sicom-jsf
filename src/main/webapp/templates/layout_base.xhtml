@@ -34,26 +34,6 @@
             <div class="header bkg-img header">
                 <div class="mdl-grid">
 
-                    <h:panelGroup rendered="#{registerController.showByRole()}">
-                        <h:outputLink target="_self"
-                                      styleClass="link-report"
-                                      value="../../pages/relatorios/sicom-report.jsf">'
-                            <div class="report-link">
-
-                                <i class="material-icons md-32 md-white sicom-icon">event_note</i>
-
-                                <div class="txt-link">
-                                    <h:outputLabel value="Presença Sicom" 
-                                                   style='cursor: pointer'
-                                                   styleClass="roboto medium s16 dark-blue"/>
-                                </div>
-
-                            </div>
-                        </h:outputLink>
-                    </h:panelGroup>
-
-
-
                     <div id="logo-area" class="logo-area">
                         <div id="logo-header" class="logo-square">
                             <img src="../../resources/images/template/marca cabeЗalho.png" 
@@ -82,91 +62,93 @@
                             </div>
                         </h:form>
 
-                        <h:form id="frmShoppingCart" styleClass="menu-btn shopping-cart">
-                            <p:commandLink id="shopCartBtn" 
-                                           style="text-decoration: none"
-                                           type="button" 
-                                           rendered="#{registerController.authenticated}">
+                        <h:panelGroup rendered="#{!subscriberController.viewReport}">
+                            <h:form id="frmShoppingCart" styleClass="menu-btn shopping-cart">
+                                <p:commandLink id="shopCartBtn" 
+                                               style="text-decoration: none"
+                                               type="button" 
+                                               rendered="#{registerController.authenticated}">
 
-                                <div class="mdl-badge mdl-badge--overlap" 
-                                     data-badge="#{subscriberController.subscriberOrder.subscriberDetailses.size()}">
-                                    <h:outputLabel value="Ver novas inscrições" 
-                                                   styleClass="roboto medium s16 dark-blue cart-label"/>
-                                    <img src="../../resources/images/workshops/icone carrinho.png"
-                                         alt=""
-                                         class="img-cart"/>
-                                </div>
-                            </p:commandLink>
+                                    <div class="mdl-badge mdl-badge--overlap" 
+                                         data-badge="#{subscriberController.subscriberOrder.subscriberDetailses.size()}">
+                                        <h:outputLabel value="Ver novas inscrições" 
+                                                       styleClass="roboto medium s16 dark-blue cart-label"/>
+                                        <img src="../../resources/images/workshops/icone carrinho.png"
+                                             alt=""
+                                             class="img-cart"/>
+                                    </div>
+                                </p:commandLink>
 
-                            <p:overlayPanel id="shoppingCart" 
-                                            for="shopCartBtn" 
-                                            showEffect="fold"
-                                            hideEffect="fold"
-                                            dynamic="true"
-                                            my="left bottom"
-                                            appendToBody="true">
-                                <div class="shopcart-label">
-                                    <h:outputLabel value="Inscrições" 
-                                                   styleClass="roboto medium s18 dark-blue"/>
-                                </div>
+                                <p:overlayPanel id="shoppingCart" 
+                                                for="shopCartBtn" 
+                                                showEffect="fold"
+                                                hideEffect="fold"
+                                                dynamic="true"
+                                                my="left bottom"
+                                                appendToBody="true">
+                                    <div class="shopcart-label">
+                                        <h:outputLabel value="Inscrições" 
+                                                       styleClass="roboto medium s18 dark-blue"/>
+                                    </div>
 
-                                <h:outputLabel value="Você não se inscreveu em nenhum novo evento até o momento."
-                                               rendered="#{!subscriberController.totalShoppingCartRendered}"
-                                               styleClass="roboto normal italic s14 dark-blue"/>
+                                    <h:outputLabel value="Você não se inscreveu em nenhum novo evento até o momento."
+                                                   rendered="#{!subscriberController.totalShoppingCartRendered}"
+                                                   styleClass="roboto normal italic s14 dark-blue"/>
 
-                                <h:dataTable id="shoppingCartTable"
-                                             value="#{subscriberController.subscriberOrder.subscriberDetailses}"
-                                             styleClass="cart-table"
-                                             rendered="#{subscriberController.totalShoppingCartRendered}"
-                                             rowClasses="odd,even"
-                                             var="event">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputLabel value="Eventos"
-                                                           styleClass="roboto medium s14 dark-blue"/>
-                                        </f:facet>
-                                        <h:outputLabel value="#{event.workshop.description}"
-                                                       styleClass="roboto normal italic s12 dark-blue"/>
-                                        <f:facet name="footer">
-                                            <h:outputLabel value="Total"
-                                                           styleClass="roboto medium s14 dark-blue"/>
-                                        </f:facet>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputLabel value="Valores"
-                                                           styleClass="roboto medium s14 dark-blue value"/>
-                                        </f:facet>
+                                    <h:dataTable id="shoppingCartTable"
+                                                 value="#{subscriberController.subscriberOrder.subscriberDetailses}"
+                                                 styleClass="cart-table"
+                                                 rendered="#{subscriberController.totalShoppingCartRendered}"
+                                                 rowClasses="odd,even"
+                                                 var="event">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputLabel value="Eventos"
+                                                               styleClass="roboto medium s14 dark-blue"/>
+                                            </f:facet>
+                                            <h:outputLabel value="#{event.workshop.description}"
+                                                           styleClass="roboto normal italic s12 dark-blue"/>
+                                            <f:facet name="footer">
+                                                <h:outputLabel value="Total"
+                                                               styleClass="roboto medium s14 dark-blue"/>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputLabel value="Valores"
+                                                               styleClass="roboto medium s14 dark-blue value"/>
+                                            </f:facet>
 
-                                        <h:outputLabel value="GRATUITO"
-                                                       rendered="#{event.workshop.price le 0}"
-                                                       styleClass="roboto medium s12 dark-blue"/>
+                                            <h:outputLabel value="GRATUITO"
+                                                           rendered="#{event.workshop.price le 0}"
+                                                           styleClass="roboto medium s12 dark-blue"/>
 
-                                        <h:outputLabel value="#{event.workshop.price}"
-                                                       rendered="#{event.workshop.price gt 0}"
-                                                       styleClass="roboto normal s14 dark-blue">
-                                            <f:convertNumber type="currency" locale="pt_BR"/>
-                                        </h:outputLabel>
-                                        <f:facet name="footer">
-                                            <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
-                                                           styleClass="roboto medium s14 dark-blue">
+                                            <h:outputLabel value="#{event.workshop.price}"
+                                                           rendered="#{event.workshop.price gt 0}"
+                                                           styleClass="roboto normal s14 dark-blue">
                                                 <f:convertNumber type="currency" locale="pt_BR"/>
                                             </h:outputLabel>
-                                        </f:facet>
-                                    </h:column>
-                                    <h:column>
-                                        <h:commandLink action="#{subscriberController.removeItem(event.workshop.description)}">
-                                            <i class="material-icons md-18 md-red">delete_forever</i>
-                                        </h:commandLink>
-                                    </h:column>
-                                </h:dataTable>
+                                            <f:facet name="footer">
+                                                <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
+                                                               styleClass="roboto medium s14 dark-blue">
+                                                    <f:convertNumber type="currency" locale="pt_BR"/>
+                                                </h:outputLabel>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink action="#{subscriberController.removeItem(event.workshop.description)}">
+                                                <i class="material-icons md-18 md-red">delete_forever</i>
+                                            </h:commandLink>
+                                        </h:column>
+                                    </h:dataTable>
 
-                                <p:commandButton value="Finalizar Inscrição" 
-                                                 onclick="confirmDialog.showModal();"
-                                                 rendered="#{subscriberController.totalShoppingCartRendered}"
-                                                 styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
-                            </p:overlayPanel>
-                        </h:form>
+                                    <p:commandButton value="Finalizar Inscrição" 
+                                                     onclick="confirmDialog.showModal();"
+                                                     rendered="#{subscriberController.totalShoppingCartRendered}"
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
+                                </p:overlayPanel>
+                            </h:form>
+                        </h:panelGroup>
                         <div class="menu-btn">
                             <h:outputLink target="_self"
                                           rendered="#{subscriberController.showPanelButton}"

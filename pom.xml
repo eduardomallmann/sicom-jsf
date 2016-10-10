@@ -27,24 +27,16 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- View dependencies -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>5.0</version>
+            <version>6.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.poi</groupId>
                     <artifactId>poi</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!-- Database dependencies -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.39</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -59,7 +51,7 @@
             <scope>provided</scope>
         </dependency>
         <!-- Sistema de Pagamento dependencies -->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>pagseguro-api</groupId>
             <artifactId>pagseguro-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>

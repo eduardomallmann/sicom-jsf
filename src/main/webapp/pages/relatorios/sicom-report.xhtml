@@ -38,31 +38,32 @@
                                            value="Busca por CPF"
                                            class="mdl-textfield__label roboto medium s14 light-blue"/>
                         </div>
-                        <h:commandLink>
-                            <i class="material-icons md-color">search</i>
-                            <p:dataExporter type="csv" target="subsTable" fileName="cars" pageOnly="true" />
-                        </h:commandLink>
+                        <p:commandButton id="exportButton" 
+                                         rendered="#{registerController.showAdmin}"
+                                         value="Exportar"
+                                         action="#{subscriberController.downloadSubscriberPresence()}"
+                                         styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect bkg-dark-blue white presence-btn"
+                                         ajax="false">
+                        </p:commandButton>
                     </div>
                     <div>
                         <!-- Mudar a tabela para PrimeFaces -->
-                        <h:dataTable id="subsTable" 
+                        <p:dataTable id="subsTable" 
                                      value="#{subscriberController.subscribers}" 
-                                     columnClasses="report-column1, report-column2, report-column3"
-                                     headerClass="report-column3"
                                      class="mdl-data-table mdl-js-data-table mdl-shadow--2dp report-table"
                                      var="sub">
-                            <h:column class="mdl-data-table__cell--non-numeric">
+                            <p:column class="mdl-data-table__cell--non-numeric report-column1">
                                 <f:facet name="header" 
-                                         class="mdl-data-table__cell--non-numeric">
+                                         class="mdl-data-table__cell--non-numeric report-column3">
                                     <h:outputLabel value="#{msgs['uc.subscriber.name']}"
                                                    class="roboto medium s16 dark-blue"/>
                                 </f:facet>
-                                <h:outputText value="#{sub.fullName}" 
-                                              class="roboto normal s16 dark-blue"/>
-                            </h:column>
+                                <h:outputText value="#{sub.fullName.toLowerCase(subscriberController.brasil)}" 
+                                              class="roboto normal s16 dark-blue capitalize"/>
+                            </p:column>
 
-                            <h:column class="mdl-data-table__cell--non-numeric">
-                                <f:facet name="header" class="mdl-data-table__cell--non-numeric">
+                            <p:column class="mdl-data-table__cell--non-numeric report-column2">
+                                <f:facet name="header" class="mdl-data-table__cell--non-numeric report-column3">
                                     <h:outputLabel value="#{msgs['uc.subscriber.cpf']}"
                                                    class="roboto medium s16 dark-blue"/>
                                 </f:facet>
@@ -71,18 +72,19 @@
                                               class="roboto normal s16 dark-blue">
                                     <f:converter converterId="cpfConverter" for="cpf"/>
                                 </h:outputText>
-                            </h:column>
+                            </p:column>
 
-                            <h:column class="mdl-data-table__cell--non-numeric">
-                                <f:facet name="header" class="mdl-data-table__cell--non-numeric">
+                            <p:column class="mdl-data-table__cell--non-numeric report-column3" 
+                                      exportable="false">
+                                <f:facet name="header" class="mdl-data-table__cell--non-numeric report-column3">
                                     <h:outputLabel value="#{msgs['uc.subscriber.presence']}"
                                                    class="roboto medium s16 dark-blue"/>
                                 </f:facet>
                                 <p:selectBooleanCheckbox value="#{sub.event}">
                                     <p:ajax update="subsTable" listener="#{subscriberController.presence(sub)}" />
                                 </p:selectBooleanCheckbox>
-                            </h:column>
-                        </h:dataTable>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                 </h:form>
             </div>

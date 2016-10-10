@@ -41,6 +41,24 @@
                                      class="icon-img"/>
                             </div>
                         </h:outputLink>
+
+                        <h:panelGroup rendered="#{registerController.showByRole() and !subscriberController.viewSicomReport}">
+                            <h:outputLink target="_self"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/relatorios/sicom-report.jsf">'
+                                <div class="inscriptions-link panels">
+
+                                    <div class="txt-link">
+                                        <h:outputLabel value="Presença Sicom" 
+                                                       style='cursor: pointer'
+                                                       styleClass="roboto medium s16 dark-blue"/>
+                                    </div>
+                                    
+                                    <i class="material-icons md-32 md-white sicom-icon">event_note</i>
+
+                                </div>
+                            </h:outputLink>
+                        </h:panelGroup>
                     </div>
                     <div class="mdl-cell mdl-cell--3-col">
                         <h:form id="inputRegister">
