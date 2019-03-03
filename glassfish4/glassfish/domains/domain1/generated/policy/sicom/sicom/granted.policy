@@ -1,0 +1,56 @@
+/* AUTOMATICALLY GENERATED ON Sun Mar 03 16:52:55 BRT 2019*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.WebResourcePermission "/:/template/*:/pages/inscricao/*:/pages/home/home.jsf:/pages/error/*";
+  permission javax.security.jacc.WebResourcePermission "/pages/home/home.jsf";
+  permission javax.security.jacc.WebUserDataPermission "/pages/inscricao/*";
+  permission javax.security.jacc.WebUserDataPermission "/pages/home/home.jsf";
+  permission javax.security.jacc.WebUserDataPermission "/:/template/*:/pages/inscricao/*:/pages/home/home.jsf:/pages/error/*";
+  permission javax.security.jacc.WebUserDataPermission "/pages/error/*";
+  permission javax.security.jacc.WebUserDataPermission "/template/*";
+};
+
+grant      principal org.glassfish.security.common.Group "ADMINISTRATOR" {
+  permission javax.security.jacc.WebResourcePermission "/pages/error/*";
+  permission javax.security.jacc.WebResourcePermission "/pages/inscricao/*";
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "ADMINISTRATOR";
+  permission javax.security.jacc.WebRoleRefPermission "", "ADMINISTRATOR";
+  permission javax.security.jacc.WebRoleRefPermission "default", "ADMINISTRATOR";
+  permission javax.security.jacc.WebRoleRefPermission "Faces Servlet", "ADMINISTRATOR";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
+  permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "Faces Servlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "default", "**";
+};
+
+grant      principal org.glassfish.security.common.Group "PANELIST" {
+  permission javax.security.jacc.WebResourcePermission "/pages/error/*";
+  permission javax.security.jacc.WebResourcePermission "/pages/inscricao/*";
+  permission javax.security.jacc.WebRoleRefPermission "Faces Servlet", "PANELIST";
+  permission javax.security.jacc.WebRoleRefPermission "default", "PANELIST";
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "PANELIST";
+  permission javax.security.jacc.WebRoleRefPermission "", "PANELIST";
+};
+
+grant      principal org.glassfish.security.common.Group "SECRETARY" {
+  permission javax.security.jacc.WebResourcePermission "/pages/error/*";
+  permission javax.security.jacc.WebResourcePermission "/pages/inscricao/*";
+  permission javax.security.jacc.WebRoleRefPermission "Faces Servlet", "SECRETARY";
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "SECRETARY";
+  permission javax.security.jacc.WebRoleRefPermission "", "SECRETARY";
+  permission javax.security.jacc.WebRoleRefPermission "default", "SECRETARY";
+};
+
+grant      principal org.glassfish.security.common.Group "SUBSCRIBER" {
+  permission javax.security.jacc.WebResourcePermission "/pages/error/*";
+  permission javax.security.jacc.WebResourcePermission "/pages/inscricao/*";
+  permission javax.security.jacc.WebRoleRefPermission "Faces Servlet", "SUBSCRIBER";
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "SUBSCRIBER";
+  permission javax.security.jacc.WebRoleRefPermission "", "SUBSCRIBER";
+  permission javax.security.jacc.WebRoleRefPermission "default", "SUBSCRIBER";
+};
+

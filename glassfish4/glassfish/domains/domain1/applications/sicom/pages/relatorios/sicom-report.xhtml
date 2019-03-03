@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/layout_base.xhtml">
+        <ui:define name="content">
+            <div class="reports bkg-gray">
+                <h:form id="report">
+
+                    <div class="search-report">
+                        <i class="material-icons md-color">search</i>
+                        <div id="name-field" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <h:inputText id="name"
+                                         value="#{subscriberController.name}" 
+                                         class="mdl-textfield__input roboto medium s14 dark-blue">
+                                <p:ajax event="keyup" 
+                                        update="subsTable"
+                                        listener="#{subscriberController.searchByParams()}"/>
+                            </h:inputText>
+                            <h:outputLabel for="name" 
+                                           value="Busca por Nome"
+                                           class="mdl-textfield__label roboto medium s14 light-blue"/>
+                        </div>
+                        <i class="material-icons md-color">search</i>
+                        <div id="name-field" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <h:inputText id="cpf"
+                                         value="#{subscriberController.cpf}" 
+                                         maxlength="11"
+                                         class="mdl-textfield__input roboto medium s14 dark-blue">
+                                <p:ajax event="keyup" 
+                                        update="subsTable"
+                                        listener="#{subscriberController.searchByParams()}"/>
+                            </h:inputText>
+                            <h:outputLabel for="cpf" 
+                                           value="Busca por CPF"
+                                           class="mdl-textfield__label roboto medium s14 light-blue"/>
+                        </div>
+                        <p:commandButton id="exportButton" 
+                                         rendered="#{registerController.showAdmin}"
+                                         value="Exportar"
+                                         action="#{subscriberController.downloadSubscriberPresence()}"
+                                         styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect bkg-dark-blue white presence-btn"
+                                         ajax="false">
+                        </p:commandButton>
+                    </div>
+                    <div>
+                        <!-- Mudar a tabela para PrimeFaces -->
+                        <p:dataTable id="subsTable" 
+                                     value="#{subscriberController.subscribers}" 
+                                     class="mdl-data-table mdl-js-data-table mdl-shadow--2dp report-table"
+                                     var="sub">
+                            <p:column class="mdl-data-table__cell--non-numeric report-column1">
+                                <f:facet name="header" 
+                                         class="mdl-data-table__cell--non-numeric report-column3">
+                                    <h:outputLabel value="#{msgs['uc.subscriber.name']}"
+                                                   class="roboto medium s16 dark-blue"/>
+                                </f:facet>
+                                <h:outputText value="#{sub.fullName.toLowerCase(subscriberController.brasil)}" 
+                                              class="roboto normal s16 dark-blue capitalize"/>
+                            </p:column>
+
+                            <p:column class="mdl-data-table__cell--non-numeric report-column2">
+                                <f:facet name="header" class="mdl-data-table__cell--non-numeric report-column3">
+                                    <h:outputLabel value="#{msgs['uc.subscriber.cpf']}"
+                                                   class="roboto medium s16 dark-blue"/>
+                                </f:facet>
+                                <h:outputText id="cpf" 
+                                              value="#{sub.cpf}"
+                                              class="roboto normal s16 dark-blue">
+                                    <f:converter converterId="cpfConverter" for="cpf"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column class="mdl-data-table__cell--non-numeric report-column3" 
+                                      exportable="false">
+                                <f:facet name="header" class="mdl-data-table__cell--non-numeric report-column3">
+                                    <h:outputLabel value="#{msgs['uc.subscriber.presence']}"
+                                                   class="roboto medium s16 dark-blue"/>
+                                </f:facet>
+                                <p:selectBooleanCheckbox value="#{sub.event}">
+                                    <p:ajax update="subsTable" listener="#{subscriberController.presence(sub)}" />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

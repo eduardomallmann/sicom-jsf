@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <message-bundle>org.sigmo.sicom.resources.ApplicationResources</message-bundle>
+        <resource-bundle>
+            <base-name>org.sigmo.sicom.resources.ApplicationResources</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>pt_BR</supported-locale>
+        </locale-config>
+    </application>
+    
+    
+        <!-- Define a navegação para as páginas-->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/pages/home/home.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>cadastro</from-outcome>
+            <to-view-id>/pages/cadastro/cadastro.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>inscricao</from-outcome>
+            <to-view-id>/pages/inscricao/inscricao.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>oficinas</from-outcome>
+            <to-view-id>/pages/inscricao/oficinas.jsf</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>palestra</from-outcome>
+            <to-view-id>/pages/inscricao/palestras.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
