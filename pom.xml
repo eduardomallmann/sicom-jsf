@@ -50,12 +50,6 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Sistema de Pagamento dependencies -->
-        <!--        <dependency>
-            <groupId>pagseguro-api</groupId>
-            <artifactId>pagseguro-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
     </dependencies>
 
     <build>
