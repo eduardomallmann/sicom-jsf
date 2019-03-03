@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/layout_base.xhtml">
+        <ui:define name="content">
+            <div class="register bkg-gray">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
+                        <div class="register-txt-field">
+                            <div class="register-label">
+                                <h:outputLabel value="III SICOM" 
+                                               styleClass="roboto light s30 dark-blue register-txt-spacer"/>
+                                <p:spacer class="register-txt-spacer"/>
+                                <h:outputLabel value="Inscrição" 
+                                               styleClass="roboto light s30 dark-blue"/>
+                            </div>
+                            <div class="register-txt col1">
+                                <h:outputText value="A participação no evento é gratuita." 
+                                              styleClass="roboto light s14 light-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Feito o cadastro, você está automaticamente inscrito no III SICOM." 
+                                              styleClass="roboto light s14 light-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Para o recebimento do certificado será necessário o credenciamento 
+                                              no dia do evento das 08h00 às 10h00. Após este período a participação será
+                                              livre, porém sem direito ao certificado." 
+                                              styleClass="roboto light s14 light-blue"/>
+                                
+                                <br/>
+                                <br/>
+                                <h:outputText value="A inscrição também pode ser realizada no local e dia do Seminário." 
+                                              styleClass="roboto light s14 light-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
+                        <h:form id="inputRegister">
+                            <div class="register-header">
+                                <i class="material-icons md-54 md-color">account_circle</i>
+                                <div class="txt-header">
+                                    <h:outputLabel value="Meu cadastro" 
+                                                   styleClass="roboto medium s32 dark-blue"/>
+                                </div>
+                            </div>
+                            <div class="register-input">
+                                <div id="fullname" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsName"
+                                                 value="#{registerController.newSubscriber.fullName}" 
+                                                 required="true"
+                                                 requiredMessage="Campo 'Nome Completo' não preenchido"
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsName" 
+                                                   value="Nome Completo"
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="fullname">
+                                    <h:outputLabel value="Campo Obrigatorio" 
+                                                   class="roboto medium yellow"/>
+                                    <br/>
+                                    <h:outputLabel value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="roboto medium"/>
+                                </div>
+                                <div id="email" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsEmail" 
+                                                 required="true"
+                                                 requiredMessage="Campo 'E-mail' não preenchido"
+                                                 value="#{registerController.newSubscriber.email}" 
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space">
+                                        <f:validator validatorId="emailValidator"/>
+                                        <f:ajax execute="@this" 
+                                                event="blur" 
+                                                listener="#{registerController.checkEmail()}"
+                                                render="registersbuttons"/>
+                                    </h:inputText>
+                                    <h:outputLabel for="subsEmail" 
+                                                   value="E-mail" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="email">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto medium yellow"/>
+                                </div>
+                                <div id="cpf" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsCPF"
+                                                 value="#{registerController.newSubscriber.cpf}"
+                                                 required="true"
+                                                 requiredMessage="Campo 'CPF' não preenchido"
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space">
+                                        <f:validator validatorId="cpfValidator"/>
+                                        <f:ajax execute="@this" 
+                                                event="blur" 
+                                                listener="#{registerController.checkCPF()}"
+                                                render="registersbuttons"/>
+                                    </h:inputText>
+                                    <h:outputLabel for="subsCPF" 
+                                                   value="CPF" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="cpf">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto medium yellow"/>
+                                    <br/>
+                                    <h:outputLabel for="subsCPF" 
+                                                   value="Necessário para geração de certificado, 
+                                                   preencha cuidadosamente." 
+                                                   class="roboto medium"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsUniv" 
+                                                 value="#{registerController.newSubscriber.course}" 
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsUniv" 
+                                                   value="Universidade/Instituição" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <h:inputText id="subsJob" 
+                                                 value="#{registerController.newSubscriber.job}" 
+                                                 class="mdl-textfield__input roboto medium s14 dark-blue input-txt-space"/>
+                                    <h:outputLabel for="subsJob" 
+                                                   value="Profissão/Atuação" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div id="pwd" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                                    <h:inputText id="subsPwd"
+                                                 value="#{registerController.newSubscriber.unencryptedPassword}" 
+                                                 required="true"
+                                                 requiredMessage="Campo 'Senha' não preenchido"
+                                                 styleClass="mdl-textfield__input roboto medium s14 dark-blue  input-txt-space"/>
+                                    <h:outputLabel for="subsPwd" 
+                                                   value="Senha" 
+                                                   class="mdl-textfield__label roboto medium s14 light-blue input-txt-space"/>
+                                </div>
+                                <div class="mdl-tooltip mdl-tooltip--right mdl-tooltip--large" for="pwd">
+                                    <h:outputLabel value="Campo Obrigatorio." 
+                                                   class="roboto medium yellow"/>
+                                    <br/>
+                                    <h:outputLabel value="Atenção campo aberto." 
+                                                   class="roboto medium white"/>
+                                </div>
+                            </div>
+
+                            <div class="button-register-grid">
+                                <h:panelGroup id="registersbuttons">
+                                    <h:commandButton id="registerbuttonLogged"
+                                                     value="Cadastrar"
+                                                     type="button"
+                                                     onclick="loginDialog.showModal();"
+                                                     rendered="#{registerController.existingCpf or registerController.existingEmail}"
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 button-register"/>
+                                    <h:commandButton id="registerbutton"
+                                                     value="Cadastrar"
+                                                     action="#{registerController.autoLogin()}"
+                                                     rendered="#{!registerController.existingCpf and !registerController.existingEmail}"
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent roboto medium s12 button-register"/>
+                                    <h:outputLink id="backHome"
+                                                  value="../../pages/home/home.jsf"
+                                                  target="_self"
+                                                  type="button"
+                                                  rendered="#{!registerController.authenticated}"
+                                                  styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button-register back-btn">
+                                        <h:outputLabel value="VOLTAR" class="roboto medium s12"/>
+
+                                    </h:outputLink>
+
+                                </h:panelGroup>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
+                        <div class="register-txt-field">
+                            <div class="register-label">
+                                <h:outputLabel value="Oficinas" 
+                                               styleClass="roboto light s30 dark-blue register-txt-spacer"/>
+                                <p:spacer class="register-txt-spacer"/>
+                                <h:outputLabel value="Temáticas" 
+                                               styleClass="roboto light s30 dark-blue"/>
+                            </div>
+                            <div class="register-txt">
+                                <h:outputText value="As inscrições para as oficinas são apenas online." 
+                                              styleClass="roboto light s14 light-blue"/>
+                                <br/>
+                                <h:outputText value="Todas as oficinas dão direito à certificado." 
+                                              styleClass="roboto light s14 light-blue"/>
+                            </div>
+                            <div id="workshop-inscription" class="inscriptions-link">
+                                <div class="txt-link">
+                                    <h:outputLabel value="Inscrições oficinas" 
+                                                   styleClass="roboto medium s18 dark-blue vertical-middle"/>
+                                </div>
+                                <img src="../../resources/images/register/icone oficinas.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </div>
+                            <div class="mdl-tooltip mdl-tooltip--bottom mdl-tooltip--large" for="workshop-inscription">
+                                <h:outputLabel value="Atenção!" 
+                                               class="roboto medium yellow"/>
+                                <br/>
+                                <h:outputLabel value="Realize seu cadastro para ter acesso as inscrições nas oficinas." 
+                                               class="roboto medium"/>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--3-col register-grid">
+                        <div class="register-txt-field">
+                            <div class="register-label">
+                                <h:outputLabel value="Palestras" 
+                                               styleClass="roboto light s30 dark-blue register-txt-spacer"/>
+                                <p:spacer class="register-txt-spacer"/>
+                                <h:outputLabel value="Gratuitas" 
+                                               styleClass="roboto light s30 dark-blue"/>
+                            </div>
+                            <div class="register-txt">
+                                <h:outputText value="Para receber o certificado é necessária a inscrição, podendo ser 
+                                              realizada também no local e dia de cada palestra." 
+                                              styleClass="roboto light s14 light-blue"/>
+                            </div>
+                            <div id="panels-inscription" class="inscriptions-link">
+                                <div class="txt-link">
+                                    <h:outputLabel value="Inscrições palestras" 
+                                                   styleClass="roboto medium s18 dark-blue"/>
+                                </div>
+                                <img src="../../resources/images/register/icone palestras.png" 
+                                     alt="" 
+                                     class="icon-img"/>
+                            </div>
+                            <div class="mdl-tooltip mdl-tooltip--bottom mdl-tooltip--large" for="panels-inscription">
+                                <h:outputLabel value="Atenção!" 
+                                               class="roboto medium yellow"/>
+                                <br/>
+                                <h:outputLabel value="Realize seu cadastro para ter acesso as inscrições nas palestras." 
+                                               class="roboto medium"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <dialog id="register-dialog" class="mdl-dialog login-data">
+
+                <form id="register-content" 
+                      method="post" 
+                      action="j_security_check">
+
+                    <div class="login-txt">
+                        <h:outputLabel value="Login" styleClass="mdl-dialog__title"/>
+                    </div>
+
+                    <div class="mdl-dialog__content login-input">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="login" 
+                                   type="text" 
+                                   class="mdl-textfield__input bkg-input-login roboto normal s18 white"
+                                   name="j_username"></input>
+                            <label class="mdl-textfield__label roboto normal s18 white" 
+                                   for="login">Confirme seu e-mail
+                            </label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="nonFeedback" 
+                                   type="password" 
+                                   class="mdl-textfield__input bkg-input-login roboto normal s18 white"
+                                   name="j_password"></input>
+                            <label class="mdl-textfield__label roboto normal s18 white" 
+                                   for="login">Confirme sua senha
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mdl-dialog__actions login-buttons">
+
+                        <input value="Entrar" 
+                               type="submit" 
+                               name="connect"
+                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt bkg-light-blue white"/>
+
+                        <button type="button"
+                                onclick="registerDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </form>
+
+            </dialog>
+
+            <dialog id="login-dialog" class="mdl-dialog login-data">
+
+                <form id="login-content" 
+                      method="post" 
+                      action="j_security_check">
+
+                    <div class="login-txt">
+                        <h:outputLabel value="Login" styleClass="mdl-dialog__title"/>
+                    </div>
+
+                    <div class="login-txt">
+                        <h:outputLabel value="Este usuário já existe," styleClass="roboto medium s16 yellow"/>
+                        <br/>
+                        <h:outputLabel value="favor realizar o login." styleClass="roboto medium s16 yellow"/>
+                    </div>
+
+                    <div class="mdl-dialog__content login-input">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="login" 
+                                   type="text" 
+                                   class="mdl-textfield__input bkg-input-login roboto normal s18 white"
+                                   name="j_username"></input>
+                            <label class="mdl-textfield__label roboto normal s18 white" 
+                                   for="login">e-mail
+                            </label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input id="nonFeedback" 
+                                   type="password" 
+                                   class="mdl-textfield__input bkg-input-login roboto normal s18 white"
+                                   name="j_password"></input>
+                            <label class="mdl-textfield__label roboto normal s18 white" 
+                                   for="login">senha
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mdl-dialog__actions login-buttons">
+
+                        <input value="Entrar" 
+                               type="submit" 
+                               name="connect"
+                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect btn-txt bkg-light-blue white"/>
+
+                        <input value="Esqueci a senha" 
+                               type="submit" 
+                               name="connect"
+                               class="mdl-button mdl-js-button mdl-button-raised mdl-js-ripple-effect forgotten-txt roboto light s16 white"/>
+
+                        <button type="button"
+                                onclick="loginDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </form>
+
+            </dialog>
+
+            <script>
+                // Login Dialog
+                var loginDialog = document.querySelector('#login-dialog');
+                if (!loginDialog.showModal) {
+                    dialogPolyfill.registerDialog(loginDialog);
+                }
+                // Register Dialog
+                var registerDialog = document.querySelector('#register-dialog');
+                if (!registerDialog.showModal) {
+                    dialogPolyfill.registerDialog(registerDialog);
+                }
+            </script>
+        </ui:define>
+    </ui:composition>
+</html>

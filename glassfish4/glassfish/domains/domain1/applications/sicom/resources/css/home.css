@@ -1,0 +1,563 @@
+/*
+Copyright (c) 2016 SIGMO. Todos os direitos reservados.
+Este software é confidencial e um produto proprietário do grupo de pesquisa da UFSC - SIGMO.
+Qualquer uso não autorizado, reprodução ou transferência deste software é terminantemente proibida.
+*/
+/* 
+    Created on : Aug 7, 2016, 6:34:39 PM
+    Author     : Eduardo Mallmann <contato@eduardomallmann.com>
+*/
+
+#-------------------------
+#   FONTS & CONFIGURATION
+#-------------------------
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-08 { font-size: 0.57143rem; }
+.material-icons.md-12 { font-size: 0.85714rem; }
+.material-icons.md-14 { font-size: 1.00000rem; }
+.material-icons.md-16 { font-size: 1.14286rem; }
+.material-icons.md-18 { font-size: 1.28571rem; }
+.material-icons.md-24 { font-size: 1.71429rem; }
+.material-icons.md-28 { font-size: 2.00000rem; }
+.material-icons.md-36 { font-size: 2.57143rem; }
+.material-icons.md-48 { font-size: 3.42857rem; }
+.material-icons.md-54 { font-size: 3.85714rem; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+.material-icons.md-color { color: #104b62; }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+/**************************
+    FONTS
+***************************/
+/*Font*/
+.roboto { font-family: roboto; }
+
+/*Font Style*/
+.italic { font-style: italic; }
+
+/*Font Weigth*/
+.thin       { font-weight: 100; }
+.light      { font-weight: 300; }
+.normal     { font-weight: 400; }
+.medium     { font-weight: 500; }
+.bold       { font-weight: 700; }
+.ultra-bold { font-weight: 900; }
+
+/*Size*/
+.s12 { font-size: 0.85714rem; }
+.s13 { font-size: 0.92857rem; }
+.s14 { font-size: 1.00000rem; }
+.s16 { font-size: 1.14286rem; }
+.s17 { font-size: 1.21429rem; }
+.s18 { font-size: 1.28571rem; }
+.s20 { font-size: 1.42857rem; }
+.s22 { font-size: 1.57143rem; }
+.s24 { font-size: 1.71429rem; }
+.s25 { font-size: 1.78571rem; }
+.s28 { font-size: 2.00000rem; }
+.s30 { font-size: 2.14286rem; }
+.s32 { font-size: 2.28571rem; }
+.s36 { font-size: 2.57143rem; }
+.s42 { font-size: 3.00000rem; }
+.s45 { font-size: 3.21429rem; }
+.s48 { font-size: 3.42857rem; }
+.s56 { font-size: 4.00000rem; }
+
+/*Color*/
+.white      { color: #FFFFFF; }
+.dark-blue  { color: #104b62; }
+.light-blue { color: #229997; }
+.yellow     { color: #cddc39; }
+.gray       { color: #666666; }
+
+/* Decoration */
+.underline { text-decoration: underline; }
+.overline  { text-decoration: overline;  }
+
+/* Shadow */
+.shadow { text-shadow: 1px 1px #000; }
+
+/* Text Align */
+.center { text-align: center; }
+.right  { text-align: right;  }
+.left   { text-align: left;   }
+.justify{ text-align: justify;}
+
+#-------------------------
+#   HOME PAGE
+#-------------------------
+
+* {
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+    border: none;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    background-color: #FFF;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+.head {
+    position: absolute;
+    top: 30px;
+    height: 155px;
+    width: 100%;
+}
+.head .img-bkg {
+    position: absolute;
+    z-index: -1;
+    height: inherit;
+}
+.head .img-bkg.side-left {
+    left: 0;
+    width: calc((100% - 642px)/2);
+}
+.head .img-bkg.side-right {
+    right: 0;
+    width: calc((100% - 642px)/2);
+}
+.head .img-bkg.central {
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.head .brand {
+    position: absolute;
+    left: 50%;
+    transform: translate(-65%,0);
+}
+.head .home-btn {
+    position: absolute;
+    top: 85px;
+    margin-right: 5%;
+    right: 0;
+}
+.head .login,
+.head .register-btn {
+    position: relative;
+    display: inline-block;
+}
+.head .register-btn {
+    margin-right: 1px;
+}
+.button-txt {
+    letter-spacing: 1.5px !important;
+}
+
+.register-btn,
+.login {
+    display: inline;
+    height: 35px;
+    border-left: 1px solid #FFF;
+    vertical-align: middle;
+}
+.register-btn {
+    border: none;
+}
+.login .login-button {
+    margin-left: 5px;
+}
+.login-data {
+    background-color: rgba(16, 75, 98, 0.8);
+    border-radius: 3px;
+    box-shadow: 0px 0px 30px #000;
+    width: 350px;
+}
+.login-txt {
+    text-align: center;
+    margin-top: 45px;
+    width: 100%;
+    color: white;
+}
+.login-input {
+    text-align: center;
+}
+.login-label {
+    font-family: roboto;
+    font-size: 18px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.mdl-textfield__input.login-label {
+    border-bottom: 1px solid rgba(255,255,255, 0.4) !important;
+}
+
+.login-data .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.login-data .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+    font-family: roboto;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 16px;
+}
+.login-data .mdl-textfield__label:after {
+    background-color: #FFF;
+}
+.login-buttons {
+    text-align: center !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.login-buttons .close-btn {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height: 53px;
+    background: transparent;
+}
+.login-buttons .close-btn:hover {
+    background: rgba(158,158,158,.2);
+}
+.btn-txt {
+    background-color: #229997;
+    color: #FFF;
+    box-shadow: 0.5px 0.5px 3px #104b62;
+}
+.btn-txt:hover {
+    background-color: rgba(34, 153, 151, 0.7);
+}
+.forgotten-txt {
+    position: absolute;
+    right: 30px;
+    text-decoration: underline !important;
+    font-family: roboto;
+    font-size: 16px;
+    color: #FFF;
+    font-weight: 300;
+    vertical-align: top;
+    text-shadow: 1px 1px #000;
+    text-transform: none;
+}
+.home.content {
+    position: absolute;
+    top: 185px;
+    width: 100%;
+}
+.home-grid {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    vertical-align: top;
+}
+.home-img {
+    margin: 0 !important;
+    width: calc(25%) !important;
+}
+.bkg-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bkg-img.image1 {
+    background-image: url('../resources/images/home/006 - Imagem_01.jpg');
+}
+.bkg-img.image1:hover {
+    background-image: url('../resources/images/home/1.jpg');
+}
+.bkg-img.image2 {
+    background-image: url('../resources/images/home/007 - Imagem_02.jpg');
+    opacity: 0.9;
+}
+.bkg-img.image2:hover {
+    background-image: url('../resources/images/home/2.jpg');
+}
+.bkg-img.image3 {
+    background-image: url('../resources/images/home/008 - Imagem_03.jpg');
+}
+.bkg-img.image3:hover {
+    background-image: url('../resources/images/home/3.jpg');
+}
+.bkg-img.image4 {
+    background-image: url('../resources/images/home/009 - Imagem_04.jpg');
+}
+.bkg-img.image4:hover {
+    background-image: url('../resources/images/home/4.jpg');
+}
+.bkg-img.image5 {
+    background-image: url('../resources/images/home/010 - Imagem_05.jpg');
+}
+.bkg-img.image5:hover {
+    background-image: url('../resources/images/home/5.jpg');
+}
+.bkg-img.image6 {
+    background-image: url('../resources/images/home/011 - Imagem_06.jpg');
+}
+.bkg-img.image6:hover {
+    background-image: url('../resources/images/home/6.jpg');
+}
+.bkg-img.image7 {
+    background-image: url('../resources/images/home/012 - Imagem_07.jpg');
+}
+.bkg-img.image7:hover {
+    background-image: url('../resources/images/home/7.jpg');
+}
+.bkg-img.image8 {
+    background-image: url('../resources/images/home/013 - Imagem_08.jpg');
+}
+.bkg-img.image8:hover {
+    background-image: url('../resources/images/home/8.jpg');
+}
+.main-txt {
+    cursor: pointer;
+}
+.footer-txt,
+.normal-txt {
+    text-decoration: none !important;
+    vertical-align: top;
+}
+
+.footer-txt {
+    vertical-align: middle;
+}
+.txt-shadow {
+    text-shadow: 1px 1px #000;
+}
+.first-img-main-txt {
+    margin-left: 85px;
+    margin-top: 48px;
+    width: 150px;
+    margin-bottom: 18px;
+}
+.first-img-link {
+    margin-left: 85px;
+}
+.first-img-link a {
+    text-decoration: none !important;
+}
+.head-txt {
+    display: block;
+    margin-top: 48px;
+    margin-bottom: 18px;
+}
+.head-txt.extended-date {
+    margin-bottom: 0px;
+}
+.head-txt.seminar {
+    margin-bottom: 35px;
+}
+.img-date-txt {
+    display: inline;
+    margin-left: 34px;
+    width: 41px;
+    text-align: center;
+    word-wrap: break-word;
+}
+.img-date-txt.extended-date {
+    display: inline-block;
+}
+.img-main-txt {
+    display: inline-block;
+    margin-left: 4.45%;
+    width: 56%;
+    word-wrap: break-word;
+    vertical-align: top;
+}
+.img-panelist-txt {
+    margin-left: 91px;
+    margin-bottom: 18px;
+}
+.img-event-txt {
+    margin-left: 91px;
+}
+.img-panel-txt {
+    margin-left: 91px;
+    margin-top: 48px;
+    width: 150px;
+    margin-bottom: 18px;
+}
+.footer-home {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-image: url('../resources/images/home/014 - RodapВ completo.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.footer-home .footer-txt-grid {
+    padding-top: 9px;
+    text-align: center;
+}
+.footer-txt-grid .footer-txt {
+    vertical-align: middle;
+}
+.footer-txt-grid .footer-txt:last-of-type {
+    margin-left: 5px;
+}
+.dialoag-popup {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 101%;
+    width: 800px;
+    padding: 0;
+}
+.dialoag-popup.birlo-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop renda.jpg');
+}
+.dialoag-popup.corporate-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop doug.jpg');
+}
+.dialoag-popup.photo-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop fotografia_site.jpg');
+}
+.dialoag-popup.project-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop julio.jpg');
+}
+.dialoag-popup.brand-bkg {
+    background-image: url('../resources/images/workshopsPopUps/banner workshop felipe.jpg');
+}
+.dialoag-popup.driin-bkg {
+    background-image: url('../resources/images/palestrasPopUps/banner palestra driin.jpg');
+}
+.dialoag-popup.job-bkg {
+    background-image: url('../resources/images/palestrasPopUps/banner palestra marcio e gladyspsd.jpg');
+}
+.dialoag-popup.sicom-bkg {
+    background-image: url('../resources/images/home/banner-sicom.jpg');
+}
+.pop-content {
+    margin-top: calc(235px + 28px);
+    margin-left: 38px;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-right: 45px;
+}
+.pop-content div {
+    padding: 0;
+}
+.pop-content .panel {
+    width: 350px;
+}
+.pop-content .panelist-photo {
+    width: 68px;
+    height: 68px;
+    margin-right: 12px;
+    display: inline;
+}
+.pop-content .panelist-name {
+    display: inline-block;
+    width: 145px;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+.pop-content .panelist-txt {
+    font-family: roboto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #229997;   
+}
+.pop-content .panelist-name .panelist-txt {
+    font-size: 17px;
+}
+.pop-content .panel-info {
+    display: block;
+    margin-top: 20px;
+}
+.pop-content .panel-info .panelist-txt {
+    display: inline;
+    margin-left: 10px;
+    vertical-align: super;
+}
+.pop-content .panel-info .panelist-txt.txt-brk {
+    margin-left: 40px;
+}
+.pop-content .panel-info .panelist-txt.light {
+    font-weight: 300;
+}
+.pop-content .panel-description {
+    width: 365px;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+}
+.pop-content .panel-description .panel-description-txt {
+    font-family: roboto;
+    font-size: 12px;
+    font-weight: 400;
+    color: #104b62;
+}
+.dialog-buttons .close-btn {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    height: 53px;
+    background: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .close-btn:hover {
+    background: rgba(16, 75, 98, 0.6);
+}   
+.dialog-buttons .mdl-button--fab:focus:not(:active) {
+    box-shadow: none;
+    background-color: rgba(16, 75, 98, 0.7);
+}
+.dialog-buttons .mdl-button:focus:not(:active) {
+    background-color: rgba(16, 75, 98, 0.7);
+}
+.open-dialog {
+    text-decoration: none;
+}
+.open-dialog .main-txt {
+    cursor: pointer !important;
+}
+
+/* MESSAGES */
+.ui-growl {
+    background-color: #e3e0e2;
+    left: 40%;
+    top: 110px;
+}
+
+@media screen and (max-width: 1439px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+
+    html {
+        font-size: 10px;
+    }
+}

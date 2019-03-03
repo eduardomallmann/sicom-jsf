@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+
+        <ui:insert name="viewParams"/>
+
+        <h:head>
+
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+            <h:outputStylesheet name="material.min.css" library="css"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"></link>
+            <h:outputScript name="material.min.js" library="js"/>
+            <h:outputScript name="dialog-polyfill.js" library="dialog-polyfill"/>
+            <h:outputStylesheet name="dialog-polyfill.css" library="dialog-polyfill"/>
+            <link rel="stylesheet" href="../../resources/css/style.css" type="text/css"></link>
+            <!--<link rel="icon" type="image/x-icon" href="../../resources/images/favicon.ico"/>-->
+
+            <title>
+                <ui:insert name="title">
+                    <h:outputText value="III-SICOM - Seminário de Informação e Comunicação da Marca"/>
+                </ui:insert>
+            </title>
+        </h:head>
+        <h:body id="bodyArea">
+
+            <div class="header bkg-img header">
+                <div class="mdl-grid">
+
+                    <div id="logo-area" class="logo-area">
+                        <div id="logo-header" class="logo-square">
+                            <img src="../../resources/images/template/marca cabeЗalho.png" 
+                                 alt=""/>
+                        </div>
+                    </div>
+
+                    <div id="menu-area" class="menu-area">
+
+                        <h:form id="frmLogoff">
+                            <div id="logoffBtn" 
+                                 class="menu-btn">
+                                <h:commandLink  target="_self" 
+                                                action="#{subscriberController.logout()}"
+                                                styleClass="logoff-link"
+                                                rendered="#{registerController.authenticated}"
+                                                type="button">
+                                    <div class="logoff-button bkg-dark-blue">
+                                        <i style="padding: 6px" class="material-icons md-28 md-white">power_settings_new</i>
+                                    </div>
+                                </h:commandLink>
+                            </div>
+                            <div class="mdl-tooltip mdl-tooltip--large" for="logoffBtn">
+                                <h:outputLabel value="Logoff" 
+                                               class="roboto medium"/>
+                            </div>
+                        </h:form>
+
+                        <h:panelGroup rendered="#{!subscriberController.viewReport}">
+                            <h:form id="frmShoppingCart" styleClass="menu-btn shopping-cart">
+                                <p:commandLink id="shopCartBtn" 
+                                               style="text-decoration: none"
+                                               type="button" 
+                                               rendered="#{registerController.authenticated}">
+
+                                    <div class="mdl-badge mdl-badge--overlap" 
+                                         data-badge="#{subscriberController.subscriberOrder.subscriberDetailses.size()}">
+                                        <h:outputLabel value="Ver novas inscrições" 
+                                                       styleClass="roboto medium s16 dark-blue cart-label"/>
+                                        <img src="../../resources/images/workshops/icone carrinho.png"
+                                             alt=""
+                                             class="img-cart"/>
+                                    </div>
+                                </p:commandLink>
+
+                                <p:overlayPanel id="shoppingCart" 
+                                                for="shopCartBtn" 
+                                                showEffect="fold"
+                                                hideEffect="fold"
+                                                dynamic="true"
+                                                my="left bottom"
+                                                appendToBody="true">
+                                    <div class="shopcart-label">
+                                        <h:outputLabel value="Inscrições" 
+                                                       styleClass="roboto medium s18 dark-blue"/>
+                                    </div>
+
+                                    <h:outputLabel value="Você não se inscreveu em nenhum novo evento até o momento."
+                                                   rendered="#{!subscriberController.totalShoppingCartRendered}"
+                                                   styleClass="roboto normal italic s14 dark-blue"/>
+
+                                    <h:dataTable id="shoppingCartTable"
+                                                 value="#{subscriberController.subscriberOrder.subscriberDetailses}"
+                                                 styleClass="cart-table"
+                                                 rendered="#{subscriberController.totalShoppingCartRendered}"
+                                                 rowClasses="odd,even"
+                                                 var="event">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputLabel value="Eventos"
+                                                               styleClass="roboto medium s14 dark-blue"/>
+                                            </f:facet>
+                                            <h:outputLabel value="#{event.workshop.description}"
+                                                           styleClass="roboto normal italic s12 dark-blue"/>
+                                            <f:facet name="footer">
+                                                <h:outputLabel value="Total"
+                                                               styleClass="roboto medium s14 dark-blue"/>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputLabel value="Valores"
+                                                               styleClass="roboto medium s14 dark-blue value"/>
+                                            </f:facet>
+
+                                            <h:outputLabel value="GRATUITO"
+                                                           rendered="#{event.workshop.price le 0}"
+                                                           styleClass="roboto medium s12 dark-blue"/>
+
+                                            <h:outputLabel value="#{event.workshop.price}"
+                                                           rendered="#{event.workshop.price gt 0}"
+                                                           styleClass="roboto normal s14 dark-blue">
+                                                <f:convertNumber type="currency" locale="pt_BR"/>
+                                            </h:outputLabel>
+                                            <f:facet name="footer">
+                                                <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
+                                                               styleClass="roboto medium s14 dark-blue">
+                                                    <f:convertNumber type="currency" locale="pt_BR"/>
+                                                </h:outputLabel>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <h:commandLink action="#{subscriberController.removeItem(event.workshop.description)}">
+                                                <i class="material-icons md-18 md-red">delete_forever</i>
+                                            </h:commandLink>
+                                        </h:column>
+                                    </h:dataTable>
+
+                                    <p:commandButton value="Finalizar Inscrição" 
+                                                     onclick="confirmDialog.showModal();"
+                                                     rendered="#{subscriberController.totalShoppingCartRendered}"
+                                                     styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cart-btn"/>
+                                </p:overlayPanel>
+                            </h:form>
+                        </h:panelGroup>
+                        <div class="menu-btn">
+                            <h:outputLink target="_self"
+                                          rendered="#{subscriberController.showPanelButton}"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/inscricao/palestras.jsf">
+                                <div class="goto-event">
+                                    <div class="txt-link">
+
+                                        <h:outputLabel value="Palestras"
+                                                       styleClass="roboto medium s16 dark-blue link-inscriptions"/>
+                                    </div>
+                                    <img src="../../resources/images/register/icone palestras.png" 
+                                         alt=""
+                                         class="icon-img"/>
+                                </div>
+                            </h:outputLink>
+                            <h:outputLink target="_self"
+                                          rendered="#{subscriberController.showWorkshopButton}"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/inscricao/oficinas.jsf">
+                                <div class="txt-link">
+                                    <h:outputLabel value="Oficinas"
+                                                   styleClass="roboto medium s16 dark-blue link-inscriptions"/>
+                                </div>
+                                <img src="../../resources/images/register/icone oficinas.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </h:outputLink>
+                        </div>
+                        <div class="menu-btn">
+                            <h:outputLink target="_self"
+                                          rendered="#{subscriberController.showInscriptionButton}"
+                                          styleClass="link-inscriptions"
+                                          value="../../pages/inscricao/inscricao.jsf">
+                                <div class="txt-header">
+                                    <h:outputLabel value="Meu cadastro" 
+                                                   styleClass="roboto medium s16 dark-blue link-inscriptions"/>
+                                </div>
+                                <img src="../../resources/images/register/icone cadastro.png" 
+                                     alt=""
+                                     class="icon-img"/>
+                            </h:outputLink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="msg">
+                <p:growl id="messages"
+                         autoUpdate="true"
+                         sticky="false"/>
+            </div>
+
+            <div id="content-area" class="contentArea">
+                <ui:insert name="content"/>
+            </div>
+
+            <div class="footer bkg-img full-footer">
+                <div class="footer-grid">
+                    <div class="footer-block">
+                        <h:outputLabel value="III Seminário de Informação e" 
+                                       styleClass="roboto-medium s18 white"/>
+                        <br/>
+                        <h:outputLabel value="Comunicação da Marca" 
+                                       styleClass="roboto-medium s18 white"/>
+                    </div>
+                    <div class="footer-block">
+                        <h:outputLabel value="19 de outubro de 2016" 
+                                       styleClass="roboto-medium s16 white"/>
+                        <br/>
+                        <h:outputLabel value="8h30m às 12h e 14h às 18h" 
+                                       styleClass="roboto-medium s16 white"/>
+                    </div>
+                    <div class="footer-block">
+                        <h:outputLabel value="Local: Auditório EFI/UFSC" 
+                                       styleClass="roboto-medium s16 white"/>
+                        <br/>
+                        <h:outputLabel value="Florianópolis-SC" 
+                                       styleClass="roboto-medium s16 white"/>
+                    </div>
+                    <div class="footer-block">
+                        <h:outputLabel value="sigmo.ufsc@gmail.com" 
+                                       styleClass="roboto-medium s16 white"/>
+                        <br/>
+                        <h:outputLabel value="(48) 3721-6609" 
+                                       styleClass="roboto-medium s16 white"/>
+                    </div>
+                </div>
+            </div>
+            <h:form>
+
+                <dialog id="birlo-dialog" class="mdl-dialog dialoag-popup birlo-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/workshopsPopUps/foto worshop1.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Mary Clasen Talyta Bastos" 
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="19/08/2016 - 14h às 18h30"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Sala 125 - CCE - UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="30,00"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="Venha conhecer através da prática de renda de bilro um pouco do contexto cultural do litoral catarinense. Este workshop pretende introduzir à prática da renda de bilro, característica da cidade, tendo como valores os conceitos de inovação, sustentabilidade e economia criativa; além da reflexão para conscientização do modo de vida Slow Fashion e transformação do sistema de moda." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Material: tesourinha para bordado ou corta fios e alfinetes." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(1)}"
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.bilro and subscriberController.renderingWorkshop(1)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button" 
+                                onclick="birloDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="corporateId-dialog" class="mdl-dialog dialoag-popup corporate-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/workshopsPopUps/foto worshop2.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Douglas Menegazzi" 
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="27/09/2016 - 18h às 21h30"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Sala 125 - CCE - UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="25,00"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="A oficina irá discutir aspectos da morfologia e da sintaxe visual aplicados à Ilustração, com práticas em design de superfície para projetos de identidade corporativa. Serão explicados conceitos relacionados aos estilos da representação gráfica com exemplos aplicados a marcas. Serão apresentados estudos resultantes das práticas de ensino exercidas pelo proponente como professor nas disciplinas de Ilustração Digital e Projeto Publicitário no curso de Design da UFSC." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Material: incluso." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(2)}" 
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.identidade and subscriberController.renderingWorkshop(2)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button"
+                                onclick="corporateDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="photo-dialog" class="mdl-dialog dialoag-popup photo-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/workshopsPopUps/foto worshop3.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Sharlene Melanie Richard Perassi" 
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="02/09/2016 e 09/09/2016"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    <br/>
+                                    <h:outputText value="14h às 17h30"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt txt-brk"/>
+
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Sala 125 - CCE - UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="50,00"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="O foco da oficina é a composição fotográfica para a representação da relação das pessoas com a arte grafite, principalmente as encontradas em Florianópolis. Será abordado o estudo da sintaxe visual para ditar técnicas, regras e teorias para capturar uma imagem com qualidade profissional. Desenvolveremos as partes técnicas e teóricas necessárias para entender o processo de composição fotográfica e, posteriormente, aplicá-las de modo prático por meio do uso de smartphones." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Material: smartphone. Não é obrigatório câmera profissional." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(3)}" 
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.fotografia and subscriberController.renderingWorkshop(3)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button"
+                                onclick="photoDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="project-dialog" class="mdl-dialog dialoag-popup project-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/workshopsPopUps/foto worshop4.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Julio Teixeira" 
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="30/09/2016 - 13h30 às 19h20"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Sala 125 - CCE - UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="30,00"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="O workshop se dividirá em duas partes, sendo:"
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <h:outputText value="Parte 1 (tarde 1h30) - Conteúdo | serão apresentados princípios, modelos e ferramentas de Gestão Visual de Projetos e suas possibilidades de uso."
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <h:outputText value="Parte 2 (tarde - 3h) – Prática | Equipes desenvolverão uma parte do projeto utilizado ferramentas visuais."
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Material: incluso." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(4)}" 
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.projetos and subscriberController.renderingWorkshop(4)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button" 
+                                onclick="projectDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="brand-dialog" class="mdl-dialog dialoag-popup brand-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/workshopsPopUps/foto worshop5.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Felipe Machado" 
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="21/09/2016 - 18h às 21h30"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Sala 125 - CCE - UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="25,00"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    <h:outputText value="(pagamento em dinheiro no local)"
+                                                  styleClass="roboto light s14 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="Marcas que têm consciência de seu arquétipo dominante detêm maior 
+                                              capacidade de criar significados que ultrapassem a razão atingindo o 
+                                              inconsciente dos consumidores. 
+                                              O arquétipo atua como princípio organizador de marcas e produtos, 
+                                              oferecendo inspiração, estrutura, coerência e significado para seus 
+                                              consumidores e clientes, para a cultura e para a sociedade. Com base na 
+                                              Psicologia e na Antropologia do Consumo, o workshop pretende demonstrar 
+                                              exemplos com arquétipos aplicados em comunicações de marcas."
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <br/>
+                                <h:outputText value="Material: incluso." 
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(5)}" 
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.arquetipos and subscriberController.renderingWorkshop(5)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button" 
+                                onclick="brandDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="job-dialog" class="mdl-dialog dialoag-popup job-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/palestrasPopUps/foto palestra1.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Márcio Miranda Gladys Prado" 
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="09/08/2016 - 20h"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Auditório Henrique Fontes CCE/UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="Gratuito"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="Toda mudança tem um preço, mas não mudar na Sociedade do Conhecimento 
+                                              tem um preço ainda mais alto. É preciso aprender a comunicar a 
+                                              marca pessoal e considerar a eficiência, a eficácia e a efetividade das ações 
+                                              no desenvolvimento da empregabilidade. A palestra A Empregabilidade, a Marca 
+                                              e Você é uma palestra desenvolvida para o público acadêmico e com 
+                                              direcionamento ao mercado de trabalho, abordando o tema da empregabilidade, 
+                                              a partir dos princípios de coaching e da comunicação da marca."
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(6)}" 
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.empregabilidade and subscriberController.renderingWorkshop(6)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button" 
+                                onclick="jobDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="driin-dialog" class="mdl-dialog dialoag-popup driin-bkg">
+                    <div class="mdl-dialog__content pop-content">
+                        <div id="conteiner">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label panel">
+                                <div>
+                                    <img src="../../resources/images/palestrasPopUps/foto palestra2.png" 
+                                         alt=""
+                                         class="panelist-photo"/>
+
+                                    <div class="panelist-name">
+                                        <h:outputText value="Driin"
+                                                      styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                    </div>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">date_range</i>
+                                    <h:outputText value="04/10/2016 - 14h"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">location_on</i>
+                                    <h:outputText value="Auditório Henrique Fontes CCE/UFSC"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                                <div class="panel-info">
+                                    <i class="material-icons md-28 md-color">attach_money</i>
+                                    <h:outputText value="Gratuito"
+                                                  styleClass="roboto bold s16 light-blue panelist-txt"/>
+                                </div>
+                            </div>
+                            <div class="panel-description">
+                                <h:outputText value="Driin é tatuador e começou os trabalhos de grafitti em 2006. Seu 
+                                              objetivo era algo mais livre, com cores mais fortes e temática de anjos e 
+                                              figuras femininas."
+                                              styleClass="roboto normal s12 dark-blue"/>
+                                <br/>
+                                <h:outputText value="O palestrante abordará sua experiência na cidade de Florianópolis, com 
+                                              exemplos de seus trabalhos e fotografias dos parceiros Marco Cezar e Igor 
+                                              Spaceck."
+                                              styleClass="roboto normal s12 dark-blue"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+                        <h:commandButton action="#{subscriberController.insertSubscriptions(7)}" 
+                                         value="Inscreva-se"
+                                         rendered="#{!subscriberController.driin and subscriberController.renderingWorkshop(7)}"
+                                         image="../../resources/images/workshopsPopUps/botao inscreva-se.png"
+                                         class="button-txt"/>
+                        <button type="button" 
+                                onclick="driinDialog.close()"
+                                class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect close close-btn">
+                            <i class="material-icons md-light md-18">close</i>
+                        </button>
+                    </div>
+                </dialog>
+
+                <dialog id="confirm-dialog" class="mdl-dialog dialoag-popup confirm-bkg confirm">
+                    <div class="mdl-dialog__content confirm-content">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label confirm-panel">
+
+                            <h:outputLabel value="Olá #{subscriberController.subscriber.fullName},"
+                                           rendered="#{registerController.authenticated}"
+                                           styleClass="roboto bold s20 white shadow"/>
+                            <br/>
+                            <br/>
+                            <h:outputLabel value="Muito obrigado por se inscrever em nossos eventos, 
+                                           confira abaixo suas inscrições:"
+                                           styleClass="roboto medium s18 white shadow"/>
+
+                            <h:dataTable id="confirmTable"
+                                         value="#{subscriberController.subscriberOrder.subscriberDetailses}"
+                                         styleClass="mdl-data-table mdl-js-data-table"
+                                         var="event">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Evento"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                    <h:outputLabel value="#{event.workshop.description}"
+                                                   styleClass="roboto normal s14 white shadow"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Data"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                    <h:outputLabel value="#{event.workshop.workshopDate}"
+                                                   styleClass="roboto normal s14 white shadow">
+                                        <f:convertDateTime locale="pt_BR" 
+                                                           type="both" 
+                                                           dateStyle="medium" 
+                                                           timeStyle="short" 
+                                                           timeZone="America/Sao_Paulo"/>
+                                    </h:outputLabel>
+                                    <f:facet name="footer">
+                                        <h:outputLabel value="Total"
+                                                       styleClass="roboto medium s16 light-blue shadow"/>
+                                    </f:facet>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="Valor"
+                                                       styleClass="roboto medium s16 light-blue shadow value"/>
+                                    </f:facet>
+
+                                    <h:outputLabel value="#{event.workshop.price}"
+                                                   styleClass="roboto normal s14 white shadow">
+                                        <f:convertNumber type="currency" locale="pt_BR"/>
+                                    </h:outputLabel>
+                                    <f:facet name="footer">
+                                        <h:outputLabel value="#{subscriberController.subscriberOrder.amount}"
+                                                       styleClass="roboto medium s16 light-blue shadow">
+                                            <f:convertNumber type="currency" locale="pt_BR"/>
+                                        </h:outputLabel>
+                                    </f:facet>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </div>
+                    <div class="mdl-dialog__actions dialog-buttons">
+
+                        <div class="confirm-btns">
+                            <p:commandButton value="Cancelar"
+                                             onclick="confirmDialog.close()"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent cancel-btn"/>
+                            <p:commandButton value="Confirmar"
+                                             onclick="confirmDialog.close()"
+                                             update="@(body)"
+                                             action="#{subscriberController.saveOrder()}"
+                                             styleClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent confirm-btn">
+                            </p:commandButton>
+                        </div>
+
+                        <div class="pagseguro-warn">
+                            <div class="pagseguro-warn-txt">
+                                <h:outputLabel value="Ao clicar em confirmar"
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                                <h:outputLabel value=" sua inscrição será finalizada."
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                                <h:outputLabel value=" Pagamento em dinheiro no local do evento."
+                                               style="word-wrap: break-word"
+                                               styleClass="roboto medium s14 yellow shadow"/>
+                            </div>
+                        </div>
+
+                    </div>                
+                </dialog>
+
+            </h:form>
+            <script>
+                // Page Height Size
+                document.onreadystatechange = function () {
+                    var body = document.body,
+                            html = document.documentElement;
+                    var bigHeight = Math.max(body.scrollHeight, body.offsetHeight,
+                            html.clientHeight, html.scrollHeight, html.offsetHeight);
+                    var minHeigth = window.innerHeight;
+                    var contentHeigth;
+                    if (bigHeight > minHeigth) {
+                        document.getElementById('bodyArea').setAttribute('style', "height: " + bigHeight + "px");
+                        contentHeigth = bigHeight - 257;
+                        document.getElementById('content-area').setAttribute('style', "height: " + contentHeigth + "px");
+                    } else {
+                        document.getElementById('bodyArea').setAttribute('style', "height: " + minHeigth + "px");
+                        contentHeigth = minHeigth - 257;
+                        document.getElementById('content-area').setAttribute('style', "height: " + contentHeigth + "px");
+                    }
+                };
+                // Confirm Dialog
+                var confirmDialog = document.querySelector('#confirm-dialog');
+                if (!confirmDialog.showModal) {
+                    dialogPolyfill.registerDialog(confirmDialog);
+                }
+                // Birlo Dialog
+                var birloDialog = document.querySelector('#birlo-dialog');
+                if (!birloDialog.showModal) {
+                    dialogPolyfill.registerDialog(birloDialog);
+                }
+                // Identidade Corporativa Dialog
+                var corporateDialog = document.querySelector('#corporateId-dialog');
+                if (!corporateDialog.showModal) {
+                    dialogPolyfill.registerDialog(corporateDialog);
+                }
+                // Composição Fotográfica Dialog
+                var photoDialog = document.querySelector('#photo-dialog');
+                if (!photoDialog.showModal) {
+                    dialogPolyfill.registerDialog(photoDialog);
+                }
+                // Gestão de Projeto Dialog
+                var projectDialog = document.querySelector('#project-dialog');
+                if (!projectDialog.showModal) {
+                    dialogPolyfill.registerDialog(projectDialog);
+                }
+                // Comunicação da Marca Dialog
+                var brandDialog = document.querySelector('#brand-dialog');
+                if (!brandDialog.showModal) {
+                    dialogPolyfill.registerDialog(brandDialog);
+                }
+                // Empregabilidade Dialog
+                var jobDialog = document.querySelector('#job-dialog');
+                if (!jobDialog.showModal) {
+                    dialogPolyfill.registerDialog(jobDialog);
+                }
+                // Driin Dialog
+                var driinDialog = document.querySelector('#driin-dialog');
+                if (!driinDialog.showModal) {
+                    dialogPolyfill.registerDialog(driinDialog);
+                }
+            </script>
+            <script>
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r;
+                    i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                    a = s.createElement(o),
+                            m = s.getElementsByTagName(o)[0];
+                    a.async = 1;
+                    a.src = g;
+                    m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'UA-84665907-1', 'auto');
+                ga('send', 'pageview');
+
+            </script>
+        </h:body>
+    </f:view>
+</html>

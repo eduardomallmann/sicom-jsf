@@ -1,0 +1,82 @@
+/* AUTOMATICALLY GENERATED ON Sun Mar 03 16:52:53 BRT 2019*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "save,Local,org.sigmo.sicom.entity.Workshop";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "authentication,Local,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "persist,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "find,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "remove,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "setEm,Local,javax.persistence.EntityManager";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "findOne,Local,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "merge,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "countBySubscriber,Local,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "listAll,Local,";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "save,Local,org.sigmo.sicom.entity.Subscriber";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "setEm,Local,javax.persistence.EntityManager";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "getEm,Local,";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "remove,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "getEm,Local,";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "merge,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "persist,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "listAll,Local,java.lang.Class";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "listByParams,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "getEm,Local,";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "setMailSession,Local,javax.mail.Session";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "getMailSession,Local,";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "findOne,Local,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "find,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "merge,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "listAll,Local,java.lang.Class";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "remove,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "listBySubscriber,Local,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "remove,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "setEm,Local,javax.persistence.EntityManager";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "listSubscriberByPresence,Local,";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "listAll,Local,";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "listAll,Local,";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "remove,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "countByCPF,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "find,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "findByDescription,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "find,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "registerConfirmationMail,Local,org.sigmo.sicom.entity.Subscriber";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "persist,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "changePwd,Local,java.lang.String,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "findOne,Local,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "remove,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "countByEmail,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "save,Local,org.sigmo.sicom.entity.SubscriberOrder";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "remove,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "merge,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "getEm,Local,";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "remove,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "remove,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "listAll,Local,java.lang.Class";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "persist,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "listAll,Local,java.lang.Class";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "sentPasswordByEmail,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "remove,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "listAll,Local,";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "listAll,Local,java.lang.Class";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "getEm,Local,";
+  permission javax.security.jacc.EJBMethodPermission "WorkshopService", "setEm,Local,javax.persistence.EntityManager";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "findByEmail,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "find,Local,java.lang.Class,java.io.Serializable";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "merge,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "persist,Local,org.sigmo.sicom.entity.BaseEntity";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "login,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberOrderService", "findOne,Local,java.lang.Long";
+  permission javax.security.jacc.EJBMethodPermission "MailService", "setEm,Local,javax.persistence.EntityManager";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberService", "listByRole,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SubscriberDetailsService", "save,Local,org.sigmo.sicom.entity.SubscriberDetails";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.EJBRoleRefPermission "SubscriberDetailsService", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "MailService", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "SubscriberOrderService", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "WorkshopService", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "SubscriberService", "**";
+};
+
